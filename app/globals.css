@@ -6,7 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 76, 192, 214;
   /* --background-start-rgb: 103, 194, 212; */
-  /* --background-end-rgb: 129, 202, 214; */
+  --background-end-rgb: 129, 202, 214;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -19,7 +19,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  /* background: rgb(var(--background-start-rgb)); */
+  /* background: #90d2c0; */
+  background: #2c7c8d;
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -36,7 +38,21 @@ body {
 
 /* Custom Changes */
 @layer base {
+  @font-face {
+    font-family: "GreatVibes";
+    src: url("/fonts/GreatVibes-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-SemiBold.ttf");
+  }
+
   h1, p {
-    @apply text-white font-mono;
+    @apply text-white font-poppins;
+  }
+
+  main {
+    /* @apply bg-gradient-to-b from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%; */
   }
 }

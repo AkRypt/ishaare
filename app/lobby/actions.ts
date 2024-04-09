@@ -1,0 +1,21 @@
+'use server';
+
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+
+import { createClient } from '@/utils/supabase/server'
+
+export async function getDecks() {
+    const supabase = createClient()
+
+    const { data, error, status } = await supabase
+        .from('decks')
+        .select("*")
+
+    if (error && status !== 406) {
+        console.log(error)
+        throw error
+    }
+
+    return data
+}

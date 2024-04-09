@@ -1,101 +1,72 @@
 'use client';
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDecks } from "./actions";
 
 export default function Lobby() {
     const router = useRouter();
 
-    // const [players, setPlayers] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [activeDeck, setActiveDeck] = useState<number | null>(null);
+    const [decks, setDecks] = useState<any[] | null>([]);
 
-    const players = [
-        {
-            name: "Player 1",
-            deck: "Deck 1"
-        },
-        {
-            name: "Player 2",
-            deck: "Deck 2"
-        },
-        {
-            name: "Player 3",
-            deck: "Deck 3"
-        }
-    ]
-
-    const decks = [
-        {
-            id: 1,
-            name: "Deck 1",
-            image: "https://wallpapercave.com/wp/wp9134142.png",
-            cards: 10
-        },
-        {
-            id: 2,
-            name: "Deck 2",
-            image: "https://wallpapercave.com/wp/wp9134142.png",
-            cards: 10
-        },
-        {
-            id: 3,
-            name: "Deck 3",
-            image: "https://wallpapercave.com/wp/wp9134142.png",
-            cards: 10
-        },
-        {
-            id: 4,
-            name: "Deck 4",
-            image: "https://wallpapercave.com/wp/wp9134142.png",
-            cards: 10
-        },
-    ]
+    useEffect(() => {
+        getDecks().then((data) => {
+            setDecks(data)
+            setLoading(false)
+        })
+    }, [])
 
     const onClickDeck = (id: number) => {
-        console.log(id);
         setActiveDeck(id);
-        // router.push(`/game/${id}`);
-        router.push(`/game`);
+    }
+
+    const onClickPlay = () => {
+        router.push(`/game?deck_id=${activeDeck}`);
     }
 
     return (
-        <main className="p-12">
+        <main className="min-h-screen max-h-screen md:p-10"
+            style={{ backgroundImage: "url('/assets/green_bg.png')", backgroundSize: 'fill' }}>
 
-            <h1 className="text-4xl my-10 font-mono text-center">Ishaare</h1>
+            {
+                loading ? (
+                    <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+                        <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                        </svg>
+                    </div>
+                ) : null
+            }
+
+
 
             {/* Lobby Body */}
-            <div className="flex mx-[10%] gap-4 justify-center">
-
-                {/* Users List */}
-                {/* <div className="w-[30%] h-[90vh] p-6 bg-secondary-bg rounded-lg">
-                    <h1 className="text-xl font-bold text-center">PLAYERS: 2</h1>
-                    {
-                        players.map((player, index) => {
-                            return (
-                                <div key={index}>
-                                    <h1 className="text-lg ">{player.name}</h1>
-                                </div>
-                            )
-                        })
-                    }
-                    <button className="w-full mt-6 bg-primary-bg p-2 rounded-lg px-6">
-                        <p>Start</p>
-                    </button>
-                </div> */}
+            <div className="flex flex-col md:w-[60%] md:h-[90vh] px-10 py-6 mx-auto justify-center bg-[#092E21] bg-opacity-70 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
+                <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
 
                 {/* Deck List */}
-                <div className="flex flex-col">
-                    <div className="grid grid-cols-3 gap-4 overflow-y-auto">
-                        {decks.map((deck, index) => (
-                            <div key={index} className={`p-4 bg-secondary-bg rounded-lg ${activeDeck === deck.id ? 'bg-blue-300 border-2 border-secondary-bg' : ''}`}
-                            onClick={() => onClickDeck(deck.id)}>
-                                <img src={deck.image} alt="Card Back" className="w-[160px] h-[200px] mb-2 mx-auto object-cover rounded-lg" />
-                                <h1 className="text-lg font-bold">{deck.name}</h1>
+                <div className="flex flex-col px-6 overflow-y-auto">
+                    <div className="md:grid grid-cols-3 gap-4">
+                        {decks?.map((deck, index) => (
+                            <div key={index} className={`p-4 mb-6 h-[240px] group md:mb-0 border-4 rounded-lg hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
+                                onClick={() => onClickDeck(deck.id)}>
+                                <img src={deck.image} alt="Card Back" className="w-full h-[160px] mb-2 mx-auto object-cover rounded-lg group-hover:h-[40px] transition-height duration-300 ease-in-out" />
+                                <h1 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h1>
+                                <h1 className={`hidden text-sm group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</h1>
                             </div>
                         ))}
                     </div>
                 </div>
+            </div>
+
+            <div className="fixed w-[200px] mx-auto rounded-lg bottom-16 left-0 right-0 bg-black">
+                <button className={`bg-action-bg w-[200px] px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700 ${activeDeck ? '' : 'hidden'}`}
+                    onClick={onClickPlay}>
+                    <p className="text-xl font-mono font-bold">PLAY</p>
+                </button>
             </div>
 
         </main>
