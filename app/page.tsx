@@ -34,7 +34,7 @@ function HowToPlayModal({ show, onClose }: { show: boolean, onClose: () => void 
 export default function Home() {
     const router = useRouter();
 
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
 
     const createLobby = () => {
         router.push('/lobby');
@@ -59,8 +59,8 @@ export default function Home() {
                     </button>
                 </div>
 
-                <div className="w-[300px] mx-auto rounded-lg bg-black">
-                    <button className={`bg-white w-[300px] px-4 py-2 rounded-lg -translate-y-2 hover:bg-gray-300`}
+                <div className="w-[90%] md:w-[300px] mx-auto rounded-lg bg-black">
+                    <button className={`bg-white w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-gray-300`}
                         onClick={onHowToPlay}>
                         <p className="text-xl text-secondary-bg font-bold">How to play?</p>
                     </button>
