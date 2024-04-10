@@ -36,7 +36,6 @@ function Game() {
 
     useEffect(() => {
         if (!loading) {
-            // nextWord();
             setCurrentWord(words[currentWordIndex]["word"]);
         }
     }, [loading])
@@ -61,7 +60,6 @@ function Game() {
         const formattedSeconds = String(seconds).padStart(2, '0');
         return `${formattedMinutes}:${formattedSeconds}`;
     }
-
 
     const nextWord = () => {
         setCurrentWordIndex((prevIndex) => {
@@ -130,12 +128,12 @@ function Game() {
 
             {
                 !gameOver ? (
-                    <div className="flex flex-col w-full h-[100vh] md:w-[100%] md:h-[80vh] md:mt-2 md:p-8 md:mx-auto  rounded-xl bg-secondary-bg relative">
+                    <div className="flex flex-col w-full h-[100vh] md:w-[100%] md:h-[80vh] md:mt-2 md:p-8 md:mx-auto overflow-hidden rounded-xl bg-secondary-bg relative">
 
                         {/* Right or Wrong */}
                         <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute left-0 top-0">
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer"
+                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer active:scale-[120%]"
                                 onClick={onSkipWord}>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" /></svg>
@@ -155,7 +153,7 @@ function Game() {
                             </div>
 
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer"
+                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer active:scale-[120%]"
                                 onClick={onCorrectWord}
                             >
 
@@ -196,14 +194,14 @@ function Game() {
 
                             <div className="w-[95%] md:w-[300px] mt-4">
                                 <div className="w-full h-[40px] mx-auto rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-white p-2 rounded-lg -translate-y-1 hover:bg-gray-300"
+                                    <button className="w-full h-[40px] bg-white p-2 rounded-lg -translate-y-1 hover:bg-gray-300 active:bg-gray-200 active:translate-y-0"
                                         onClick={() => window.location.reload()}>
                                         <p className="text-lg text-secondary-bg font-bold">Play Again</p>
                                     </button>
                                 </div>
 
                                 <div className="w-full h-[40px] mx-auto mt-4 rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg -translate-y-1 hover:bg-secondary-bg"
+                                    <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg -translate-y-1 hover:bg-secondary-bg active:bg-green-800 active:translate-y-0"
                                         onClick={() => {
                                             // router.push('/lobby')
                                             router.back();

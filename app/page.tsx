@@ -53,14 +53,14 @@ export default function Home() {
                 <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
 
                 <div className="w-[90%] md:w-[300px] mx-auto my-4 rounded-lg bg-black">
-                    <button className={`bg-secondary-bg w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700`}
+                    <button className={`bg-secondary-bg w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700 active:bg-green-800 active:translate-y-0`}
                         onClick={createLobby}>
                         <p className="text-xl font-bold">Play Game</p>
                     </button>
                 </div>
 
                 <div className="w-[90%] md:w-[300px] mx-auto rounded-lg bg-black">
-                    <button className={`bg-white w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-gray-300`}
+                    <button className={`bg-white w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-gray-300 active:bg-gray-400 active:translate-y-0`}
                         onClick={onHowToPlay}>
                         <p className="text-xl text-secondary-bg font-bold">How to play?</p>
                     </button>
