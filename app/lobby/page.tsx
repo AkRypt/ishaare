@@ -51,9 +51,9 @@ export default function Lobby() {
                 <div className="flex flex-col md:px-6 overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-2 pb-4 md:p-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
+                            <div key={index} className={`p-2 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
                                 onClick={() => onClickDeck(deck.id)}>
-                                <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[40%] transition-height duration-300 ease-in-out" />
+                                <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[30%] transition-height duration-300 ease-in-out" />
                                 <h2 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h2>
                                 <p className={`hidden text-sm group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
                             </div>

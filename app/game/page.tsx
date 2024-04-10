@@ -12,6 +12,7 @@ function Game() {
     const [isMobile, setIsMobile] = useState(true);
     const [timer, setTimer] = useState(60);
     const [loading, setLoading] = useState(true);
+    const [showSnack, setShowSnack] = useState(true);
     const [currentWord, setCurrentWord] = useState("Loading...");
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
@@ -27,6 +28,14 @@ function Game() {
     const randomizeWords = (words: any[]) => {
         return words.sort(() => Math.random() - 0.5);
     }
+
+    useEffect(() => {
+        const snackTimeout = setTimeout(() => {
+            setShowSnack(false);
+        }, 2000);
+
+        return () => clearTimeout(snackTimeout);
+    }, []);
 
     useEffect(() => {
         setIsMobile(/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
@@ -191,15 +200,37 @@ function Game() {
             }
 
             {
+                showSnack && (
+                    <div className="fixed top-10 left-0 right-0 w-[90%] md:w-[80%] h-[40px] mx-auto z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 rounded-full">
+                        <p className="text-sm">Rotate screen for better experience</p>
+                    </div>
+                )
+            }
+
+            {
                 !gameOver ? (
                     <div className="flex flex-col w-full h-[100vh] md:p-8 md:mx-auto overflow-hidden rounded-xl bg-secondary-bg relative">
 
+                        {/* Swipe symbols */}
+                        {/* Vertical Arrows */}
+                        <div className="md:hidden absolute top-[10%] w-full flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#135454" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" /></svg>
+                            <p className="text-[#135454] font-bold">Swipe Up</p>
+                        </div>
+                        <div className="md:hidden absolute bottom-[10%] w-full flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#135454" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
+                            <p className="text-[#135454] font-bold">Swipe Down</p>
+                        </div>
+
+                        {/* Horizontal Arrows */}
+
                         {/* Right or Wrong */}
                         <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute left-0 top-0">
+
+
                             <div
                                 className={`flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${skipSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
-                            >
-                                {/* onClick={onSkipWord}> active:scale-[120%] */}
+                                onClick={() => { !isMobile ? onSkipWord() : null }}>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" /></svg>
                                 <h1 className="text-2xl md:text-3xl font-bold">Skip</h1>
@@ -207,7 +238,12 @@ function Game() {
                                     <p className="flex flex-row text-md items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" /></svg>
                                         Backspace
-                                    </p> : null}
+                                    </p> :
+                                    <div className="hidden md:flex mt-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#135454" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+                                        <p className="text-[#135454] font-bold">Swipe Left</p>
+                                    </div>
+                                }
                             </div>
 
                             {/* Separation Lines */}
@@ -219,8 +255,7 @@ function Game() {
 
                             <div
                                 className={`flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${correctSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
-                            >
-                                {/* onClick={onCorrectWord}> */}
+                                onClick={() => { !isMobile ? onCorrectWord() : null }}>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={`${correctSwiped ? '#86efac' : 'white'}`} className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 
@@ -229,7 +264,12 @@ function Game() {
                                     <p className="flex flex-row text-md items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" /></svg>
                                         Enter
-                                    </p> : null}
+                                    </p> :
+                                    <div className="hidden md:flex mt-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#135454" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                                        <p className="text-[#135454] font-bold">Swipe Right</p>
+                                    </div>
+                                }
                             </div>
                         </div>
 
@@ -261,14 +301,14 @@ function Game() {
 
                             <div className="w-[95%] md:w-[300px] mt-4">
                                 <div className="w-full h-[40px] mx-auto rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-white p-2 rounded-lg -translate-y-1 hover:bg-gray-300 active:bg-gray-200 active:translate-y-0"
+                                    <button className="w-full h-[40px] bg-white p-2 rounded-lg translate-x-1 -translate-y-1 hover:bg-gray-300 active:bg-gray-200 active:translate-y-0 active:translate-x-0"
                                         onClick={() => window.location.reload()}>
                                         <p className="text-lg text-secondary-bg font-bold">Play Again</p>
                                     </button>
                                 </div>
 
                                 <div className="w-full h-[40px] mx-auto mt-4 rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg -translate-y-1 hover:bg-secondary-bg active:bg-green-800 active:translate-y-0"
+                                    <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg translate-x-1 -translate-y-1 hover:bg-secondary-bg active:bg-green-800 active:translate-x-0 active:translate-y-0"
                                         onClick={() => {
                                             router.back();
                                         }}>
