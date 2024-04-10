@@ -44,16 +44,16 @@ export default function Lobby() {
 
 
             {/* Lobby Body */}
-            <div className="flex flex-col md:w-[60%] md:h-[90vh] px-10 py-6 mx-auto justify-center bg-[#092E21] bg-opacity-70 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
+            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-10 py-6 mx-auto justify-center bg-[#092E21] bg-opacity-70 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
                 <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
 
                 {/* Deck List */}
                 <div className="flex flex-col px-6 overflow-y-auto">
                     <div className="md:grid grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-4 mb-6 h-[240px] group md:mb-0 border-4 rounded-lg hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
+                            <div key={index} className={`p-4 mb-6 h-[30vh] group md:mb-0 border-4 rounded-lg hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
                                 onClick={() => onClickDeck(deck.id)}>
-                                <img src={deck.image} alt="Card Back" className="w-full h-[160px] mb-2 mx-auto object-cover rounded-lg group-hover:h-[40px] transition-height duration-300 ease-in-out" />
+                                <img src={deck.image} alt="Card Back" className="w-full h-[70%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[40px] transition-height duration-300 ease-in-out" />
                                 <h1 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h1>
                                 <h1 className={`hidden text-sm group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</h1>
                             </div>

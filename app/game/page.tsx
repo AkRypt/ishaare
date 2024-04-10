@@ -8,9 +8,12 @@ function Game() {
     const router = useRouter();
     const deck_id = parseInt(useSearchParams().get('deck_id') ?? '0', 10);
 
+
+    const [isMobile, setIsMobile] = useState(true);
     const [timer, setTimer] = useState(60);
     const [loading, setLoading] = useState(true);
     const [currentWord, setCurrentWord] = useState("Loading...");
+    const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
 
     const [seenWords, setSeenWords] = useState<Record<string, boolean>>({});
@@ -19,16 +22,22 @@ function Game() {
     // Will fetch words from the database
     const [words, setWords] = useState<any[]>([]);
 
+    const randomizeWords = (words: any[]) => {
+        return words.sort(() => Math.random() - 0.5);
+    }
+
     useEffect(() => {
-        getWords(deck_id).then((words) => {
-            setWords(words || []);
+        setIsMobile(/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        getWords(deck_id).then((deck_words) => {
+            setWords(randomizeWords(deck_words ?? []));
             setLoading(false);
         });
     }, []);
 
     useEffect(() => {
         if (!loading) {
-            nextWord();
+            // nextWord();
+            setCurrentWord(words[currentWordIndex]["word"]);
         }
     }, [loading])
 
@@ -53,18 +62,17 @@ function Game() {
         return `${formattedMinutes}:${formattedSeconds}`;
     }
 
-    const nextWord = () => {
-        if (Object.keys(seenWords).length === words.length) {
-            setGameOver(true);
-            return;
-        }
 
-        const wordIndex = Math.floor(Math.random() * words.length);
-        if (words[wordIndex]["word"] in seenWords) {
-            nextWord();
-        } else {
-            setCurrentWord(words[wordIndex]["word"]);
-        }
+    const nextWord = () => {
+        setCurrentWordIndex((prevIndex) => {
+            const newIndex = prevIndex + 1;
+            if (newIndex === words.length) {
+                setGameOver(true);
+                return prevIndex;
+            }
+            setCurrentWord(words[newIndex]["word"]);
+            return newIndex;
+        });
     }
 
     const onCorrectWord = () => {
@@ -105,7 +113,7 @@ function Game() {
     }, [handleKeyUp]);
 
     return (
-        <main className="min-h-screen max-h-screen p-0 md:p-12">
+        <main className="min-h-screen max-h-screen p-0 md:p-4">
 
             {
                 loading ? (
@@ -122,40 +130,50 @@ function Game() {
 
             {
                 !gameOver ? (
-                    <div className="flex flex-col w-full h-[100vh] md:w-[80%] md:h-[50vh] md:mt-2 md:p-8 md:mx-auto justify-between items-center rounded-xl bg-secondary-bg relative">
+                    <div className="flex flex-col w-full h-[100vh] md:w-[100%] md:h-[80vh] md:mt-2 md:p-8 md:mx-auto  rounded-xl bg-secondary-bg relative">
 
                         {/* Right or Wrong */}
-                        <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute">
+                        <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute left-0 top-0">
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer hover:opacity-50"
-                                onClick={onSkipWord}
-                            >
+                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer"
+                                onClick={onSkipWord}>
+
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" /></svg>
                                 <h1 className="text-2xl md:text-3xl font-bold">Skip</h1>
-                                <p className="hidden md:flex flex-row text-lg items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" /></svg>
-                                    Backspace
-                                </p>
+                                {!isMobile ?
+                                    <p className="flex flex-row text-md items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" /></svg>
+                                        Backspace
+                                    </p> : null}
                             </div>
+
+                            {/* Separation Lines */}
+                            <div className="hidden md:block w-0.5 h-full rounded-full bg-gradient-to-b from-transparent from-20% via-transparent via-30% to-white"></div>
+                            <div className="md:hidden w-full flex">
+                                <div className="md:hidden w-1/2 h-0.5 rounded-full bg-gradient-to-r from-white via-transparent to-transparent"></div>
+                                <div className="md:hidden w-1/2 h-0.5 rounded-full bg-gradient-to-r from-transparent via-transparent to-white"></div>
+                            </div>
+
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer hover:opacity-50"
+                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer"
                                 onClick={onCorrectWord}
                             >
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 
                                 <h1 className="text-2xl md:text-3xl font-bold">Correct</h1>
-                                <p className="hidden md:flex flex-row text-lg items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" /></svg>
-                                    Enter
-                                </p>
+                                {!isMobile ?
+                                    <p className="flex flex-row text-md items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" /></svg>
+                                        Enter
+                                    </p> : null}
                             </div>
                         </div>
 
                         {/* Word Display */}
-                        <div className="flex flex-col w-full h-full justify-center md:justify-between items-center">
-                            <h1 className="text-[12vw] md:text-6xl text-center font-bold">{currentWord}</h1>
-                            <p className="px-2 py-1 mt-4 md:mt-10 rounded-full bg-primary-bg">{formatTime(timer)}</p>
+                        <div className="flex flex-col w-full h-full justify-center md:justify-start items-center">
+                            <h1 className="text-[10vw] md:text-6xl text-center font-bold">{currentWord}</h1>
+                            <p className="px-2 py-1 mt-2 md:mt-6 rounded-full bg-primary-bg">{formatTime(timer)}</p>
                         </div>
                     </div>
                 )
