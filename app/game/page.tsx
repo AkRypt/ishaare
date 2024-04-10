@@ -140,7 +140,20 @@ function Game() {
     }, [handleKeyUp]);
 
 
-    //// Handling user swipe input
+    //// SWIPE RELATED ===================
+
+    // Preventing Reload on Swipe
+    useEffect(() => {
+        // This will run when the component is mounted
+        document.body.style.overscrollBehaviorY = 'contain';
+
+        return () => {
+            // This will run when the component is unmounted
+            document.body.style.overscrollBehaviorY = 'auto';
+        };
+    }, []);
+
+    // Handling user swipe input
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);
     const [startY, setStartY] = useState(0);
@@ -184,6 +197,8 @@ function Game() {
             };
         }
     }, [startY, endY]);
+
+    // END SWIPE RELATED ===================
 
     return (
         <main>
