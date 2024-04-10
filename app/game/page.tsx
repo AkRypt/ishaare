@@ -15,6 +15,8 @@ function Game() {
     const [currentWord, setCurrentWord] = useState("Loading...");
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [correctSwiped, setCorrectSwiped] = useState(false);
+    const [skipSwiped, setSkipSwiped] = useState(false);
 
     const [seenWords, setSeenWords] = useState<Record<string, boolean>>({});
     const seenWordsRef = useRef<Record<string, boolean>>({});
@@ -74,6 +76,14 @@ function Game() {
     }
 
     const onCorrectWord = () => {
+        setCorrectSwiped(true);
+        const resetCorrectSwiped = () => {
+            setTimeout(() => {
+                setCorrectSwiped(false);
+            }, 500);
+        }
+        resetCorrectSwiped();
+
         setSeenWords((prevSeenWords) => {
             const updatedSeenWords = { ...prevSeenWords, [currentWord]: true };
             seenWordsRef.current = updatedSeenWords;
@@ -83,6 +93,14 @@ function Game() {
     }
 
     const onSkipWord = () => {
+        setSkipSwiped(true);
+        const resetSkipSwiped = () => {
+            setTimeout(() => {
+                setSkipSwiped(false);
+            }, 500);
+        }
+        resetSkipSwiped();
+
         setSeenWords((prevSeenWords) => {
             const updatedSeenWords = { ...prevSeenWords, [currentWord]: false };
             seenWordsRef.current = updatedSeenWords;
@@ -91,15 +109,17 @@ function Game() {
         nextWord();
     }
 
-    // Choosing next word with keyboard
+    // Handling keyboard inputs for next word
     const handleKeyUp = useCallback((e: KeyboardEvent) => {
         if (gameOver) return;
 
-        if (e.key === "Enter") {
-            onCorrectWord();
-        }
-        if (e.key === "Backspace") {
-            onSkipWord();
+        if (!isMobile) {
+            if (e.key === "Enter") {
+                onCorrectWord();
+            }
+            if (e.key === "Backspace") {
+                onSkipWord();
+            }
         }
     }, [onCorrectWord, onSkipWord]);
 
@@ -110,8 +130,54 @@ function Game() {
         };
     }, [handleKeyUp]);
 
+
+    //// Handling user swipe input
+    const [startX, setStartX] = useState(0);
+    const [endX, setEndX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const [endY, setEndY] = useState(0);
+
+    useEffect(() => {
+        if (!gameOver) {
+            const touchStart = (e: TouchEvent) => {
+                setStartX(e.touches[0].screenX);
+                setStartY(e.touches[0].screenY);
+            };
+
+            const touchMove = (e: TouchEvent) => {
+                setEndX(e.touches[0].screenX);
+                setEndY(e.touches[0].screenY);
+            };
+
+            const touchEnd = () => {
+                if (endX > 0 || endY > 0) {
+                    if (startX - endX > 50 || startY - endY > 50) {
+                        onSkipWord();
+                    } else if (endX - startX > 50 || endY - startY > 50) {
+                        onCorrectWord();
+                    } else {
+                        console.log("onSwipeNone")
+                    }
+                }
+                setStartX(0);
+                setStartY(0);
+                setEndX(0);
+                setEndY(0);
+            };
+
+            window.addEventListener('touchstart', touchStart);
+            window.addEventListener('touchmove', touchMove);
+            window.addEventListener('touchend', touchEnd);
+            return () => {
+                window.removeEventListener('touchstart', touchStart);
+                window.removeEventListener('touchmove', touchMove);
+                window.removeEventListener('touchend', touchEnd);
+            };
+        }
+    }, [startY, endY]);
+
     return (
-        <main className="min-h-screen max-h-screen p-0 md:p-4">
+        <main>
 
             {
                 loading ? (
@@ -124,17 +190,16 @@ function Game() {
                 ) : null
             }
 
-            <h1 className="text-6xl mb-2 font-vibe text-center hidden md:block">Ishaare</h1>
-
             {
                 !gameOver ? (
-                    <div className="flex flex-col w-full h-[100vh] md:w-[100%] md:h-[80vh] md:mt-2 md:p-8 md:mx-auto overflow-hidden rounded-xl bg-secondary-bg relative">
+                    <div className="flex flex-col w-full h-[100vh] md:p-8 md:mx-auto overflow-hidden rounded-xl bg-secondary-bg relative">
 
                         {/* Right or Wrong */}
                         <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute left-0 top-0">
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer active:scale-[120%]"
-                                onClick={onSkipWord}>
+                                className={`flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${skipSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
+                            >
+                                {/* onClick={onSkipWord}> active:scale-[120%] */}
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" /></svg>
                                 <h1 className="text-2xl md:text-3xl font-bold">Skip</h1>
@@ -153,13 +218,13 @@ function Game() {
                             </div>
 
                             <div
-                                className="flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer active:scale-[120%]"
-                                onClick={onCorrectWord}
+                                className={`flex md:flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${correctSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
                             >
+                                {/* onClick={onCorrectWord}> */}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={`${correctSwiped ? '#86efac' : 'white'}`} className="w-6 h-6 mr-2 md:hidden"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 
-                                <h1 className="text-2xl md:text-3xl font-bold">Correct</h1>
+                                <h1 className={`text-2xl md:text-3xl font-bold ${correctSwiped ? 'text-green-300' : ''}`}>Correct</h1>
                                 {!isMobile ?
                                     <p className="flex flex-row text-md items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" /></svg>
@@ -169,7 +234,7 @@ function Game() {
                         </div>
 
                         {/* Word Display */}
-                        <div className="flex flex-col w-full h-full justify-center md:justify-start items-center">
+                        <div className="flex flex-col w-full h-full justify-center md:justify-start md:mt-10 items-center">
                             <h1 className="text-[10vw] md:text-6xl text-center font-bold">{currentWord}</h1>
                             <p className="px-2 py-1 mt-2 md:mt-6 rounded-full bg-primary-bg">{formatTime(timer)}</p>
                         </div>
@@ -178,14 +243,16 @@ function Game() {
                     :
                     // Results View
                     (
-                        <div className="flex flex-col w-[90%] md:w-[80%] my-6 md:my-0 md:max-h-[80vh] p-6 mx-auto justify-center items-center rounded-xl bg-secondary-bg relative">
+                        <div className="flex flex-col w-[90%] md:w-[80%] p-6 my-6 mx-auto justify-center items-center rounded-xl bg-secondary-bg">
                             <h1 className="text-3xl font-bold mb-2">Game Over</h1>
-                            <div className="w-full my-2 mx-auto overflow-y-auto">
+                            <div className="w-full my-2 mx-auto">
                                 {
                                     Object.keys(seenWords).map((word) => {
                                         return (
-                                            <div key={word} className={`flex flex-col justify-center items-center${seenWords[word] ? '' : ''}`}>
-                                                <p className={`w-full text-center ${seenWords[word] ? 'my-1 font-bold  bg-gray-900 bg-opacity-40' : 'text-gray-300'}`}>{word}</p>
+                                            <div key={word} className={`flex flex-col justify-center items-center ${seenWords[word] ? '' : ''}`}>
+                                                <p className={`w-full text-center ${seenWords[word] ? 'my-1 font-bold  bg-gray-900 bg-opacity-40' : 'text-gray-300'}`}>
+                                                    {word}
+                                                </p>
                                             </div>
                                         )
                                     })
@@ -203,7 +270,6 @@ function Game() {
                                 <div className="w-full h-[40px] mx-auto mt-4 rounded-lg bg-black">
                                     <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg -translate-y-1 hover:bg-secondary-bg active:bg-green-800 active:translate-y-0"
                                         onClick={() => {
-                                            // router.push('/lobby')
                                             router.back();
                                         }}>
                                         <p className="text-lg text-white font-bold">Choose Another Deck</p>

@@ -36,4 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 # local files
-default_values.js
+/default_values.js
