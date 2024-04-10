@@ -44,14 +44,14 @@ export default function Lobby() {
 
 
             {/* Lobby Body */}
-            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-2 md:px-10 py-6 md:py-1 mx-auto justify-center bg-[#092E21] bg-opacity-10 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
+            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-2 md:px-10 py-6 mx-auto justify-center bg-[#092E21] bg-opacity-10 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
                 <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
 
                 {/* Deck List */}
                 <div className="flex flex-col md:px-6 overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-2 pb-4 md:p-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg overflow-hidden hover:cursor-pointer active:bg-white ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
+                            <div key={index} className={`p-2 pb-4 md:p-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-secondary-bg border-action-bg' : 'border-transparent bg-gray-200'}`}
                                 onClick={() => onClickDeck(deck.id)}>
                                 <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[40%] transition-height duration-300 ease-in-out" />
                                 <h2 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h2>
