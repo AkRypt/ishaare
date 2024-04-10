@@ -55,7 +55,7 @@ export default function Home() {
                 <div className="w-[90%] md:w-[300px] mx-auto my-4 rounded-lg bg-black">
                     <button className={`bg-secondary-bg w-full px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700`}
                         onClick={createLobby}>
-                        <p className="text-xl font-bold">Start Game</p>
+                        <p className="text-xl font-bold">Play Game</p>
                     </button>
                 </div>
 

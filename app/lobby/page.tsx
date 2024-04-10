@@ -63,9 +63,10 @@ export default function Lobby() {
             </div>
 
             <div className="fixed w-[200px] mx-auto rounded-lg bottom-16 left-0 right-0 bg-black">
-                <button className={`bg-action-bg w-[200px] px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700 ${activeDeck ? '' : 'hidden'}`}
+                <button className={`flex justify-center items-center bg-action-bg w-[200px] px-4 py-2 rounded-lg -translate-y-2 hover:bg-green-700 ${activeDeck ? '' : 'hidden'}`}
                     onClick={onClickPlay}>
-                    <p className="text-xl font-mono font-bold">PLAY</p>
+                    <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
+                    <p className="text-xl tracking-[0.1rem] font-bold">START</p>
                 </button>
             </div>
 
