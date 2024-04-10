@@ -173,9 +173,9 @@ function Game() {
 
             const touchEnd = () => {
                 if (endX > 0 || endY > 0) {
-                    if (startX - endX > 50 || startY - endY > 50) {
+                    if (startX - endX > 50 || startY - endY > 100) {
                         onSkipWord();
-                    } else if (endX - startX > 50 || endY - startY > 50) {
+                    } else if (endX - startX > 50 || endY - startY > 100) {
                         onCorrectWord();
                     } else {
                         console.log("onSwipeNone")
