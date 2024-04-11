@@ -2,14 +2,19 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getDecks } from "./actions";
+import { getDecks, signOut } from "./actions";
+import { createClient } from "@/utils/supabase/client";
+import HowToPlayModal from "../components/howToPlay";
+import SignOutButton from "../components/signOutButton";
 
 export default function Lobby() {
     const router = useRouter();
 
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [activeDeck, setActiveDeck] = useState<number | null>(null);
     const [decks, setDecks] = useState<any[] | null>([]);
+    const [userData, setUserData] = useState<any>(null);
 
     useEffect(() => {
         getDecks().then((data) => {
@@ -18,12 +23,35 @@ export default function Lobby() {
         })
     }, [])
 
+    // Fetching logged in userData
+    async function getUserData() {
+        const supabase = createClient();
+        const { data, error } = await supabase.auth.getUser()
+        const { data: userD, error: userError } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', data?.user?.id)
+
+        setUserData(userD ? userD[0] : null)
+        console.log(userD)
+    }
+    useEffect(() => {
+        getUserData()
+    }, [])
+
     const onClickDeck = (id: number) => {
         setActiveDeck(id);
     }
 
     const onClickPlay = () => {
         router.push(`/game?deck_id=${activeDeck}`);
+    }
+
+    const onClickSignOut = () => {
+        setLoading(true)
+        signOut().then(() => {
+            setLoading(false)
+        })
     }
 
     return (
@@ -41,10 +69,21 @@ export default function Lobby() {
                 ) : null
             }
 
-
+            <HowToPlayModal show={showModal} onClose={() => setShowModal(false)} />
 
             {/* Lobby Body */}
-            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-2 md:px-10 py-6 mx-auto justify-center bg-[#092E21] bg-opacity-10 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
+            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-2 md:px-10 py-4 mx-auto justify-center bg-[#092E21] bg-opacity-10 shadow-3xl shadow-inner shadow-green-950 rounded-lg">
+
+                <div className="flex justify-between items-center px-2 mb-4">
+                    {/* Info on how to playButton */}
+                    <button className="md:ml-4"
+                    onClick={() => setShowModal(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
+                    </button>
+
+                    {/* SignOut Btn */}
+                    {userData ? <SignOutButton text={userData?.email || ''} onClick={() => onClickSignOut()} /> : null}
+                </div>
                 <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
 
                 {/* Deck List */}

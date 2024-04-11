@@ -3,6 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { getWords } from "./actions";
+import { keyboardHandler, preventReload, swipeHandler } from "./hooks";
+import { formatTime } from "./helpers";
 
 function Game() {
     const router = useRouter();
@@ -25,18 +27,20 @@ function Game() {
     // Will fetch words from the database
     const [words, setWords] = useState<any[]>([]);
 
+    // Randomizing the received list of words
     const randomizeWords = (words: any[]) => {
         return words.sort(() => Math.random() - 0.5);
     }
 
+    // Showing Snackbar to suggest screen rotation
     useEffect(() => {
         const snackTimeout = setTimeout(() => {
             setShowSnack(false);
         }, 2000);
-
         return () => clearTimeout(snackTimeout);
     }, []);
 
+    // Getting words in the deck
     useEffect(() => {
         setIsMobile(/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
         getWords(deck_id).then((deck_words) => {
@@ -45,6 +49,7 @@ function Game() {
         });
     }, []);
 
+    // Loading the first word
     useEffect(() => {
         if (!loading) {
             setCurrentWord(words[currentWordIndex]["word"]);
@@ -64,14 +69,7 @@ function Game() {
         return () => clearTimeout(timeOut);
     }, [timer]);
 
-    const formatTime = (time: number): string => {
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        const formattedMinutes = String(minutes).padStart(2, '0');
-        const formattedSeconds = String(seconds).padStart(2, '0');
-        return `${formattedMinutes}:${formattedSeconds}`;
-    }
-
+    // Displaying next word after action
     const nextWord = () => {
         setCurrentWordIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
@@ -84,6 +82,7 @@ function Game() {
         });
     }
 
+    // Handling correct swipe
     const onCorrectWord = () => {
         setCorrectSwiped(true);
         const resetCorrectSwiped = () => {
@@ -101,6 +100,7 @@ function Game() {
         nextWord();
     }
 
+    // Handling skip swipe
     const onSkipWord = () => {
         setSkipSwiped(true);
         const resetSkipSwiped = () => {
@@ -119,86 +119,23 @@ function Game() {
     }
 
     // Handling keyboard inputs for next word
-    const handleKeyUp = useCallback((e: KeyboardEvent) => {
-        if (gameOver) return;
-
-        if (!isMobile) {
-            if (e.key === "Enter") {
-                onCorrectWord();
-            }
-            if (e.key === "Backspace") {
-                onSkipWord();
-            }
-        }
-    }, [onCorrectWord, onSkipWord]);
-
-    useEffect(() => {
-        document.addEventListener("keyup", handleKeyUp);
-        return () => {
-            document.removeEventListener("keyup", handleKeyUp);
-        };
-    }, [handleKeyUp]);
-
-
-    //// SWIPE RELATED ===================
+    keyboardHandler({
+        gameOver,
+        isMobile,
+        correctFunc: onCorrectWord,
+        skipFunc: onSkipWord
+    })
 
     // Preventing Reload on Swipe
-    useEffect(() => {
-        // This will run when the component is mounted
-        document.body.style.overscrollBehaviorY = 'contain';
-
-        return () => {
-            // This will run when the component is unmounted
-            document.body.style.overscrollBehaviorY = 'auto';
-        };
-    }, []);
+    preventReload()
 
     // Handling user swipe input
-    const [startX, setStartX] = useState(0);
-    const [endX, setEndX] = useState(0);
-    const [startY, setStartY] = useState(0);
-    const [endY, setEndY] = useState(0);
-
-    useEffect(() => {
-        if (!gameOver) {
-            const touchStart = (e: TouchEvent) => {
-                setStartX(e.touches[0].screenX);
-                setStartY(e.touches[0].screenY);
-            };
-
-            const touchMove = (e: TouchEvent) => {
-                setEndX(e.touches[0].screenX);
-                setEndY(e.touches[0].screenY);
-            };
-
-            const touchEnd = () => {
-                if (endX > 0 || endY > 0) {
-                    if (startX - endX > 50 || startY - endY > 100) {
-                        onSkipWord();
-                    } else if (endX - startX > 50 || endY - startY > 100) {
-                        onCorrectWord();
-                    } else {
-                        console.log("onSwipeNone")
-                    }
-                }
-                setStartX(0);
-                setStartY(0);
-                setEndX(0);
-                setEndY(0);
-            };
-
-            window.addEventListener('touchstart', touchStart);
-            window.addEventListener('touchmove', touchMove);
-            window.addEventListener('touchend', touchEnd);
-            return () => {
-                window.removeEventListener('touchstart', touchStart);
-                window.removeEventListener('touchmove', touchMove);
-                window.removeEventListener('touchend', touchEnd);
-            };
-        }
-    }, [startY, endY]);
-
-    // END SWIPE RELATED ===================
+    swipeHandler({
+        gameOver,
+        loading,
+        correctFunc: onCorrectWord,
+        skipFunc: onSkipWord
+    })
 
     return (
         <main>
