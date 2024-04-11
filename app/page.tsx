@@ -6,6 +6,7 @@ import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import GoogleButton from "./components/googleButton";
 import HowToPlayModal from "./components/howToPlay";
+import { getURL } from "./helpers";
 
 export default function Home() {
     const router = useRouter();
@@ -26,7 +27,7 @@ export default function Home() {
                     access_type: 'offline',
                     prompt: 'consent'
                 },
-                redirectTo: `${window.location.origin}/auth/callback`
+                redirectTo: `${getURL()}/auth/callback`
             },
         })
     }
