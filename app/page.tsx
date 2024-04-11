@@ -2,23 +2,26 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import GoogleButton from "./components/googleButton";
 import HowToPlayModal from "./components/howToPlay";
-import { getURL } from "./helpers";
+import { getRedirectURL } from "./helpers";
 
 export default function Home() {
     const router = useRouter();
 
     const [showModal, setShowModal] = useState(false)
+    const [redirectURL, setRedirectURL] = useState('')
 
     const createLobby = () => {
         router.push('/lobby');
     }
 
+
     //// GOOGLE LOGIN ============
     const onClickGoogleLogin = async () => {
+        console.log(`getURL(): ${getRedirectURL()}`)
         const supabase = createClient();
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
@@ -27,7 +30,7 @@ export default function Home() {
                     access_type: 'offline',
                     prompt: 'consent'
                 },
-                redirectTo: `${getURL()}/auth/callback`
+                redirectTo: getRedirectURL()
             },
         })
     }

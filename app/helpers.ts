@@ -1,4 +1,6 @@
-export const getURL = () => {
+'use server'
+
+export const getRedirectURL = () => {
     let url =
         process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
         process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
@@ -7,5 +9,9 @@ export const getURL = () => {
     url = url.includes('http') ? url : `https://${url}`
     // Make sure to include a trailing `/`.
     url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
+    // Adding callback path
+    url = `${url}auth/callback/`
+
+    console.log("GETURL:", url)
     return url
 }
