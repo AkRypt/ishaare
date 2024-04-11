@@ -12,27 +12,21 @@ export default function Home() {
     const router = useRouter();
 
     const [showModal, setShowModal] = useState(false)
-    const [redirectURL, setRedirectURL] = useState('')
 
     const createLobby = () => {
         router.push('/lobby');
     }
 
-
     //// GOOGLE LOGIN ============
     const onClickGoogleLogin = async () => {
-        console.log(`getURL(): ${getRedirectURL()}`)
-        const supabase = createClient();
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                queryParams: {
-                    access_type: 'offline',
-                    prompt: 'consent'
-                },
-                redirectTo: getRedirectURL()
-            },
-        })
+        router.push('/auth/google')
+        // const supabase = createClient();
+        // const { data, error } = await supabase.auth.signInWithOAuth({
+        //     provider: 'google',
+        //     options: {
+        //         redirectTo: `${window.location.origin}/auth/callback/`
+        //     },
+        // })
     }
 
     return (
