@@ -7,7 +7,7 @@ export default function GoogleButton({ style, onClick }: GoogleButtonProps) {
     return (
         <button
             aria-label="Sign in with Google"
-            className={`flex items-center justify-center bg-white border border-button-border-light rounded-md p-0.5  ${style}`}
+            className={`flex items-center justify-center bg-white border border-gray-600 rounded-md p-0.5  ${style}`}
             onClick={onClick}
         >
             <div className="flex items-center justify-center bg-white w-9 h-9 rounded-l">

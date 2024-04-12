@@ -15,8 +15,8 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                             <p className="text-lg">2. Hold the Phone in front of you</p>
                             <p className="text-lg">3. Your friends will describe or act the word out</p>
                             <p className="text-lg">4. You will have to guess the word</p>
-                            <p className="text-lg">5. Tap the top part of your phone to skip the word</p>
-                            <p className="text-lg">6. Tap the bottom part of your phone to guess the word</p>
+                            <p className="text-lg">5. Swipe Right/Down to guess the word correctly</p>
+                            <p className="text-lg">6. Swipe Up/Left to skip the word</p>
                         </div>
                     </div>
                 </div>

@@ -44,29 +44,27 @@ export function swipeHandler({ gameOver, loading, correctFunc, skipFunc }: { gam
         if (!gameOver) {
             const touchStart = (e: TouchEvent) => {
                 setStartX(e.touches[0].screenX);
-                setStartY(e.touches[0].screenY);
+                // setStartY(e.touches[0].screenY);
             };
 
             const touchMove = (e: TouchEvent) => {
                 setEndX(e.touches[0].screenX);
-                setEndY(e.touches[0].screenY);
+                // setEndY(e.touches[0].screenY);
             };
 
             const touchEnd = () => {
                 if (loading) return;
-                if (endX > 0 || endY > 0) {
-                    if (startX - endX > 50 || startY - endY > 100) {
+                if (endX > 0) {
+                    if (startX - endX > 50) {
                         skipFunc();
-                    } else if (endX - startX > 50 || endY - startY > 100) {
+                    } else if (endX - startX > 50) {
                         correctFunc();
                     } else {
                         console.log("onSwipeNone")
                     }
                 }
                 setStartX(0);
-                setStartY(0);
                 setEndX(0);
-                setEndY(0);
             };
 
             window.addEventListener('touchstart', touchStart);
@@ -78,5 +76,5 @@ export function swipeHandler({ gameOver, loading, correctFunc, skipFunc }: { gam
                 window.removeEventListener('touchend', touchEnd);
             };
         }
-    }, [startY, endY]);
+    }, [startX, endX]);
 }
