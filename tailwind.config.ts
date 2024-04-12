@@ -14,7 +14,6 @@ const config: Config = {
         poppins: ["Poppins", 'sans']
       },
       colors: {
-        // "primary-bg": "#4CC0D6",
         "primary-bg": "#2c7c8d",
         "secondary-bg": "#3B92A2",
         "action-bg": "#35F1B0",

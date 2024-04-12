@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/client";
 import GoogleButton from "./components/googleButton";
 import HowToPlayModal from "./components/howToPlay";
 import { getRedirectURL } from "./helpers";
+import { Loading } from "./components/loading";
 
 export default function Home() {
     const router = useRouter();
@@ -19,14 +20,14 @@ export default function Home() {
 
     //// GOOGLE LOGIN ============
     const onClickGoogleLogin = async () => {
-        // router.push('/auth/google')
-        const supabase = createClient();
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: `${window.location.origin}/auth/callback`
-            },
-        })
+        router.push('/auth/google')
+        // const supabase = createClient();
+        // const { data, error } = await supabase.auth.signInWithOAuth({
+        //     provider: 'google',
+        //     options: {
+        //         redirectTo: `${window.location.origin}/auth/callback`
+        //     },
+        // })
     }
 
     return (

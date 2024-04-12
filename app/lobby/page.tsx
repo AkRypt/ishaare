@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/client";
 import HowToPlayModal from "../components/howToPlay";
 import SignOutButton from "../components/signOutButton";
 import { Loading } from "../components/loading";
+import GoogleMiniButton from "../components/googleMiniButton";
 
 export default function Lobby() {
     const router = useRouter();
@@ -43,6 +44,7 @@ export default function Lobby() {
 
     const onClickDeck = (id: number, isPremium: boolean) => {
         setActiveDeck(id);
+        //// TODO UNCOMMENT AFTER IMPLEMENTING PAYMENT
         // if (isPremium) {
         //     if (purchasedTopics?.includes(id)) {
         //         setCanPlay(true)
@@ -66,40 +68,45 @@ export default function Lobby() {
     }
 
     return (
-        <main className="min-h-screen max-h-screen md:p-10"
-            style={{ backgroundImage: "url('/assets/green_bg.png')", backgroundSize: 'fill' }}>
+        <main className="min-h-screen md:px-10"
+            style={{ backgroundImage: "url('/assets/lobby_bg.png')", backgroundSize: 'cover' }}>
 
             {loading ? <Loading /> : null}
 
             <HowToPlayModal show={showModal} onClose={() => setShowModal(false)} />
 
             {/* Lobby Body */}
-            <div className="flex flex-col md:w-[80%] md:h-[90vh] px-2 md:px-10 py-4 mx-auto justify-center bg-[#092E21] bg-opacity-10 shadow-inner shadow-green-950 rounded-lg">
-
-                <div className="flex justify-between items-center px-2 mb-4">
+            <div className="flex flex-col md:w-[80%] md:h-[100vh] md:my-auto overflow-hidden px-2 md:px-10 py-4 mx-auto bg-gray-700 bg-opacity-10 justify-center items-center shadow-lg rounded-lg">
+                <div className="flex w-full justify-between items-center px-2">
                     {/* Info on how to playButton */}
                     <button className="md:ml-4"
                         onClick={() => setShowModal(true)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#2c7c8d" className="w-9 h-9"><path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
                     </button>
 
                     {/* SignOut Btn */}
-                    {userData ? <SignOutButton text={userData?.email || ''} onClick={() => onClickSignOut()} /> : null}
+                    {userData ?
+                        <SignOutButton text={userData?.email || ''} onClick={() => onClickSignOut()} />
+                        :
+                        <GoogleMiniButton onClick={() => {router.push('/auth/google')}} />
+                    }
                 </div>
-                <h1 className="text-6xl mb-4 font-vibe text-center">Ishaare</h1>
+                <div className="px-4 pt-3 pb-1 mb-4 bg-white bg-opacity-70 rounded-full relative">
+                    <h1 className="text-6xl font-vibe text-primary-bg ">Ishaare</h1>
+                </div>
 
                 {/* Deck List */}
-                <div className="flex flex-col md:px-6 overflow-y-auto">
+                <div className="flex flex-col md:px-6  overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-2 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-primary-bg border-action-bg' : 'border-transparent bg-white'}`}
+                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-primary-bg border-action-bg' : 'border-transparent bg-white'}`}
                                 onClick={() => onClickDeck(deck.id, deck.is_premium)}>
                                 <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[30%] transition-height duration-300 ease-in-out" />
-                                <h2 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h2>
-                                <p className={`hidden text-sm group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
+                                <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
+                                <p className={`hidden text-sm pl-1 group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
                                 {deck.is_premium && 0
                                     ?
-                                    <div className="absolute top-1 right-1 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full p-1">
+                                    <div className="absolute w-[170px] flex justify-center items-center top-[26px] right-[-45px] rotate-45 bg-gradient-to-r from-primary-bg via-secondary-bg to-action-bg">
                                         {
                                             !(purchasedTopics && purchasedTopics.includes(deck.id)) ?
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#FFD700" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FFD700" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
