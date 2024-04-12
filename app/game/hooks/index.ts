@@ -33,23 +33,22 @@ export function preventReload() {
     }, []);
 }
 
+// Confirm going back
+
+
 // Handling swipe events
 export function swipeHandler({ gameOver, loading, correctFunc, skipFunc }: { gameOver: boolean, loading: boolean, correctFunc: () => void, skipFunc: () => void }) {
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);
-    const [startY, setStartY] = useState(0);
-    const [endY, setEndY] = useState(0);
 
     useEffect(() => {
         if (!gameOver) {
             const touchStart = (e: TouchEvent) => {
                 setStartX(e.touches[0].screenX);
-                // setStartY(e.touches[0].screenY);
             };
 
             const touchMove = (e: TouchEvent) => {
                 setEndX(e.touches[0].screenX);
-                // setEndY(e.touches[0].screenY);
             };
 
             const touchEnd = () => {

@@ -72,17 +72,17 @@ export async function updateSession(request: NextRequest) {
       .select('*')
       .eq('id', deckId)
 
-    if (deckData && deckData[0].is_premium) {
-      const { data: userData, error: userError }: { data: any, error: any } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', data?.user?.id)
+    //// TODO REDIRECT TO BUY TOPIC PAGE
+    // if (deckData && deckData[0].is_premium) {
+    //   const { data: userData, error: userError }: { data: any, error: any } = await supabase
+    //     .from('users')
+    //     .select('*')
+    //     .eq('id', data?.user?.id)
 
-      //// TODO REDIRECT TO BUY TOPIC PAGE
-      if (!userData[0].purchased_topics.includes(deckId)) {
-        return NextResponse.redirect(new URL("/lobby", request.url))
-      }
-    }
+    // if (!userData[0].purchased_topics.includes(deckId)) {
+    //   return NextResponse.redirect(new URL("/lobby", request.url))
+    // }
+    // }
 
 
   }

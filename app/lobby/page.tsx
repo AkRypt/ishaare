@@ -6,6 +6,7 @@ import { getDecks, signOut } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import HowToPlayModal from "../components/howToPlay";
 import SignOutButton from "../components/signOutButton";
+import { Loading } from "../components/loading";
 
 export default function Lobby() {
     const router = useRouter();
@@ -14,6 +15,8 @@ export default function Lobby() {
     const [showModal, setShowModal] = useState(false);
     const [activeDeck, setActiveDeck] = useState<number | null>(null);
     const [decks, setDecks] = useState<any[] | null>([]);
+    const [canPlay, setCanPlay] = useState(false);
+    const [purchasedTopics, setPurchasedTopics] = useState<number[]>([]);
     const [userData, setUserData] = useState<any>(null);
 
     useEffect(() => {
@@ -31,19 +34,27 @@ export default function Lobby() {
             .from('users')
             .select('*')
             .eq('id', data?.user?.id)
-
         setUserData(userD ? userD[0] : null)
-        console.log(userD)
+        setPurchasedTopics(userD ? userD[0]?.purchased_topics : [])
     }
     useEffect(() => {
         getUserData()
     }, [])
 
-    const onClickDeck = (id: number) => {
+    const onClickDeck = (id: number, isPremium: boolean) => {
         setActiveDeck(id);
+        // if (isPremium) {
+        //     if (purchasedTopics?.includes(id)) {
+        //         setCanPlay(true)
+        //     } else {
+        //         // return setCanPlay(false)
+        //     }
+        // }
+        setCanPlay(true)
     }
 
     const onClickPlay = () => {
+        setLoading(true)
         router.push(`/game?deck_id=${activeDeck}`);
     }
 
@@ -58,16 +69,7 @@ export default function Lobby() {
         <main className="min-h-screen max-h-screen md:p-10"
             style={{ backgroundImage: "url('/assets/green_bg.png')", backgroundSize: 'fill' }}>
 
-            {
-                loading ? (
-                    <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-                        <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                        </svg>
-                    </div>
-                ) : null
-            }
+            {loading ? <Loading /> : null}
 
             <HowToPlayModal show={showModal} onClose={() => setShowModal(false)} />
 
@@ -90,11 +92,22 @@ export default function Lobby() {
                 <div className="flex flex-col md:px-6 overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-2 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg  shadow-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-primary-bg border-action-bg' : 'border-transparent bg-white'}`}
-                                onClick={() => onClickDeck(deck.id)}>
+                            <div key={index} className={`p-2 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-lg overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-primary-bg border-action-bg' : 'border-transparent bg-white'}`}
+                                onClick={() => onClickDeck(deck.id, deck.is_premium)}>
                                 <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[30%] transition-height duration-300 ease-in-out" />
                                 <h2 className={`text-lg ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-bold`}>{deck.name}</h2>
                                 <p className={`hidden text-sm group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
+                                {deck.is_premium && 0
+                                    ?
+                                    <div className="absolute top-1 right-1 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full p-1">
+                                        {
+                                            !(purchasedTopics && purchasedTopics.includes(deck.id)) ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#FFD700" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FFD700" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={5} stroke="white" className="w-[18px] h-[18px] m-1"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                                        }
+                                    </div> : <></>
+                                }
                             </div>
                         ))}
                     </div>
@@ -102,11 +115,22 @@ export default function Lobby() {
             </div>
 
             <div className="fixed w-[200px] mx-auto rounded-lg bottom-16 left-0 right-0 bg-black">
-                <button className={`flex justify-center items-center bg-action-bg w-[200px] px-4 py-2 rounded-lg -translate-y-1.5 translate-x-1 hover:bg-green-500 active:bg-green-700 active:translate-x-0 active:translate-y-0 ${activeDeck ? '' : 'hidden'}`}
-                    onClick={onClickPlay}>
-                    <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
-                    <p className="text-xl tracking-[0.1rem] font-bold">START</p>
-                </button>
+                {
+                    activeDeck ?
+                        canPlay ?
+                            <button className="flex justify-center items-center bg-action-bg w-[200px] px-4 py-2 rounded-lg -translate-y-1.5 translate-x-1 hover:bg-green-500 active:bg-green-700 active:translate-x-0 active:translate-y-0"
+                                onClick={onClickPlay}>
+                                <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
+                                <p className="text-xl tracking-[0.1rem] font-bold">START</p>
+                            </button>
+                            :
+                            <button className="flex justify-center items-center bg-action-bg bg-yellow-400 w-[200px] px-4 py-2 rounded-lg -translate-y-1.5 translate-x-1 hover:bg-green-500 active:bg-green-700 active:translate-x-0 active:translate-y-0"
+                                onClick={() => { }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                                <p className="text-xl tracking-[0.1rem] font-bold">BUY</p>
+                            </button>
+                        : null
+                }
             </div>
 
         </main>

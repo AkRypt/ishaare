@@ -20,3 +20,7 @@ export async function getWords(deck_id: number) {
 
     return data
 }
+
+export async function ilog(text: string) {
+    console.log(text)
+}
