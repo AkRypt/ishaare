@@ -88,7 +88,7 @@ export default function Lobby() {
                     {userData ?
                         <SignOutButton text={userData?.email || ''} onClick={() => onClickSignOut()} />
                         :
-                        <GoogleMiniButton onClick={() => {router.push('/auth/google')}} />
+                        <GoogleMiniButton onClick={() => { router.push('/auth/google') }} />
                     }
                 </div>
                 <div className="px-4 pt-3 pb-1 mb-4 bg-white bg-opacity-70 rounded-full relative">
@@ -96,22 +96,22 @@ export default function Lobby() {
                 </div>
 
                 {/* Deck List */}
-                <div className="flex flex-col md:px-6  overflow-y-auto">
+                <div className="flex flex-col w-full md:px-6 overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-primary-bg border-action-bg' : 'border-transparent bg-white'}`}
+                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
                                 onClick={() => onClickDeck(deck.id, deck.is_premium)}>
                                 <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[30%] transition-height duration-300 ease-in-out" />
                                 <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
                                 <p className={`hidden text-sm pl-1 group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
                                 {deck.is_premium && 0
                                     ?
-                                    <div className="absolute w-[170px] flex justify-center items-center top-[26px] right-[-45px] rotate-45 bg-gradient-to-r from-primary-bg via-secondary-bg to-action-bg">
+                                    <div className={`absolute w-[170px] flex justify-center items-center bottom-[26px] right-[-45px] -rotate-45 bg-gradient-to-r ${!purchasedTopics.includes(deck.id) ? 'from-primary-bg via-secondary-bg to-action-bg' : 'from-blue-500 via-indigo-500 to-cyan-500'}`}>
                                         {
                                             !(purchasedTopics && purchasedTopics.includes(deck.id)) ?
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#FFD700" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FFD700" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={5} stroke="white" className="w-[18px] h-[18px] m-1"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={5} stroke="white" className="w-[18px] h-[18px] m-1 "><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
                                         }
                                     </div> : <></>
                                 }
