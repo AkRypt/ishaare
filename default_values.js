@@ -25,6 +25,13 @@ const Places_in_India = [
     ('Mysore Palace', 1),
     ('Vaishno Devi', 1),
     
+    ('Qutub Minar', 1),
+    ('Lotus Temple', 1),
+    ('Red Fort', 1),
+    ('Gateway of India', 1),
+    ('Hawa Mahal', 1),
+    ('Golden Temple', 1),
+    ('Golconda Fort', 1),
 ]
 
 const Indian_Food = [
@@ -52,6 +59,10 @@ const Indian_Food = [
     ('Maggi', 2),
     ('Kelloggs', 2),
     ('Kaju Katli', 2),
+
+    ('Haleem', 2),
+    ('Dahi Puri', 2),
+    ('Butter Chicken', 2),
 ]
 
 const Indian_Brands = [
@@ -210,7 +221,8 @@ const cartoons = [
     ('Richie Rich', 6),
     ('Pink Panther', 6),
     ('Pingu', 6),
-
+    ('Vikram aur Betaal', 6),
+    ('Tenali Rama', 6),
 ]
 
 Indian_Actions = [
@@ -233,6 +245,14 @@ Indian_Actions = [
     ('Firecrackers', 7),
     ('Bharaat Dance', 7),
     ('Cameraman in Weddings', 7),
+
+    ('Bajrang Dal', 7),
+    ('Hookah', 7),
+    ('Diwali Cleaning', 7),
+    ('Oyo Rooms', 7),
+    ('Swiggy', 7),
+    ('Ola', 7),
+    ('Chain Snatching', 7),
 
 ]
 
@@ -279,9 +299,109 @@ Bollywood = [
 
 ]
 
+const IPL_Teams = [
+    ('RCB', 9),
+    ('Chennai Super Kings', 9),
+    ('Delhi Capitals', 9),
+    ('Gujarat Titans', 9),
+    ('Kolkata Knight Riders', 9),
+    ('Lucknow Super Giants', 9),
+    ('Mumbai Indians', 9),
+    ('Punjab Kings', 9),
+    ('Rajasthan Royals', 9),
+    ('Sunrisers Hyderabad', 9),
+]
+
+const indian_cricketers = [
+    ('Virat Kohli', 10),
+    ('Rohit Sharma', 10),
+    ('Shubman Gill', 10),
+    ('Bhuvneshwar Kumar', 10),
+    ('Rishabh Pant', 10),
+    ('Jasprit Bumrah', 10),
+    ('Ravindra Jadeja', 10),
+    ('Ravichandran Ashwin', 10),
+    ('Mohammad Shami', 10),
+    ('Mohammed Siraj', 10),
+    ('Kl Rahul', 10),
+    ('Hardik Pandya', 10),
+    ('MS Dhoni', 10),
+    ('Kapil Dev', 10),
+    ('Sachin Tendulkar', 10),
+    ('Rahul Dravid', 10),
+    ('Sunil Gavaskar', 10),
+    ('Anil Kumble', 10),
+    ('Sourav Ganguly', 10),
+    ('Virender Sehwag', 10),
+    ('Yuvraj Singh', 10),
+    ('Mohammad Azharuddin', 10),
+    ('Javagal Srinath', 10),
+    ('Harbhajan Singh', 10),
+    ('Zaheer Khan', 10),
+    ('VVS Laxman', 10),
+    ('Gautam Gambhir', 10),
+    ('Suresh Raina', 10),
+    ('Murali Vijay', 10),
+    ('Shikhar Dhawan', 10),
+    ('Ajinkya Rahane', 10),
+    ('Irfan Pathan', 10),
+    ('Yusuf Pathan', 10),
+    ('Wriddhiman Saha', 10),
+    ('Kuldeep Yadav', 10),
+]
+
+// didnt add
+const hyderabadi_things = [
+    ('Blanket Hall', 13),
+    ('Saleem Pheku', 13),
+    ('Baigan', 13),
+    ('Kiraak', 13),
+    ('Item', 13),
+    ('Charminar', 13),
+    ('Begum Bazaar', 13),
+    ('Irani Chai', 13),
+    ('Niloufer', 13),
+    ('Oyo Rooms', 13),
+    ('Babri', 13),
+    ('Maram pitti', 13),
+    ('Necklace Road', 13),
+    ('Indira Park', 13),
+    ('Triple Riding', 13),
+    ('Burqa', 13),
+    ('Haleem', 13),
+    ('Shawarma', 13),
+    ('Kaan Bhairi', 13),
+    ('Pinde me Miljana', 13),
+    ('Kaiku?', 13),
+    ('Yaaro', 13),
+    ('Miya', 13),
+    ('Teenmaar', 13),
+    ('Marfa', 13),
+    ('Dedh Hushaari', 13),
+    ('Mothabari', 13),
+    ('Galeez', 13),
+    ('Amma Bava', 13),
+    ('Howle', 13),
+]
+
+const being_telugu = [
+    ('Ugadi', 16),
+    ('Bonalu', 16),
+    
+]
+
+// didnt add
+const j90sThings = [
+    ('Doordardhan', 17),
+    ('TV Satellite shaking', 17),
+    ('WWE', 17),
+
+]
+
+// didnt add
 const Telugu_Memes = [
-    "Baane extralu",
-    "Kurchi martapetti",
-    "Uppal baal",
+    ('Baane extralu', 18),
+    ('Kurchi martapetti', 18),
+    ('Uppal baal', 18),
     
 ]
