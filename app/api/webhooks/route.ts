@@ -10,11 +10,11 @@ const stripe = new Stripe(process.env.TEST_STRIPE_SECRET as string, {
 const endpointSecret = process.env.TEST_WEBHOOK_SECRET as string;
 
 // Make sure to add this, otherwise you will get a stream.not.readable error
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
+// export const config = {
+//     api: {
+//         bodyParser: false,
+//     },
+// };
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -28,6 +28,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     try {
         let event = stripe.webhooks.constructEvent(payload, sig!, endpointSecret);
+
+        console.log("event:", event)
 
         if (event.type === "checkout.session.completed") {
 
