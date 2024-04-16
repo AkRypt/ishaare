@@ -74,6 +74,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
             } catch (error) {
                 console.log("Handling when you're unable to save an order");
+                console.error(error)
                 return NextResponse.json({ status: "Failed", error })
             }
         }
