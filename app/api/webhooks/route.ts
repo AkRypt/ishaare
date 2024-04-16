@@ -33,11 +33,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         if (event.type === "checkout.session.completed") {
 
+            console.log("incheckSesssComplete")
+
             try {
                 const session = event.data.object as Stripe.Checkout.Session
                 const metadata = session.metadata
                 const topicId = parseInt(metadata?.topic_id!)
                 const custEmail = session.customer_details?.email
+
+                console.log("before supabase")
 
                 const supabase = await supabaseAdmin();
                 await supabase
@@ -56,8 +60,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
                             return;
                         }
 
+                        console.log("BeforeUpdate")
+
                         const currentTopics = data.purchased_topics || [];
                         const updatedTopics = [...currentTopics, topicId];
+
+                        console.log("updatedTopics:", updatedTopics)
 
                         // Update the user's topics array in the database
                         supabase
@@ -69,6 +77,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
                                     console.error('Error updating user topics:', error.message);
                                     return;
                                 }
+
+                                console.log("Update Success:", data)
                             })
                     })
 
