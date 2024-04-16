@@ -29,11 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     try {
         let event = stripe.webhooks.constructEvent(payload, sig!, endpointSecret);
 
-        console.log("event:", event)
-
         if (event.type === "checkout.session.completed") {
-
-            console.log("incheckSesssComplete")
 
             try {
                 const session = event.data.object as Stripe.Checkout.Session
@@ -41,7 +37,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 const topicId = parseInt(metadata?.topic_id!)
                 const custEmail = session.customer_details?.email
 
-                console.log("before supabase")
+                let updatedTopics: number[] = []
 
                 const supabase = await supabaseAdmin();
                 await supabase
@@ -60,27 +56,30 @@ export async function POST(req: NextRequest, res: NextResponse) {
                             return;
                         }
 
-                        console.log("BeforeUpdate")
-
                         const currentTopics = data.purchased_topics || [];
-                        const updatedTopics = [...currentTopics, topicId];
+                        updatedTopics = [...currentTopics, topicId];
 
-                        console.log("updatedTopics:", updatedTopics)
-
-                        // Update the user's topics array in the database
-                        supabase
-                            .from('users')
-                            .update({ purchased_topics: updatedTopics })
-                            .eq('email', custEmail)
-                            .then(({ data, error }) => {
-                                if (error) {
-                                    console.error('Error updating user topics:', error.message);
-                                    return;
-                                }
-
-                                console.log("Update Success:", data)
-                            })
                     })
+
+                console.log("Updatedtopicss:", updatedTopics)
+
+                // Update the user's topics array in the database
+                if (updatedTopics.length > 0) {
+                    await supabase
+                        .from('users')
+                        .update({ purchased_topics: updatedTopics })
+                        .eq('email', custEmail)
+                        .then(({ data, error }) => {
+                            if (error) {
+                                console.error('Error updating user topics:', error.message);
+                                return;
+                            }
+
+                            console.log("Update Success:", data)
+                        })
+                }
+
+                console.log("after supaUpdate")
 
             } catch (error) {
                 console.log("Handling when you're unable to save an order");
