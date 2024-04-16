@@ -17,7 +17,7 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                 <div className="fixed top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-50">
                     <div className="relative w-full h-full flex items-center justify-center">
                         <div className="absolute w-full h-full" onClick={onClose}></div>
-                        <div className="bg-primary-bg bg-white p-4 w-[90%] md:w-[30%] rounded-lg shadow-2xl relative">
+                        <div className="bg-white p-4 w-[90%] md:w-[30%] rounded-lg shadow-2xl relative">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#2c7c8d" className="absolute top-4 right-4 w-6 h-6 cursor-pointer" onClick={onClose}>
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>

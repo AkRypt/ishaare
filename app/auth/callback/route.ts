@@ -11,6 +11,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const code = searchParams.get('code')
 
+    console.log("code:", code)
+
     const redirectTo = new URL('/lobby', request.url)
 
     if (code) {
@@ -24,6 +26,7 @@ export async function GET(request: NextRequest) {
                 .upsert([{ id: data.user?.id, email: data.user.email }])
 
             if (error) {
+                console.error("Error:", error)
                 throw new Error(`Error creating new user: ${JSON.stringify(newUserError)}`)
             }
         }
