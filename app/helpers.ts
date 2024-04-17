@@ -1,16 +1,16 @@
-'use server'
+import { constants } from "./constants";
 
-export const getRedirectURL = () => {
-    let url =
-        process.env.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
-        process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
-        'http://localhost:3000/'
-    // Make sure to include `https://` when not localhost.
-    url = url.includes('http') ? url : `https://${url}`
-    // Make sure to include a trailing `/`.
-    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
-    // Adding callback path
-    url = `${url}auth/callback/`
+export const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": constants.siteUrl
+    },
+    headline: "Play Indian Charades with your friends",
+    description:
+        "Play Ishaare game which is a game of Heads Up but with a twist just for Indians. Indian Charades.",
+    image: `${constants.siteUrl}/favicon.ico`,
+    inLanguage: "en-US"
+};
 
-    return url
-}

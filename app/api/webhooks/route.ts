@@ -61,8 +61,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                     })
 
-                console.log("Updatedtopicss:", updatedTopics)
-
                 // Update the user's topics array in the database
                 if (updatedTopics.length > 0) {
                     await supabase
@@ -74,13 +72,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
                                 console.error('Error updating user topics:', error.message);
                                 return;
                             }
-
-                            console.log("Update Success:", data)
                         })
                 }
-
-                console.log("after supaUpdate")
-
             } catch (error) {
                 console.log("Handling when you're unable to save an order");
                 console.error(error)

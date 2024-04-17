@@ -45,12 +45,12 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                                 currentPage === 1 ?
                                     <div className="flex flex-col justify-center items-center">
                                         <img src="/assets/how-to/how-2.png" alt="" className="w-[80%] h-[80%] mb-1" />
-                                        <p className="text-md text-primary-bg">Your friends will either act the word out or describe it and you will have to guess the word.</p>
+                                        <p className="text-md text-primary-bg">Your friends will either act the word out or describe it and you will have to guess the word. Guess as many words as possible in 1 minute.</p>
                                     </div>
                                     :
                                     <div className="flex flex-col justify-center items-center">
                                         <img src="/assets/how-to/how-3.png" alt="" className="w-[80%] h-[80%] mb-1" />
-                                        <p className="text-md text-primary-bg">If you guessed the word correctly, swipe right. If you want to skip the word, swipe left. (Without looking at the screen)</p>
+                                        <p className="text-md text-primary-bg">Swipe Right if you guessed the word correctly. Swipe Left to skip the word. (Without looking at the screen)</p>
                                     </div>
                             }
 

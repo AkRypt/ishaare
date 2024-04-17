@@ -97,7 +97,7 @@ export default function Lobby() {
 
                 {/* Deck List */}
                 <div className="flex flex-col w-full md:px-6 overflow-y-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-[100px]">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                         {decks?.map((deck, index) => (
                             <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
                                 onClick={() => onClickDeck(deck.id, deck.is_premium)}>

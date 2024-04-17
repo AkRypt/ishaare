@@ -34,11 +34,13 @@ body {
   @font-face {
     font-family: "GreatVibes";
     src: url("/fonts/GreatVibes-Regular.ttf");
+    font-display: swap;
   }
 
   @font-face {
     font-family: "Poppins";
     src: url("/fonts/Poppins-SemiBold.ttf");
+    font-display: swap;
   }
 
   h1, p {
