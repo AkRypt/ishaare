@@ -4,7 +4,6 @@ import "./globals.css";
 import { constants } from "./constants";
 
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Ishaare",
   description: "Play Heads Up game with your Indian friends",
@@ -31,6 +30,9 @@ export const metadata: Metadata = {
     "max-snippet": -1,
     "max-video-preview": -1,
     googleBot: "index, follow"
+  },
+  verification: {
+    google: "YmyyeXR2N3tf-O0tAaBuiibsZwr7p-gUgmnBKbEU5l0"
   },
   alternates: {
     canonical: constants.siteUrl
