@@ -45,6 +45,10 @@ function Game() {
     useEffect(() => {
         setIsMobile(/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
         getWords(deck_id).then((deck_words) => {
+            // If there are no deck words
+            if (deck_words?.length === 0) {
+                return router.back();
+            }
             setWords(randomizeWords(deck_words ?? []));
             setLoading(false);
         });
