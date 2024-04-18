@@ -6,6 +6,7 @@ import { useState } from "react";
 import GoogleButton from "./components/googleButton";
 import HowToPlayModal from "./components/howToPlay";
 import { jsonLd } from "./helpers";
+import { greatVibes } from "./fonts";
 
 export default function Home() {
     const router = useRouter();
@@ -23,13 +24,13 @@ export default function Home() {
 
     return (
         <main className="min-h-screen max-h-screen md:p-10 flex justify-center items-center"
-            style={{ backgroundImage: "url('/assets/vector2_bg.png')", backgroundSize: 'fill' }}>
+            style={{ backgroundImage: "url('/assets/vector_bg.avif')", backgroundSize: 'cover' }}>
 
             <HowToPlayModal show={showModal} onClose={() => setShowModal(false)} />
 
             {/* Lobby Body */}
             <div className="flex flex-col w-[90%] md:w-[60%] md:h-[90vh] px-10 py-6 mx-auto justify-center bg-[#092E21] bg-white bg-opacity-90 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] shadow-green-950 rounded-lg">
-                <h1 className="text-6xl mb-4 font-vibe text-primary-bg text-center">Ishaare</h1>
+                <h1 className={`text-6xl mb-4 text-primary-bg text-center ${greatVibes.className}`}>Ishaare</h1>
 
                 <div className="w-[90%] md:w-[300px] mx-auto my-4 rounded-lg bg-black">
                     <button className={`bg-secondary-bg w-full px-4 py-2 rounded-lg translate-x-1 -translate-y-2 hover:bg-green-700 active:bg-green-800`}

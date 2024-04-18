@@ -9,6 +9,8 @@ import SignOutButton from "../components/signOutButton";
 import { Loading } from "../components/loading";
 import GoogleMiniButton from "../components/googleMiniButton";
 import ReloadModal from "../components/reloadModal";
+import { greatVibes } from "../fonts";
+import Image from "next/image";
 
 export default function Lobby() {
     const router = useRouter();
@@ -67,7 +69,7 @@ export default function Lobby() {
 
     return (
         <main className="min-h-screen md:px-10"
-            style={{ backgroundImage: "url('/assets/lobby_bg.png')", backgroundSize: 'cover' }}>
+            style={{ backgroundImage: "url('/assets/lobby_bg.avif')", backgroundSize: 'cover' }}>
 
             {loading ? <Loading /> : null}
 
@@ -92,37 +94,51 @@ export default function Lobby() {
                     }
                 </div>
                 <div className="px-4 pt-3 pb-1 mb-4 bg-white bg-opacity-70 rounded-full relative">
-                    <h1 className="text-6xl font-vibe text-primary-bg ">Ishaare</h1>
+                    <h1 className={`text-6xl ${greatVibes.className} text-primary-bg `}>Ishaare</h1>
                 </div>
 
                 {/* Deck List */}
                 <div className="flex flex-col w-full md:px-6 overflow-y-auto">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                         {decks?.map((deck, index) => (
-                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
-                                onClick={() => onClickDeck(deck.id, deck.is_premium)}>
-                                <img src={deck.image} alt="Card Back" className="w-full h-[86%] mb-2 mx-auto object-cover rounded-lg group-hover:h-[30%] transition-height duration-300 ease-in-out" />
-                                <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
-                                <p className={`hidden text-sm pl-1 group-hover:block ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'}`}>{deck.description}</p>
+                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden 
+                            hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
+                                onClick={() => !deck.coming_soon ? onClickDeck(deck.id, deck.is_premium) : null}>
+
+                                <img src={deck.image} alt="Topic Image" className={`w-full mb-2 mx-auto object-cover rounded-lg md:group-hover:h-[30%] 
+                                transition-height duration-300 ease-in-out ${activeDeck === deck.id ? 'h-[30%]' : 'h-[86%]'} ${deck.coming_soon ? 'grayscale' : ''}`} />
+                                {deck.coming_soon ?
+                                    <h2 className={`text-md pl-1 text-gray-500 font-semibold`}>Coming Soon...</h2>
+                                    :
+                                    <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
+                                }
+                                <p className={`text-sm pl-1 md:group-hover:block ${activeDeck === deck.id ? 'text-white block' : 'hidden text-primary-bg'} `}>
+                                    {deck.description}
+                                </p>
+
 
                                 <div className="flex justify-center">
-                                    {deck.is_premium && (!purchasedTopics || !purchasedTopics.includes(deck.id)) ?
-                                        userData ?
-                                            <a className="absolute w-[96%] bottom-0 m-1 px-4 py-2 hidden group-hover:flex justify-center items-center bg-yellow-400 rounded-lg hover:bg-yellow-500 active:bg-yellow-700 active:scale-[90%]"
-                                                href={deck.buy_link + emailParam} onClick={onClickBuyBtn} target="_blank">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                                                <p className="text-xl tracking-[0.1rem] font-bold">BUY</p>
-                                            </a>
+                                    {deck.coming_soon ?
+                                        <div className="absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner hidden md:group-hover:flex justify-center items-center rounded-lg">
+                                            <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Coming Soon</p>
+                                        </div>
+                                        : deck.is_premium && (!purchasedTopics || !purchasedTopics.includes(deck.id)) ?
+                                            userData ?
+                                                <a className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 md:group-hover:flex justify-center items-center bg-yellow-400 rounded-lg hover:bg-yellow-500 active:bg-yellow-700 active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
+                                                    href={deck.buy_link + emailParam} onClick={onClickBuyBtn} target="_blank">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                                                    <p className="text-xl tracking-[0.1rem] font-bold">BUY</p>
+                                                </a>
+                                                :
+                                                <div className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner md:group-hover:flex justify-center items-center rounded-lg ${activeDeck === deck.id ? 'flex' : 'hidden'}`}>
+                                                    <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Sign in to Buy</p>
+                                                </div>
                                             :
-                                            <div className="absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner hidden group-hover:flex justify-center items-center rounded-lg">
-                                                <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Sign in to Buy</p>
-                                            </div>
-                                        :
-                                        <button className="absolute w-[96%] m-1 px-4 py-2 bottom-0 hidden group-hover:flex justify-center items-center bg-secondary-bg rounded-lg hover:bg-teal-700 active:bg-primary-bg active:scale-[90%]"
-                                            onClick={() => onClickPlay(deck.id)}>
-                                            <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
-                                            <p className="text-xl tracking-[0.1rem] font-bold">START</p>
-                                        </button>
+                                            <button className={`absolute w-[96%] m-1 px-4 py-2 bottom-0 md:group-hover:flex justify-center items-center bg-secondary-bg rounded-lg hover:bg-teal-700 active:bg-primary-bg active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
+                                                onClick={() => onClickPlay(deck.id)}>
+                                                <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
+                                                <p className="text-xl tracking-[0.1rem] font-bold">START</p>
+                                            </button>
                                     }
                                 </div>
 

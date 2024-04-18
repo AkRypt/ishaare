@@ -4,8 +4,10 @@ import "./globals.css";
 import { constants } from "./constants";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { poppins } from "./fonts";
 
 const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
   title: "Ishaare",
   description: "Play Heads Up game with your Indian friends",
@@ -103,7 +105,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         {children}
         <Analytics />
         <SpeedInsights />

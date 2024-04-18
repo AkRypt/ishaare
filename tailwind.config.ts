@@ -9,10 +9,6 @@ const config: Config = {
   mode: "jit",
   theme: {
     extend: {
-      fontFamily: {
-        vibe: ["GreatVibes", 'sans'],
-        poppins: ["Poppins", 'sans']
-      },
       colors: {
         "primary-bg": "#2c7c8d",
         "secondary-bg": "#3B92A2",
