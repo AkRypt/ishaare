@@ -1,3 +1,5 @@
+import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function HowToPlayModal({ show, onClose }: { show: boolean, onClose: () => void }) {
@@ -29,7 +31,7 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                                     src="/assets/icons/arrow-g.png" alt=""
                                     onClick={onPrevious} /> : <></>
                             }
-                            {currentPage < 2 ?
+                            {currentPage < 3 ?
                                 <img className="absolute right-4 top-1/2 -translate-y-1/2 w-[10%] h-[10%] cursor-pointer rotate-180"
                                     src="/assets/icons/arrow-g.png" alt=""
                                     onClick={onNext} /> : <></>
@@ -38,20 +40,27 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                             {/* Instructions */}
                             {currentPage === 0 ?
                                 <div className="flex flex-col justify-center items-center">
-                                    <img src="/assets/how-to/how-1.avif" alt="" className="w-[80%] h-[80%] mb-1" />
-                                    <p className="text-md text-primary-bg">Hold the phone horizontally in front of you. You should not look at the screen.</p>
+                                    <Image src="/assets/how-to/how-4.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                    <p className="text-md text-primary-bg mt-2">This is a turn based game. Gather your friends in a room. Select a player.
+                                        Choose any topic you like and start the game.</p>
                                 </div>
-                                :
-                                currentPage === 1 ?
+                                : currentPage === 1 ?
                                     <div className="flex flex-col justify-center items-center">
-                                        <img src="/assets/how-to/how-2.avif" alt="" className="w-[80%] h-[80%] mb-1" />
-                                        <p className="text-md text-primary-bg">Your friends will either act the word out or describe it and you will have to guess the word. Guess as many words as possible in 1 minute.</p>
+                                        <Image src="/assets/how-to/how-1.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                        <p className="text-md text-primary-bg mt-2">The player must hold the phone horizontally in front of
+                                            them without looking at the screen. Words related to the topic will be shown on the screen.</p>
                                     </div>
-                                    :
-                                    <div className="flex flex-col justify-center items-center">
-                                        <img src="/assets/how-to/how-3.avif" alt="" className="w-[80%] h-[80%] mb-1" />
-                                        <p className="text-md text-primary-bg">Swipe Right if you guessed the word correctly. Swipe Left to skip the word. (Without looking at the screen)</p>
-                                    </div>
+                                    : currentPage === 2 ?
+                                        <div className="flex flex-col justify-center items-center">
+                                            <Image src="/assets/how-to/how-2.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                            <p className="text-md text-primary-bg mt-2">Your friends will either act the word out or describe it and you will have
+                                                to guess the word. Guess as many words as possible in 1 minute.</p>
+                                        </div>
+                                        :
+                                        <div className="flex flex-col justify-center items-center">
+                                            <Image src="/assets/how-to/how-3.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                            <p className="text-md text-primary-bg mt-2">Swipe Right if you guessed the word correctly. Swipe Left to skip the word. (Without looking at the screen)</p>
+                                        </div>
                             }
 
                         </div>

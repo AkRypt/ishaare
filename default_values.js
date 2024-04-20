@@ -385,26 +385,87 @@ const hyderabadi_things = [
 ]
 
 const being_telugu = [
-    ('Ugadi', 16),
-    ('Bonalu', 16),
     ('Bathukamma', 16),
-    ('Pawan Kalyan', 16),
-    ('Brahmanandam', 16),
+    ('Kurchi Madtapetti', 16),
+    ('Uppal Balu', 16),
+    ('Baane Extralu', 16),
+    ('Enkamala Backside', 16),
+    ('Chese Moodu Utsaham', 16),
+    ('Tinnava Srujana?', 16),
+    ('Chaduvukondi Firstu', 16),
+    ('So Beautiful So Elegant', 16),
+    ('Iron eh vanchala enti', 16),
+    ('Idhi nen sudala', 16),
+    ('Paadala Midha Nadiche Yatra', 16),
+    ('Rendu Gaajulu Ammukovali', 16),
+    ('Model Model Supermodel', 16),
+    ('Enjoy Pandago', 16),
+
+]
+
+const tollywood = [
+    ('Pawan Kalyan', 17),
+    ('Brahmanandam', 17),
+    ('Mahesh Babu', 17),
+    ('Allu Arjun', 17),
+    ('Vijay Deverakonda', 17),
+    ('Junior NTR', 17),
+    ('Ram Charan', 17),
+    ('Prabhas', 17),
+    ('Ravi Teja', 17),
+    ('Nagarjuna', 17),
+    ('Balayya', 17),
+    ('Chiranjeevi', 17),
+    ('Venky', 17),
+    ('Nani', 17),
+    ('Naga Chaitanya', 17),
+    ('Samantha', 17),
+    ('Adivi Sesh', 17),
+    ('Vishwak Sen', 17),
+    ('Rashmika', 17),
+    ('Anupama', 17),
+    ('DJ Tillu', 17),
+    ('Pooja Hegde', 17),
+    ('Keerthi Suresh', 17),
+    ('Uppena', 17),
+    ('Sree Leela', 17),
+    ('Jaathi Ratnalu', 17),
+    ('Ee Nagaraniki Emaindi', 17),
+    ('Aarya 2', 17),
+    ('Arjun Reddy', 17),
+    ('Baahubali', 17),
+    ('Pokiri', 17),
+    ('Happy Days', 17),
+    ('RRR', 17),
+    ('Eega', 17),
+    ('Magadheera', 17),
+    ('Pushpa', 17),
+    ('KGF', 17),
+    ('Jersey', 17),
+    ('Sita Ramam', 17),
+    ('Mahanati', 17),
+    ('Agent Sai Srinivas Atreya', 17),
+    ('Bommarillu', 17),
+    ('Pelli Choopulu', 17),
+    ('Manmadhudu', 17),
+    ('RX100', 17),
+    ('Rangasthalam', 17),
+    ('Srimanthudu', 17),
+    ('Bharat Ane Nenu', 17),
+    ('Ala Vaikuntapuramlo', 17),
+    ('Geeta Govindam', 17),
+    ('Gabbar Singh', 17),
+    ('Mirchi', 17),
+    ('Ninnu Kori', 17),
+    ('Attharintiki Daaredi', 17),
+    ('Dookudu', 17),
 
 ]
 
 // didnt add
 const j90sThings = [
-    ('Doordardhan', 17),
+    ('Doordarshan', 17),
     ('TV Satellite shaking', 17),
     ('WWE', 17),
 
-]
-
-// didnt add
-const Telugu_Memes = [
-    ('Baane extralu', 18),
-    ('Kurchi martapetti', 18),
-    ('Uppal baal', 18),
-    
 ]
