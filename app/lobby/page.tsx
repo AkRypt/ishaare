@@ -94,7 +94,7 @@ export default function Lobby() {
                     }
                 </div>
                 <div className="px-4 pt-3 pb-1 mb-4 bg-white bg-opacity-70 rounded-full relative">
-                    <h1 className={`text-6xl ${greatVibes.className} text-primary-bg `}>Ishaare</h1>
+                    <h1 className={`text-5xl ${greatVibes.className} text-primary-bg `}>Ishaare</h1>
                 </div>
 
                 {/* Deck List */}

@@ -387,7 +387,10 @@ const hyderabadi_things = [
 const being_telugu = [
     ('Ugadi', 16),
     ('Bonalu', 16),
-    
+    ('Bathukamma', 16),
+    ('Pawan Kalyan', 16),
+    ('Brahmanandam', 16),
+
 ]
 
 // didnt add

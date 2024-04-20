@@ -1,4 +1,4 @@
-import { Great_Vibes, Poppins } from "next/font/google";
+import { Great_Vibes, Poppins, Space_Mono, JetBrains_Mono, Raleway } from "next/font/google";
 
 export const greatVibes = Great_Vibes({
     weight: '400',
@@ -14,3 +14,9 @@ export const poppins = Poppins({
     display: 'swap'
 })
 
+export const raleway = Raleway({
+    weight: '700',
+    subsets: ['latin'],
+    variable: '--font-raleway',
+    display: 'swap'
+})
