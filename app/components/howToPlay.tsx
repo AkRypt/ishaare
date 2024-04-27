@@ -1,6 +1,4 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HowToPlayModal({ show, onClose }: { show: boolean, onClose: () => void }) {
     const [currentPage, setCurrentPage] = useState(0);
@@ -12,6 +10,17 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
     const onPrevious = () => {
         setCurrentPage(currentPage - 1);
     }
+
+    const preloadImages = () => {
+        const images = ["/assets/how-to/how-1.avif", "/assets/how-to/how-2.avif", "/assets/how-to/how-3.avif", "/assets/how-to/how-4.avif"];
+        images.forEach((image) => {
+            new Image().src = image;
+        });
+    }
+
+    useEffect(() => {
+        preloadImages();
+    }, []);
 
     return (
         <div>
@@ -40,25 +49,29 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                             {/* Instructions */}
                             {currentPage === 0 ?
                                 <div className="flex flex-col justify-center items-center">
-                                    <Image src="/assets/how-to/how-4.png" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                    {/* <Image src="/assets/how-to/how-4.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
+                                    <img src="/assets/how-to/how-4.avif" alt="" className="w-[80%] h-[80%] mb-2" />
                                     <p className="text-md text-primary-bg mt-2">This is a turn based game. Gather your friends in a room. Select a player.
                                         Choose any topic you like and start the game.</p>
                                 </div>
                                 : currentPage === 1 ?
                                     <div className="flex flex-col justify-center items-center">
-                                        <Image src="/assets/how-to/how-1.png" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                        {/* <Image src="/assets/how-to/how-1.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
+                                        <img src="/assets/how-to/how-1.avif" alt="" className="w-[80%] h-[80%] mb-2" />
                                         <p className="text-md text-primary-bg mt-2">The player must hold the phone horizontally in front of
                                             them without looking at the screen. Words related to the topic will be shown on the screen.</p>
                                     </div>
                                     : currentPage === 2 ?
                                         <div className="flex flex-col justify-center items-center">
-                                            <Image src="/assets/how-to/how-2.png" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                            {/* <Image src="/assets/how-to/how-2.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
+                                            <img src="/assets/how-to/how-2.avif" alt="" className="w-[80%] h-[80%] mb-2" />
                                             <p className="text-md text-primary-bg mt-2">Your friends will either act the word out or describe it and you will have
                                                 to guess the word. Guess as many words as possible in 1 minute.</p>
                                         </div>
                                         :
                                         <div className="flex flex-col justify-center items-center">
-                                            <Image src="/assets/how-to/how-3.png" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} />
+                                            {/* <Image src="/assets/how-to/how-3.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
+                                            <img src="/assets/how-to/how-3.avif" alt="" className="w-[80%] h-[80%] mb-2" />
                                             <p className="text-md text-primary-bg mt-2">Swipe Right if you guessed the word correctly. Swipe Left to skip the word. (Without looking at the screen)</p>
                                         </div>
                             }
