@@ -13,7 +13,7 @@ function Game() {
 
 
     const [isMobile, setIsMobile] = useState(true);
-    const [timer, setTimer] = useState(60);
+    const [timer, setTimer] = useState(90);
     const [loading, setLoading] = useState(true);
     const [showSnack, setShowSnack] = useState(true);
     const [currentWord, setCurrentWord] = useState("Loading...");
