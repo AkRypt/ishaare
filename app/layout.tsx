@@ -105,6 +105,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload"/>
+      </head>
       <body className={poppins.className}>
         {children}
         <Analytics />

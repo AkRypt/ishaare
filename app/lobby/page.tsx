@@ -69,7 +69,11 @@ export default function Lobby() {
 
     return (
         <main className="min-h-screen md:px-10"
-            style={{ backgroundImage: "url('/assets/lobby_bg.avif')", backgroundSize: 'cover' }}>
+            style={{ 
+                backgroundImage: "url('/assets/lobby_bg.avif')", 
+                backgroundSize: 'cover', 
+                backgroundRepeat: 'no-repeat'
+            }}>
 
             {loading ? <Loading /> : null}
 

@@ -24,7 +24,11 @@ export default function Home() {
 
     return (
         <main className="min-h-screen max-h-screen md:p-10 flex justify-center items-center"
-            style={{ backgroundImage: "url('/assets/vector_bg.avif')", backgroundSize: 'cover' }}>
+            style={{ 
+                backgroundImage: "url('/assets/vector_bg.avif')", 
+                backgroundSize: 'cover', 
+                backgroundRepeat: 'no-repeat'
+            }}>
 
             <HowToPlayModal show={showModal} onClose={() => setShowModal(false)} />
 
