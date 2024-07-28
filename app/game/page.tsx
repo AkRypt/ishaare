@@ -69,7 +69,7 @@ function Game() {
             }
         }, 1000);
         if (timer === 0) {
-            setGameOver(true);
+            handleGameOver();
         }
         return () => clearTimeout(timeOut);
     }, [timer]);
@@ -79,7 +79,7 @@ function Game() {
         setCurrentWordIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
             if (newIndex === words.length) {
-                setGameOver(true);
+                handleGameOver();
                 return prevIndex;
             }
             setCurrentWord(words[newIndex]["word"]);
@@ -97,11 +97,7 @@ function Game() {
         }
         resetCorrectSwiped();
 
-        setSeenWords((prevSeenWords) => {
-            const updatedSeenWords = { ...prevSeenWords, [currentWord]: true };
-            seenWordsRef.current = updatedSeenWords;
-            return updatedSeenWords;
-        });
+        addToSeenWords(currentWord, true);
         nextWord();
     }
 
@@ -115,12 +111,23 @@ function Game() {
         }
         resetSkipSwiped();
 
+        addToSeenWords(currentWord, false);
+        nextWord();
+    }
+
+    // Adding to Seen Words
+    const addToSeenWords = (word: string, correct: boolean) => {
         setSeenWords((prevSeenWords) => {
-            const updatedSeenWords = { ...prevSeenWords, [currentWord]: false };
+            const updatedSeenWords = { ...prevSeenWords, [word]: correct };
             seenWordsRef.current = updatedSeenWords;
             return updatedSeenWords;
         });
-        nextWord();
+    }
+
+    // Handling game Over
+    const handleGameOver = () => {
+        addToSeenWords(currentWord, false);
+        setGameOver(true);
     }
 
     // Handling keyboard inputs for next word

@@ -14,6 +14,7 @@ export async function getWords(deck_id: number) {
         .eq('deck_id', deck_id)
 
     if (error && status !== 406) {
+
         console.log(error)
         throw error
     }
