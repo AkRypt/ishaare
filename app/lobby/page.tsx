@@ -23,6 +23,7 @@ export default function Lobby() {
     const [purchasedTopics, setPurchasedTopics] = useState<number[]>([]);
     const [userData, setUserData] = useState<any>(null);
     const [emailParam, setEmailParam] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         getDecks().then((data) => {
@@ -72,7 +73,9 @@ export default function Lobby() {
             style={{
                 backgroundImage: "url('/assets/lobby_bg.avif')",
                 backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat'
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed',
             }}>
 
             {loading ? <Loading /> : null}
@@ -82,7 +85,7 @@ export default function Lobby() {
             <ReloadModal show={reloadModal} />
 
             {/* Lobby Body */}
-            <div className="flex flex-col md:w-[80%] md:h-[100vh] md:my-auto overflow-hidden px-2 md:px-10 py-4 mx-auto bg-gray-700 bg-opacity-10 justify-center items-center shadow-lg rounded-lg">
+            <div className="flex flex-col md:w-[80%] md:h-[100vh] md:my-auto overflow-hidden px-2 md:px-10 py-4 mx-auto bg-gray-700 bg-opacity-10 items-center shadow-lg rounded-lg">
                 <div className="flex w-full justify-between items-center px-2">
                     {/* Info on how to playButton */}
                     <button className="md:ml-4"
@@ -103,65 +106,91 @@ export default function Lobby() {
 
                 {/* Deck List */}
                 <div className="flex flex-col w-full md:px-6 overflow-y-auto">
+                    <div className="flex justify-center mb-4">
+                        <input
+                            type="text"
+                            placeholder="Search decks..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full m-2 md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                        {decks?.map((deck, index) => (
-                            deck.enabled &&
-                            <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden 
+                        {decks
+                            ?.filter((deck) => deck.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                            ?.map((deck, index) => (
+                                deck.enabled &&
+                                <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden 
                             hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
-                                onClick={() => !deck.coming_soon ? onClickDeck(deck.id, deck.is_premium) : null}>
-
-                                <img src={deck.image} alt="Topic Image" className={`w-full mb-2 mx-auto object-cover rounded-lg md:group-hover:h-[30%] 
-                                transition-height duration-300 ease-in-out ${activeDeck === deck.id ? 'h-[30%]' : 'h-[86%]'} ${deck.coming_soon ? 'grayscale' : ''}`} />
-                                {deck.coming_soon ?
-                                    <h2 className={`text-md pl-1 text-gray-500 font-semibold`}>Coming Soon...</h2>
-                                    :
-                                    <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
-                                }
-                                <p className={`text-sm pl-1 md:group-hover:block ${activeDeck === deck.id ? 'text-white block' : 'hidden text-primary-bg'} `}>
-                                    {deck.description}
-                                </p>
-
-
-                                <div className="flex justify-center">
+                                    onClick={() => !deck.coming_soon ? onClickDeck(deck.id, deck.is_premium) : null}>
+                                    <picture>
+                                        <source srcSet={deck.image} type="image/avif" />
+                                        <img
+                                            src={deck.image}
+                                            alt="Topic Image"
+                                            className={`w-full mb-2 mx-auto object-cover rounded-lg md:group-hover:h-[30%] 
+         transition-height duration-300 ease-in-out ${activeDeck === deck.id ? 'h-[30%]' : 'h-[86%]'} ${deck.coming_soon ? 'grayscale' : ''}`}
+                                        />
+                                    </picture>
                                     {deck.coming_soon ?
-                                        <div className="absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner hidden md:group-hover:flex justify-center items-center rounded-lg">
-                                            <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Coming Soon</p>
-                                        </div>
-                                        : deck.is_premium && (!purchasedTopics || !purchasedTopics.includes(deck.id)) ?
-                                            userData ?
-                                                <a className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 md:group-hover:flex justify-center items-center bg-yellow-400 rounded-lg hover:bg-yellow-500 active:bg-yellow-700 active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
-                                                    href={deck.buy_link + emailParam} onClick={onClickBuyBtn} target="_blank">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                                                    <p className="text-xl tracking-[0.1rem] font-bold">BUY</p>
-                                                </a>
+                                        <h2 className={`text-md pl-1 text-gray-500 font-semibold`}>Coming Soon...</h2>
+                                        :
+                                        <h2 className={`text-md pl-1 ${activeDeck === deck.id ? 'text-white' : 'text-primary-bg'} font-semibold`}>{deck.name}</h2>
+                                    }
+                                    <p className={`text-sm pl-1 md:group-hover:block ${activeDeck === deck.id ? 'text-white block' : 'hidden text-primary-bg'} `}>
+                                        {deck.description}
+                                    </p>
+
+
+                                    <div className="flex justify-center">
+                                        {deck.coming_soon ?
+                                            <div className="absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner hidden md:group-hover:flex justify-center items-center rounded-lg">
+                                                <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Coming Soon</p>
+                                            </div>
+                                            : deck.is_premium && (!purchasedTopics || !purchasedTopics.includes(deck.id)) ?
+                                                userData ?
+                                                    <a className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 md:group-hover:flex justify-center items-center bg-yellow-400 rounded-lg hover:bg-yellow-500 active:bg-yellow-700 active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
+                                                        href={deck.buy_link + emailParam} onClick={onClickBuyBtn} target="_blank">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                                                        <p className="text-xl tracking-[0.1rem] font-bold">BUY</p>
+                                                    </a>
+                                                    :
+                                                    <div className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner md:group-hover:flex justify-center items-center rounded-lg ${activeDeck === deck.id ? 'flex' : 'hidden'}`}>
+                                                        <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Sign in to Buy</p>
+                                                    </div>
                                                 :
-                                                <div className={`absolute w-[96%] bottom-0 m-1 px-4 py-2 bg-gray-700 shadow-inner md:group-hover:flex justify-center items-center rounded-lg ${activeDeck === deck.id ? 'flex' : 'hidden'}`}>
-                                                    <p className="text-md tracking-[0.1rem] font-bold text-gray-300">Sign in to Buy</p>
-                                                </div>
-                                            :
-                                            <button className={`absolute w-[96%] m-1 px-4 py-2 bottom-0 md:group-hover:flex justify-center items-center bg-secondary-bg rounded-lg hover:bg-teal-700 active:bg-primary-bg active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
-                                                onClick={() => onClickPlay(deck.id)}>
-                                                <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
-                                                <p className="text-xl tracking-[0.1rem] font-bold">START</p>
-                                            </button>
+                                                <button className={`absolute w-[96%] m-1 px-4 py-2 bottom-0 md:group-hover:flex justify-center items-center bg-secondary-bg rounded-lg hover:bg-teal-700 active:bg-primary-bg active:scale-[90%] ${activeDeck === deck.id ? 'flex' : 'hidden'}`}
+                                                    onClick={() => onClickPlay(deck.id)}>
+                                                    <img src="/assets/icons/play.png" alt="Play" className="w-5 h-5 mr-2" />
+                                                    <p className="text-xl tracking-[0.1rem] font-bold">START</p>
+                                                </button>
+                                        }
+                                    </div>
+
+                                    {deck.is_premium
+                                        ?
+                                        <div>
+                                            <div className={`absolute w-[170px] flex justify-center items-center top-[20px] right-[-55px] rotate-45 shadow-lg bg-gradient-to-r ${!purchasedTopics || !purchasedTopics.includes(deck.id) ? 'from-yellow-500 via-yellow-200 to-yellow-500' : 'from-indigo-600 via-blue-500 to-indigo-600'}`}>
+                                                {
+                                                    !(purchasedTopics && purchasedTopics.includes(deck.id)) ?
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                                        :
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={5} stroke="white" className="w-[18px] h-[18px] m-1 "><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                                                }
+                                            </div>
+                                        </div> : <></>
                                     }
                                 </div>
-
-                                {deck.is_premium
-                                    ?
-                                    <div>
-                                        <div className={`absolute w-[170px] flex justify-center items-center top-[20px] right-[-55px] rotate-45 shadow-lg bg-gradient-to-r ${!purchasedTopics || !purchasedTopics.includes(deck.id) ? 'from-yellow-500 via-yellow-200 to-yellow-500' : 'from-indigo-600 via-blue-500 to-indigo-600'}`}>
-                                            {
-                                                !(purchasedTopics && purchasedTopics.includes(deck.id)) ?
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
-                                                    :
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={5} stroke="white" className="w-[18px] h-[18px] m-1 "><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-                                            }
-                                        </div>
-                                    </div> : <></>
-                                }
-                            </div>
-                        ))}
+                            ))
+                        }
+                        {decks?.filter((deck) =>
+                            deck.name.toLowerCase().includes(searchQuery.toLowerCase())
+                        ).length === 0 && (
+                                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                                    No decks found matching the search query.
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

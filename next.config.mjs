@@ -3,6 +3,7 @@ const nextConfig = {
     images: {
         minimumCacheTTL: 31536000,
         formats: ["image/avif", "image/webp"],
+        domains: ["sirxrcuwndrxhjmywucm.supabase.co"],
         remotePatterns: [
             {
                 protocol: "https",
