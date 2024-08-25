@@ -225,7 +225,7 @@ const cartoons = [
     ('Tenali Rama', 6),
 ]
 
-Indian_Actions = [
+const Indian_Actions = [
     ('Broom', 7),
     ('Sabjiwala', 7),
     ('Gilli Danda', 7),
@@ -256,7 +256,7 @@ Indian_Actions = [
 
 ]
 
-Bollywood = [
+const Bollywood = [
     ('Shah Rukh Khan', 8),
     ('Salman Khan', 8),
     ('Amitabh Bachchan', 8),
@@ -350,7 +350,6 @@ const indian_cricketers = [
     ('Kuldeep Yadav', 10),
 ]
 
-// didnt add
 const hyderabadi_things = [
     ('Blanket Hall', 13),
     ('Saleem Pheku', 13),
@@ -467,5 +466,11 @@ const j90sThings = [
     ('Doordarshan', 17),
     ('TV Satellite shaking', 17),
     ('WWE', 17),
+
+]
+
+const indian_mythology = [
+    ('Ramayana', 18),
+    ('Mahabharata', 18),
 
 ]
