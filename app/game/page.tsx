@@ -1,8 +1,8 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
-import { getWords, ilog } from "./actions";
+import { getWords } from "./actions";
 import { keyboardHandler, preventReload, swipeHandler } from "./hooks";
 import { formatTime } from "./helpers";
 import { Loading } from "../components/loading";
@@ -11,12 +11,12 @@ function Game() {
     const router = useRouter();
     const deck_id = parseInt(useSearchParams().get('deck_id') ?? '0', 10);
 
-
     const [isMobile, setIsMobile] = useState(true);
     const [timer, setTimer] = useState(90);
     const [loading, setLoading] = useState(true);
     const [showSnack, setShowSnack] = useState(true);
     const [currentWord, setCurrentWord] = useState("Loading...");
+    const [wordKey, setWordKey] = useState(0);
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [correctSwiped, setCorrectSwiped] = useState(false);
@@ -24,255 +24,300 @@ function Game() {
 
     const [seenWords, setSeenWords] = useState<Record<string, boolean>>({});
     const seenWordsRef = useRef<Record<string, boolean>>({});
+    const busyRef = useRef(false);
 
-    // Will fetch words from the database
     const [words, setWords] = useState<any[]>([]);
 
-    // Randomizing the received list of words
-    const randomizeWords = (words: any[]) => {
-        return words.sort(() => Math.random() - 0.5);
-    }
+    const randomizeWords = (list: any[]) => {
+        const copy = [...list];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    };
 
-    // Showing Snackbar to suggest screen rotation
     useEffect(() => {
-        const snackTimeout = setTimeout(() => {
-            setShowSnack(false);
-        }, 2000);
+        const snackTimeout = setTimeout(() => setShowSnack(false), 2800);
         return () => clearTimeout(snackTimeout);
     }, []);
 
-    // Getting words in the deck
     useEffect(() => {
-        setIsMobile(/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        const coarse =
+            typeof window !== "undefined" &&
+            (window.matchMedia("(pointer: coarse)").matches ||
+                /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+                    navigator.userAgent
+                ));
+        setIsMobile(coarse);
         getWords(deck_id).then((deck_words) => {
-            // If there are no deck words
             if (deck_words?.length === 0) {
                 return router.back();
             }
             setWords(randomizeWords(deck_words ?? []));
             setLoading(false);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Loading the first word
     useEffect(() => {
-        if (!loading) {
+        if (!loading && words.length > 0) {
             setCurrentWord(words[currentWordIndex]["word"]);
+            setWordKey((k) => k + 1);
         }
-    }, [loading])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loading]);
 
-    // Timer Functionality
     useEffect(() => {
+        if (gameOver || loading) return;
         const timeOut = setTimeout(() => {
             if (timer > 0) {
-                setTimer(timer - 1);
+                setTimer((t) => t - 1);
             }
         }, 1000);
         if (timer === 0) {
             handleGameOver();
         }
         return () => clearTimeout(timeOut);
-    }, [timer]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timer, gameOver, loading]);
 
-    // Displaying next word after action
-    const nextWord = () => {
+    const nextWord = useCallback(() => {
         setCurrentWordIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
-            if (newIndex === words.length) {
-                handleGameOver();
+            if (newIndex >= words.length) {
+                setTimeout(() => handleGameOver(), 0);
                 return prevIndex;
             }
             setCurrentWord(words[newIndex]["word"]);
+            setWordKey((k) => k + 1);
             return newIndex;
         });
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [words]);
 
-    // Handling correct swipe
-    const onCorrectWord = () => {
-        setCorrectSwiped(true);
-        const resetCorrectSwiped = () => {
-            setTimeout(() => {
-                setCorrectSwiped(false);
-            }, 500);
-        }
-        resetCorrectSwiped();
-
-        addToSeenWords(currentWord, true);
-        nextWord();
-    }
-
-    // Handling skip swipe
-    const onSkipWord = () => {
-        setSkipSwiped(true);
-        const resetSkipSwiped = () => {
-            setTimeout(() => {
-                setSkipSwiped(false);
-            }, 500);
-        }
-        resetSkipSwiped();
-
-        addToSeenWords(currentWord, false);
-        nextWord();
-    }
-
-    // Adding to Seen Words
-    const addToSeenWords = (word: string, correct: boolean) => {
+    const addToSeenWords = useCallback((word: string, correct: boolean) => {
         setSeenWords((prevSeenWords) => {
             const updatedSeenWords = { ...prevSeenWords, [word]: correct };
             seenWordsRef.current = updatedSeenWords;
             return updatedSeenWords;
         });
-    }
+    }, []);
 
-    // Handling game Over
-    const handleGameOver = () => {
+    const handleGameOver = useCallback(() => {
+        setGameOver((already) => {
+            if (already) return true;
+            setSeenWords((prev) => {
+                if (prev[currentWord] !== undefined) {
+                    seenWordsRef.current = prev;
+                    return prev;
+                }
+                const updated = { ...prev, [currentWord]: false };
+                seenWordsRef.current = updated;
+                return updated;
+            });
+            return true;
+        });
+    }, [currentWord]);
+
+    const onCorrectWord = useCallback(() => {
+        if (busyRef.current || gameOver || loading) return;
+        busyRef.current = true;
+        setCorrectSwiped(true);
+        addToSeenWords(currentWord, true);
+        setTimeout(() => {
+            setCorrectSwiped(false);
+            nextWord();
+            busyRef.current = false;
+        }, 480);
+    }, [addToSeenWords, currentWord, gameOver, loading, nextWord]);
+
+    const onSkipWord = useCallback(() => {
+        if (busyRef.current || gameOver || loading) return;
+        busyRef.current = true;
+        setSkipSwiped(true);
         addToSeenWords(currentWord, false);
-        setGameOver(true);
-    }
+        setTimeout(() => {
+            setSkipSwiped(false);
+            nextWord();
+            busyRef.current = false;
+        }, 480);
+    }, [addToSeenWords, currentWord, gameOver, loading, nextWord]);
 
-    // Handling keyboard inputs for next word
     keyboardHandler({
         gameOver,
         isMobile,
         correctFunc: onCorrectWord,
-        skipFunc: onSkipWord
-    })
+        skipFunc: onSkipWord,
+    });
 
-    // Preventing Reload on Swipe
-    preventReload()
+    preventReload();
 
-    // Handling user swipe input
     swipeHandler({
         gameOver,
         loading,
         correctFunc: onCorrectWord,
-        skipFunc: onSkipWord
-    })
+        skipFunc: onSkipWord,
+    });
+
+    const correctCount = Object.values(seenWords).filter(Boolean).length;
+    const skipCount = Object.values(seenWords).filter((v) => !v).length;
 
     return (
-        <main>
-
+        <main className="bg-brand-deep">
             {loading ? <Loading /> : null}
 
-            {
-                showSnack && (
-                    <div className="fixed top-[35%] left-0 right-0 w-[90%] md:w-[80%] h-[40px] mx-auto z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 rounded-full">
-                        <p className="text-sm">Rotate screen for better experience</p>
-                    </div>
-                )
-            }
+            {showSnack && !gameOver && !loading ? (
+                <div className="fixed top-[18%] left-0 right-0 w-[90%] max-w-md mx-auto z-50 flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-deep/80 backdrop-blur-md rounded-full shadow-lg animate-pulse-soft">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-brand-mist shrink-0">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
+                    </svg>
+                    <p className="text-sm text-white/95 font-medium text-center">
+                        Rotate landscape · hold on forehead
+                    </p>
+                </div>
+            ) : null}
 
-            {
-                !gameOver ? (
-                    <div className="flex flex-col w-full h-[100vh] md:p-8 md:mx-auto overflow-hidden rounded-xl bg-secondary-bg relative">
+            {!gameOver ? (
+                <div className="game-shell" data-testid="game-shell">
+                    {correctSwiped ? (
+                        <div className="game-flash game-flash-correct" aria-hidden />
+                    ) : null}
+                    {skipSwiped ? (
+                        <div className="game-flash game-flash-skip" aria-hidden />
+                    ) : null}
 
-                        {/* Right or Wrong */}
-                        <div className="flex flex-col md:flex-row w-full h-full justify-between items-center rounded-xl absolute left-0 top-0">
-
-                            <div
-                                className={`flex flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${skipSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
-                                onClick={() => { !isMobile ? onSkipWord() : null }}>
-
-                                <div className="flex justify-center items-center order-2 md:order-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" /></svg>
-                                    <h1 className="text-2xl md:text-3xl font-bold">Skip</h1>
-                                </div>
-                                {!isMobile ?
-                                    <p className="flex flex-row text-md items-center order-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" /></svg>
+                    <div className="game-zones">
+                        <button
+                            type="button"
+                            aria-label="Skip word"
+                            data-testid="skip-zone"
+                            className={`game-zone game-zone-skip ${skipSwiped ? "active" : ""}`}
+                            onClick={onSkipWord}
+                        >
+                            <div className="game-zone-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="w-7 h-7">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                Skip
+                            </div>
+                            <div className="game-zone-hint">
+                                {isMobile ? (
+                                    <>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                        </svg>
+                                        Swipe left or tap
+                                    </>
+                                ) : (
+                                    <>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
+                                        </svg>
                                         Backspace
-                                    </p> :
-                                    <div className="flex mt-2 order-1 md:order-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#135454" className="w-6 h-6 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-                                        <p className="text-[#135454] font-bold">Swipe Left</p>
-                                    </div>
-                                }
+                                    </>
+                                )}
                             </div>
+                        </button>
 
-                            {/* Separation Lines */}
-                            <div className="hidden md:block w-0.5 h-full rounded-full bg-gradient-to-b from-transparent from-20% via-transparent via-30% to-white"></div>
-                            <div className="md:hidden w-full flex">
-                                <div className="md:hidden w-1/2 h-0.5 rounded-full bg-gradient-to-r from-white via-transparent to-transparent"></div>
-                                <div className="md:hidden w-1/2 h-0.5 rounded-full bg-gradient-to-r from-transparent via-transparent to-white"></div>
+                        <div className="game-divider" aria-hidden />
+
+                        <button
+                            type="button"
+                            aria-label="Mark correct"
+                            data-testid="correct-zone"
+                            className={`game-zone game-zone-correct ${correctSwiped ? "active" : ""}`}
+                            onClick={onCorrectWord}
+                        >
+                            <div className="game-zone-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="w-7 h-7">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                Correct
                             </div>
-
-                            <div
-                                className={`flex flex-col w-full md:w-1/2 h-1/2 md:h-full justify-center items-center rounded-xl hover:cursor-pointer  ${correctSwiped ? 'scale-[120%] opacity-20 transition-scale transition-opacity transform duration-500 ease-in-out' : ''}`}
-                                onClick={() => { !isMobile ? onCorrectWord() : null }}>
-
-                                <div className="flex justify-center items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={`${correctSwiped ? '#86efac' : 'white'}`} className="w-6 h-6 mr-2 "><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                                    <h1 className={`text-2xl md:text-3xl font-bold ${correctSwiped ? 'text-green-300' : ''}`}>Correct</h1>
-                                </div>
-                                {!isMobile ?
-                                    <p className="flex flex-row text-md items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-4 h-4 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" /></svg>
+                            <div className="game-zone-hint">
+                                {isMobile ? (
+                                    <>
+                                        Swipe right or tap
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                        </svg>
+                                    </>
+                                ) : (
+                                    <>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                                        </svg>
                                         Enter
-                                    </p> :
-                                    <div className="flex mt-2">
-                                        <p className="text-[#135454] font-bold">Swipe Right</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#135454" className="w-6 h-6 ml-2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-                                    </div>
-                                }
+                                    </>
+                                )}
                             </div>
+                        </button>
+                    </div>
+
+                    <div className="game-center">
+                        <h1 key={wordKey} className="game-word game-word-enter" data-testid="current-word">
+                            {currentWord}
+                        </h1>
+                        <p className="game-timer" data-testid="timer">
+                            {formatTime(timer)}
+                        </p>
+                    </div>
+                </div>
+            ) : (
+                <div className="flex flex-col w-[92%] max-w-lg p-5 my-6 mx-auto justify-center items-center rounded-2xl bg-secondary-bg shadow-xl safe-pad">
+                    <h1 className="text-3xl font-bold mb-1">Round over</h1>
+                    <p className="text-sm text-white/80 mb-4">
+                        <span className="text-correct-soft font-semibold">{correctCount} correct</span>
+                        <span className="mx-2 text-white/40">·</span>
+                        <span className="text-skip-soft font-semibold">{skipCount} skipped</span>
+                    </p>
+
+                    <div className="w-full my-1 mx-auto max-h-[45vh] overflow-y-auto rounded-xl">
+                        {Object.keys(seenWords).map((word) => (
+                            <div
+                                key={word}
+                                className={`flex justify-center items-center px-3 py-2 mb-1 rounded-lg ${
+                                    seenWords[word] ? "result-correct" : "result-skip"
+                                }`}
+                            >
+                                <p className="w-full text-center text-base m-0">
+                                    {seenWords[word] ? "✓ " : "✕ "}
+                                    {word}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="w-full mt-5 space-y-3">
+                        <div className="w-full h-[44px] rounded-xl bg-black/80">
+                            <button
+                                className="w-full h-[44px] bg-white rounded-xl translate-x-1 -translate-y-1 hover:bg-gray-100 active:translate-y-0 active:translate-x-0 transition-transform"
+                                onClick={() => window.location.reload()}
+                            >
+                                <p className="text-lg text-secondary-bg font-bold m-0">Play again</p>
+                            </button>
                         </div>
 
-                        {/* Word Display */}
-                        <div className="flex flex-col w-full h-full justify-center md:justify-start md:mt-10 items-center">
-                            <h1 className="text-[10vw] md:text-6xl text-center font-bold">{currentWord}</h1>
-                            <p className="px-2 py-1 mt-2 md:mt-6 rounded-full bg-primary-bg">{formatTime(timer)}</p>
+                        <div className="w-full h-[44px] rounded-xl bg-black/80">
+                            <button
+                                className="w-full h-[44px] bg-primary-bg rounded-xl translate-x-1 -translate-y-1 hover:bg-brand-deep active:translate-y-0 active:translate-x-0 transition-transform"
+                                onClick={() => router.back()}
+                            >
+                                <p className="text-lg text-white font-bold m-0">Choose another deck</p>
+                            </button>
                         </div>
                     </div>
-                )
-                    :
-                    // Results View
-                    (
-                        <div className="flex flex-col w-[90%] md:w-[80%] p-6 my-6 mx-auto justify-center items-center rounded-xl bg-secondary-bg">
-                            <h1 className="text-3xl font-bold mb-2">Game Over</h1>
-                            <div className="w-full my-2 mx-auto">
-                                {
-                                    Object.keys(seenWords).map((word) => {
-                                        return (
-                                            <div key={word} className={`flex flex-col justify-center items-center ${seenWords[word] ? '' : ''}`}>
-                                                <p className={`w-full text-center ${seenWords[word] ? 'my-1 font-bold  bg-gray-900 bg-opacity-40' : 'text-gray-300'}`}>
-                                                    {word}
-                                                </p>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-
-                            <div className="w-[95%] md:w-[300px] mt-4">
-                                <div className="w-full h-[40px] mx-auto rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-white p-2 rounded-lg translate-x-1 -translate-y-1 hover:bg-gray-300 active:bg-gray-200 active:translate-y-0 active:translate-x-0"
-                                        onClick={() => window.location.reload()}>
-                                        <p className="text-lg text-secondary-bg font-bold">Play Again</p>
-                                    </button>
-                                </div>
-
-                                <div className="w-full h-[40px] mx-auto mt-4 rounded-lg bg-black">
-                                    <button className="w-full h-[40px] bg-primary-bg p-2 rounded-lg translate-x-1 -translate-y-1 hover:bg-secondary-bg active:bg-green-800 active:translate-x-0 active:translate-y-0"
-                                        onClick={() => {
-                                            router.back();
-                                        }}>
-                                        <p className="text-lg text-white font-bold">Choose Another Deck</p>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    )
-            }
-
+                </div>
+            )}
         </main>
     );
 }
 
 const SuspenseWrapper = () => (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
         <Game />
     </Suspense>
-)
+);
 
 export default SuspenseWrapper;

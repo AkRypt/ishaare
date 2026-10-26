@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { constants } from "./constants";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { poppins } from "./fonts";
 
-const inter = Inter({ subsets: ["latin"] });
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#2c7c8d",
+};
 
 export const metadata: Metadata = {
   title: "Ishaare",
@@ -105,10 +109,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preload"/>
-      </head>
-      <body className={poppins.className}>
+      <body className={`${poppins.className} antialiased`}>
         {children}
         <Analytics />
         <SpeedInsights />
