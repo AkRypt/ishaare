@@ -72,7 +72,11 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                                         <div className="flex flex-col justify-center items-center">
                                             {/* <Image src="/assets/how-to/how-3.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
                                             <img src="/assets/how-to/how-3.avif" alt="" className="w-[80%] h-[80%] mb-2" />
-                                            <p className="text-md text-primary-bg mt-2">Swipe or tap <span className="font-bold text-correct-deep">right / bottom for Correct (green)</span>. Swipe or tap <span className="font-bold text-skip-deep">left / top to Skip (red)</span> — without looking at the screen.</p>
+                                            <p className="text-md text-primary-bg mt-2">
+                                        Portrait: swipe <span className="font-bold text-skip-deep">up to Skip (red)</span>, <span className="font-bold text-correct-deep">down for Correct (green)</span>.
+                                        {" "}Landscape: swipe <span className="font-bold text-skip-deep">left to Skip</span>, <span className="font-bold text-correct-deep">right for Correct</span>.
+                                        {" "}Or tap the matching zone — without looking at the screen.
+                                    </p>
                                         </div>
                             }
 

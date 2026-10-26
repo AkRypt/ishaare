@@ -46,7 +46,15 @@ export function preventReload() {
   }, []);
 }
 
-// Handling swipe events (refs avoid stale state between touchstart/end)
+const SWIPE_THRESHOLD = 50;
+
+function isLandscapeOrientation() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(orientation: landscape)").matches;
+}
+
+// Portrait: up = skip, down = correct
+// Landscape: left = skip, right = correct
 export function swipeHandler({
   gameOver,
   loading,
@@ -59,7 +67,9 @@ export function swipeHandler({
   skipFunc: () => void;
 }) {
   const startX = useRef(0);
+  const startY = useRef(0);
   const endX = useRef(0);
+  const endY = useRef(0);
   const active = useRef(true);
 
   useEffect(() => {
@@ -68,29 +78,59 @@ export function swipeHandler({
 
   useEffect(() => {
     const touchStart = (e: TouchEvent) => {
-      startX.current = e.touches[0].screenX;
-      endX.current = e.touches[0].screenX;
+      const t = e.touches[0];
+      startX.current = t.screenX;
+      startY.current = t.screenY;
+      endX.current = t.screenX;
+      endY.current = t.screenY;
     };
 
     const touchMove = (e: TouchEvent) => {
-      endX.current = e.touches[0].screenX;
+      const t = e.touches[0];
+      endX.current = t.screenX;
+      endY.current = t.screenY;
     };
 
     const touchEnd = () => {
       if (!active.current) return;
-      const delta = endX.current - startX.current;
-      if (Math.abs(delta) < 50) {
-        startX.current = 0;
-        endX.current = 0;
-        return;
-      }
-      if (delta < 0) {
-        skipFunc();
+
+      const dx = endX.current - startX.current;
+      const dy = endY.current - startY.current;
+      const landscape = isLandscapeOrientation();
+
+      if (landscape) {
+        if (Math.abs(dx) < SWIPE_THRESHOLD) {
+          startX.current = 0;
+          startY.current = 0;
+          endX.current = 0;
+          endY.current = 0;
+          return;
+        }
+        if (dx < 0) {
+          skipFunc();
+        } else {
+          correctFunc();
+        }
       } else {
-        correctFunc();
+        if (Math.abs(dy) < SWIPE_THRESHOLD) {
+          startX.current = 0;
+          startY.current = 0;
+          endX.current = 0;
+          endY.current = 0;
+          return;
+        }
+        // screenY decreases upward → negative dy = swipe up = skip
+        if (dy < 0) {
+          skipFunc();
+        } else {
+          correctFunc();
+        }
       }
+
       startX.current = 0;
+      startY.current = 0;
       endX.current = 0;
+      endY.current = 0;
     };
 
     window.addEventListener("touchstart", touchStart, { passive: true });
