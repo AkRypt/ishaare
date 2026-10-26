@@ -1,28 +1,37 @@
 rules_version = '2';
-// Shared Firebase project (akxh-games): deploy THIS file as the project ruleset.
-// Ishaare catalog is Admin-only; Spycy lobbies need authenticated clients.
+// Shared Firebase project (akxh-games) — namespaced per game.
+// Deploy this file as the project ruleset (Console or firebase deploy).
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Spycy
-    match /users/{userId} {
+    // --- Spycy (client Auth + realtime) ---
+    match /spycy_users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
-    match /lobbies/{lobbyId} {
+    match /spycy_lobbies/{lobbyId} {
       allow read: if request.auth != null;
       allow create: if request.auth != null;
       allow update: if request.auth != null;
     }
-    // Spycy word banks are category docs with a `words` array.
-    // Ishaare word rows are numeric-id docs with `deck_id` + `word` — both live in `words`.
-    // Clients may read Spycy-style docs; Admin bypasses rules for Ishaare writes/reads.
-    match /words/{id} {
+    match /spycy_words/{id} {
       allow read: if request.auth != null;
       allow write: if false;
     }
 
-    // Ishaare catalog — Admin SDK only
-    match /decks/{id} {
+    // --- Ishaare (Admin SDK only) ---
+    match /ishaare_users/{uid} {
       allow read, write: if false;
     }
+    match /ishaare_decks/{id} {
+      allow read, write: if false;
+    }
+    match /ishaare_words/{id} {
+      allow read, write: if false;
+    }
+
+    // Legacy flat collections — deny (data moved to namespaced names)
+    match /users/{id} { allow read, write: if false; }
+    match /decks/{id} { allow read, write: if false; }
+    match /words/{id} { allow read, write: if false; }
+    match /lobbies/{id} { allow read, write: if false; }
   }
 }

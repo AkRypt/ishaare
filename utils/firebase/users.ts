@@ -1,4 +1,5 @@
 import { getAdminDb } from './admin'
+import { ISHAARE_COLLECTIONS } from './collections'
 import type { SessionUser } from './session'
 
 export type UserProfile = {
@@ -9,7 +10,7 @@ export type UserProfile = {
 
 export async function upsertUser(user: SessionUser): Promise<UserProfile> {
   const db = getAdminDb()
-  const ref = db.collection('users').doc(user.uid)
+  const ref = db.collection(ISHAARE_COLLECTIONS.USERS).doc(user.uid)
   const snap = await ref.get()
 
   if (!snap.exists) {
@@ -39,7 +40,7 @@ export async function upsertUser(user: SessionUser): Promise<UserProfile> {
 }
 
 export async function getUserProfile(uid: string): Promise<UserProfile | null> {
-  const snap = await getAdminDb().collection('users').doc(uid).get()
+  const snap = await getAdminDb().collection(ISHAARE_COLLECTIONS.USERS).doc(uid).get()
   if (!snap.exists) return null
   const data = snap.data() ?? {}
   return {
@@ -51,7 +52,7 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
 
 export async function findUserByEmail(email: string): Promise<UserProfile | null> {
   const query = await getAdminDb()
-    .collection('users')
+    .collection(ISHAARE_COLLECTIONS.USERS)
     .where('email', '==', email)
     .limit(1)
     .get()
@@ -77,7 +78,7 @@ export async function addPurchasedTopic(email: string, topicId: number): Promise
   if (current.includes(topicId)) return
 
   await getAdminDb()
-    .collection('users')
+    .collection(ISHAARE_COLLECTIONS.USERS)
     .doc(user.id)
     .update({ purchased_topics: [...current, topicId] })
 }
