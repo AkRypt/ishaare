@@ -1,0 +1,167 @@
+[
+    {
+        "id":  1,
+        "name":  "Places in India",
+        "description":  "Famous places in India",
+        "created_at":  "2024-04-09T14:11:00.011794+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/places.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  2,
+        "name":  "Indian Food",
+        "description":  "Popular food in India",
+        "created_at":  "2024-04-09T14:15:32.115983+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/food.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  3,
+        "name":  "Brands",
+        "description":  "Popular brands in India",
+        "created_at":  "2024-04-09T14:16:36.306975+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/brands.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  4,
+        "name":  "Countries",
+        "description":  "Countries around the world",
+        "created_at":  "2024-04-09T14:22:35.537897+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/countries.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  5,
+        "name":  "Festivals",
+        "description":  "Celebrated festivals in India",
+        "created_at":  "2024-04-09T14:23:33.193409+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/festivals.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  6,
+        "name":  "Cartoons",
+        "description":  "Popular cartoons in India",
+        "created_at":  "2024-04-09T14:24:17.478493+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/cartoons.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  7,
+        "name":  "Just Indian Things",
+        "description":  "Funny Indian actions",
+        "created_at":  "2024-04-10T17:05:21.912178+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/just_indian.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  8,
+        "name":  "Bollywood",
+        "description":  "Bollywood movies and actors",
+        "created_at":  "2024-04-10T17:15:08.497866+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/bollywood.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  9,
+        "name":  "IPL Teams",
+        "description":  "Indian Premier League Teams",
+        "created_at":  "2024-04-13T14:58:55.232222+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/ipl.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  12,
+        "name":  "Indian Cricketers",
+        "description":  "For the cricket geeks",
+        "created_at":  "2024-04-13T15:22:25.121984+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/cricketers.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  15,
+        "name":  "Being Hyderabadi",
+        "description":  "Kya karre miya? Khairiyat?",
+        "created_at":  "2024-04-13T17:58:39.880892+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/hyderabadi.avif",
+        "is_premium":  false,
+        "buy_link":  "https://buy.stripe.com/test_3cseXgdIucrE1BC000",
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  16,
+        "name":  "Telugu Memes",
+        "description":  "Baaga instagram \u0026 tiktok chustaru ankunta?",
+        "created_at":  "2024-04-18T18:30:25.004701+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/telugu.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  17,
+        "name":  "Tollywood",
+        "description":  "Telugu movies and actors",
+        "created_at":  "2024-04-20T01:20:47.344619+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/tollywood.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  18,
+        "name":  "Indian Mythology",
+        "description":  "Indian mythology",
+        "created_at":  "2024-08-25T19:03:27.94682+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/indian_mythology.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  true
+    },
+    {
+        "id":  22,
+        "name":  "Hindi TV Shows",
+        "description":  "Hindi Daily Soap",
+        "created_at":  "2024-08-25T20:49:14.959642+00:00",
+        "image":  "https://mffsmschwooawyhcsovu.supabase.co/storage/v1/object/public/topic_images/tollywood.avif",
+        "is_premium":  false,
+        "buy_link":  null,
+        "coming_soon":  false,
+        "enabled":  false
+    }
+]

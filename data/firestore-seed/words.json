@@ -1,0 +1,2697 @@
+[
+    {
+        "id":  1,
+        "deck_id":  1,
+        "word":  "Mumbai"
+    },
+    {
+        "id":  2,
+        "deck_id":  1,
+        "word":  "Hyderabad"
+    },
+    {
+        "id":  3,
+        "deck_id":  1,
+        "word":  "Bangalore"
+    },
+    {
+        "id":  4,
+        "deck_id":  1,
+        "word":  "Delhi"
+    },
+    {
+        "id":  5,
+        "deck_id":  1,
+        "word":  "Madhya Pradesh"
+    },
+    {
+        "id":  6,
+        "deck_id":  1,
+        "word":  "Gujarat"
+    },
+    {
+        "id":  7,
+        "deck_id":  1,
+        "word":  "Chennai"
+    },
+    {
+        "id":  8,
+        "deck_id":  1,
+        "word":  "Kerala"
+    },
+    {
+        "id":  9,
+        "deck_id":  1,
+        "word":  "Kashmir"
+    },
+    {
+        "id":  10,
+        "deck_id":  1,
+        "word":  "Sikkim"
+    },
+    {
+        "id":  11,
+        "deck_id":  1,
+        "word":  "Bihar"
+    },
+    {
+        "id":  12,
+        "deck_id":  1,
+        "word":  "Bhopal"
+    },
+    {
+        "id":  13,
+        "deck_id":  1,
+        "word":  "Dehradun"
+    },
+    {
+        "id":  14,
+        "deck_id":  1,
+        "word":  "Rayalaseema"
+    },
+    {
+        "id":  15,
+        "deck_id":  1,
+        "word":  "Guntur"
+    },
+    {
+        "id":  16,
+        "deck_id":  1,
+        "word":  "Uttar Pradesh"
+    },
+    {
+        "id":  17,
+        "deck_id":  1,
+        "word":  "Maharashtra"
+    },
+    {
+        "id":  18,
+        "deck_id":  1,
+        "word":  "Manipal"
+    },
+    {
+        "id":  19,
+        "deck_id":  1,
+        "word":  "Andaman"
+    },
+    {
+        "id":  20,
+        "deck_id":  1,
+        "word":  "Nicobar"
+    },
+    {
+        "id":  45,
+        "deck_id":  2,
+        "word":  "Pani Puri"
+    },
+    {
+        "id":  46,
+        "deck_id":  2,
+        "word":  "Dosa"
+    },
+    {
+        "id":  47,
+        "deck_id":  2,
+        "word":  "Idly"
+    },
+    {
+        "id":  48,
+        "deck_id":  2,
+        "word":  "Vada pav"
+    },
+    {
+        "id":  49,
+        "deck_id":  2,
+        "word":  "Kachori"
+    },
+    {
+        "id":  50,
+        "deck_id":  2,
+        "word":  "Biryani"
+    },
+    {
+        "id":  51,
+        "deck_id":  2,
+        "word":  "Tandoori chicken"
+    },
+    {
+        "id":  52,
+        "deck_id":  2,
+        "word":  "Samosa"
+    },
+    {
+        "id":  53,
+        "deck_id":  2,
+        "word":  "Chai"
+    },
+    {
+        "id":  54,
+        "deck_id":  2,
+        "word":  "Dhokla"
+    },
+    {
+        "id":  55,
+        "deck_id":  2,
+        "word":  "Jalebi"
+    },
+    {
+        "id":  56,
+        "deck_id":  2,
+        "word":  "Pav Bhaji"
+    },
+    {
+        "id":  57,
+        "deck_id":  2,
+        "word":  "Poha"
+    },
+    {
+        "id":  58,
+        "deck_id":  2,
+        "word":  "Rasmalai"
+    },
+    {
+        "id":  59,
+        "deck_id":  2,
+        "word":  "Paan"
+    },
+    {
+        "id":  60,
+        "deck_id":  2,
+        "word":  "Gutka"
+    },
+    {
+        "id":  61,
+        "deck_id":  2,
+        "word":  "Sugarcane"
+    },
+    {
+        "id":  62,
+        "deck_id":  2,
+        "word":  "Momos"
+    },
+    {
+        "id":  63,
+        "deck_id":  2,
+        "word":  "Mutton"
+    },
+    {
+        "id":  64,
+        "deck_id":  2,
+        "word":  "Shawarma"
+    },
+    {
+        "id":  65,
+        "deck_id":  2,
+        "word":  "Mandi"
+    },
+    {
+        "id":  66,
+        "deck_id":  2,
+        "word":  "Maggi"
+    },
+    {
+        "id":  67,
+        "deck_id":  2,
+        "word":  "Kelloggs"
+    },
+    {
+        "id":  68,
+        "deck_id":  2,
+        "word":  "Kaju Katli"
+    },
+    {
+        "id":  69,
+        "deck_id":  3,
+        "word":  "Haldirams"
+    },
+    {
+        "id":  70,
+        "deck_id":  3,
+        "word":  "Maggi"
+    },
+    {
+        "id":  71,
+        "deck_id":  3,
+        "word":  "Chings"
+    },
+    {
+        "id":  72,
+        "deck_id":  3,
+        "word":  "Tanishq"
+    },
+    {
+        "id":  73,
+        "deck_id":  3,
+        "word":  "Pepsodent"
+    },
+    {
+        "id":  74,
+        "deck_id":  3,
+        "word":  "Colgate"
+    },
+    {
+        "id":  75,
+        "deck_id":  3,
+        "word":  "Lays"
+    },
+    {
+        "id":  76,
+        "deck_id":  3,
+        "word":  "Cheetos"
+    },
+    {
+        "id":  77,
+        "deck_id":  3,
+        "word":  "Dunkin Donuts"
+    },
+    {
+        "id":  78,
+        "deck_id":  3,
+        "word":  "Oreo"
+    },
+    {
+        "id":  79,
+        "deck_id":  3,
+        "word":  "Vimal Paan Masala"
+    },
+    {
+        "id":  80,
+        "deck_id":  4,
+        "word":  "United States"
+    },
+    {
+        "id":  81,
+        "deck_id":  4,
+        "word":  "India"
+    },
+    {
+        "id":  82,
+        "deck_id":  4,
+        "word":  "China"
+    },
+    {
+        "id":  83,
+        "deck_id":  4,
+        "word":  "Russia"
+    },
+    {
+        "id":  84,
+        "deck_id":  4,
+        "word":  "Algeria"
+    },
+    {
+        "id":  85,
+        "deck_id":  4,
+        "word":  "Australia"
+    },
+    {
+        "id":  86,
+        "deck_id":  4,
+        "word":  "Brazil"
+    },
+    {
+        "id":  87,
+        "deck_id":  4,
+        "word":  "Canada"
+    },
+    {
+        "id":  88,
+        "deck_id":  4,
+        "word":  "Denmark"
+    },
+    {
+        "id":  89,
+        "deck_id":  4,
+        "word":  "Egypt"
+    },
+    {
+        "id":  90,
+        "deck_id":  4,
+        "word":  "France"
+    },
+    {
+        "id":  91,
+        "deck_id":  4,
+        "word":  "Germany"
+    },
+    {
+        "id":  92,
+        "deck_id":  4,
+        "word":  "Iceland"
+    },
+    {
+        "id":  93,
+        "deck_id":  4,
+        "word":  "Japan"
+    },
+    {
+        "id":  94,
+        "deck_id":  4,
+        "word":  "Mexico"
+    },
+    {
+        "id":  95,
+        "deck_id":  4,
+        "word":  "United Kingdom"
+    },
+    {
+        "id":  96,
+        "deck_id":  4,
+        "word":  "Greece"
+    },
+    {
+        "id":  97,
+        "deck_id":  4,
+        "word":  "Turkey"
+    },
+    {
+        "id":  98,
+        "deck_id":  4,
+        "word":  "Ireland"
+    },
+    {
+        "id":  99,
+        "deck_id":  4,
+        "word":  "Spain"
+    },
+    {
+        "id":  100,
+        "deck_id":  4,
+        "word":  "Italy"
+    },
+    {
+        "id":  101,
+        "deck_id":  4,
+        "word":  "Netherlands"
+    },
+    {
+        "id":  102,
+        "deck_id":  4,
+        "word":  "Switzerland"
+    },
+    {
+        "id":  103,
+        "deck_id":  4,
+        "word":  "Sweden"
+    },
+    {
+        "id":  104,
+        "deck_id":  4,
+        "word":  "Norway"
+    },
+    {
+        "id":  105,
+        "deck_id":  4,
+        "word":  "Finland"
+    },
+    {
+        "id":  106,
+        "deck_id":  5,
+        "word":  "Holi"
+    },
+    {
+        "id":  107,
+        "deck_id":  5,
+        "word":  "Diwali"
+    },
+    {
+        "id":  108,
+        "deck_id":  5,
+        "word":  "Sankranti"
+    },
+    {
+        "id":  109,
+        "deck_id":  5,
+        "word":  "Dussehra"
+    },
+    {
+        "id":  110,
+        "deck_id":  5,
+        "word":  "Saree Function"
+    },
+    {
+        "id":  111,
+        "deck_id":  5,
+        "word":  "Haldi Function"
+    },
+    {
+        "id":  112,
+        "deck_id":  5,
+        "word":  "Ganesh Chaturthi"
+    },
+    {
+        "id":  113,
+        "deck_id":  5,
+        "word":  "Muharram"
+    },
+    {
+        "id":  114,
+        "deck_id":  5,
+        "word":  "Bakri Eid"
+    },
+    {
+        "id":  115,
+        "deck_id":  5,
+        "word":  "Christmas"
+    },
+    {
+        "id":  116,
+        "deck_id":  5,
+        "word":  "Easter"
+    },
+    {
+        "id":  117,
+        "deck_id":  6,
+        "word":  "Tom \u0026 Jerry"
+    },
+    {
+        "id":  118,
+        "deck_id":  6,
+        "word":  "Doraemon"
+    },
+    {
+        "id":  119,
+        "deck_id":  6,
+        "word":  "Pokemon"
+    },
+    {
+        "id":  120,
+        "deck_id":  6,
+        "word":  "Ninja Hattori"
+    },
+    {
+        "id":  121,
+        "deck_id":  6,
+        "word":  "Oswald"
+    },
+    {
+        "id":  122,
+        "deck_id":  6,
+        "word":  "Scooby Doo"
+    },
+    {
+        "id":  123,
+        "deck_id":  6,
+        "word":  "Power Rangers"
+    },
+    {
+        "id":  124,
+        "deck_id":  6,
+        "word":  "Ben 10"
+    },
+    {
+        "id":  125,
+        "deck_id":  6,
+        "word":  "Oggy and the Cockroaches"
+    },
+    {
+        "id":  126,
+        "deck_id":  6,
+        "word":  "Jungle Book"
+    },
+    {
+        "id":  127,
+        "deck_id":  6,
+        "word":  "Tarzan"
+    },
+    {
+        "id":  128,
+        "deck_id":  6,
+        "word":  "Chota Bheem"
+    },
+    {
+        "id":  129,
+        "deck_id":  6,
+        "word":  "Kitaretsu"
+    },
+    {
+        "id":  130,
+        "deck_id":  6,
+        "word":  "Motu aur Patlu"
+    },
+    {
+        "id":  131,
+        "deck_id":  6,
+        "word":  "Shaktimaan"
+    },
+    {
+        "id":  132,
+        "deck_id":  3,
+        "word":  "Samsung"
+    },
+    {
+        "id":  133,
+        "deck_id":  3,
+        "word":  "TCS"
+    },
+    {
+        "id":  134,
+        "deck_id":  3,
+        "word":  "Capgemini"
+    },
+    {
+        "id":  135,
+        "deck_id":  3,
+        "word":  "Lux"
+    },
+    {
+        "id":  136,
+        "deck_id":  3,
+        "word":  "Dove"
+    },
+    {
+        "id":  137,
+        "deck_id":  3,
+        "word":  "Santoor"
+    },
+    {
+        "id":  138,
+        "deck_id":  3,
+        "word":  "Amul"
+    },
+    {
+        "id":  139,
+        "deck_id":  3,
+        "word":  "Reliance"
+    },
+    {
+        "id":  140,
+        "deck_id":  3,
+        "word":  "Airtel"
+    },
+    {
+        "id":  141,
+        "deck_id":  3,
+        "word":  "Jio"
+    },
+    {
+        "id":  142,
+        "deck_id":  3,
+        "word":  "Maruti"
+    },
+    {
+        "id":  143,
+        "deck_id":  3,
+        "word":  "L\u0026T"
+    },
+    {
+        "id":  144,
+        "deck_id":  3,
+        "word":  "SBI"
+    },
+    {
+        "id":  145,
+        "deck_id":  3,
+        "word":  "Dadu\u0027s"
+    },
+    {
+        "id":  146,
+        "deck_id":  3,
+        "word":  "Dominos"
+    },
+    {
+        "id":  147,
+        "deck_id":  3,
+        "word":  "Pizza Hut"
+    },
+    {
+        "id":  148,
+        "deck_id":  3,
+        "word":  "Baskin Robbins"
+    },
+    {
+        "id":  149,
+        "deck_id":  3,
+        "word":  "KFC"
+    },
+    {
+        "id":  150,
+        "deck_id":  3,
+        "word":  "McDonald\u0027s"
+    },
+    {
+        "id":  151,
+        "deck_id":  3,
+        "word":  "Coca Cola"
+    },
+    {
+        "id":  152,
+        "deck_id":  3,
+        "word":  "Pepsi"
+    },
+    {
+        "id":  153,
+        "deck_id":  1,
+        "word":  "Taj Mahal"
+    },
+    {
+        "id":  154,
+        "deck_id":  1,
+        "word":  "Charminar"
+    },
+    {
+        "id":  155,
+        "deck_id":  1,
+        "word":  "Mysore Palace"
+    },
+    {
+        "id":  156,
+        "deck_id":  1,
+        "word":  "Vaishno Devi"
+    },
+    {
+        "id":  157,
+        "deck_id":  4,
+        "word":  "Nigeria"
+    },
+    {
+        "id":  158,
+        "deck_id":  4,
+        "word":  "South Africa"
+    },
+    {
+        "id":  159,
+        "deck_id":  4,
+        "word":  "New Zealand"
+    },
+    {
+        "id":  160,
+        "deck_id":  4,
+        "word":  "Bangladesh"
+    },
+    {
+        "id":  161,
+        "deck_id":  4,
+        "word":  "Pakistan"
+    },
+    {
+        "id":  162,
+        "deck_id":  4,
+        "word":  "Afghanistan"
+    },
+    {
+        "id":  163,
+        "deck_id":  4,
+        "word":  "Sri Lanka"
+    },
+    {
+        "id":  164,
+        "deck_id":  4,
+        "word":  "Indonesia"
+    },
+    {
+        "id":  165,
+        "deck_id":  4,
+        "word":  "Iraq"
+    },
+    {
+        "id":  166,
+        "deck_id":  4,
+        "word":  "Iran"
+    },
+    {
+        "id":  167,
+        "deck_id":  4,
+        "word":  "Turkmenistan"
+    },
+    {
+        "id":  168,
+        "deck_id":  4,
+        "word":  "Tajikistan"
+    },
+    {
+        "id":  169,
+        "deck_id":  4,
+        "word":  "Azerbaijan"
+    },
+    {
+        "id":  170,
+        "deck_id":  4,
+        "word":  "Uzbekistan"
+    },
+    {
+        "id":  171,
+        "deck_id":  4,
+        "word":  "Kyrgyzstan"
+    },
+    {
+        "id":  172,
+        "deck_id":  4,
+        "word":  "Jordan"
+    },
+    {
+        "id":  173,
+        "deck_id":  4,
+        "word":  "Morocco"
+    },
+    {
+        "id":  174,
+        "deck_id":  4,
+        "word":  "Albania"
+    },
+    {
+        "id":  175,
+        "deck_id":  4,
+        "word":  "Bosnia"
+    },
+    {
+        "id":  176,
+        "deck_id":  4,
+        "word":  "Serbia"
+    },
+    {
+        "id":  177,
+        "deck_id":  4,
+        "word":  "Moldova"
+    },
+    {
+        "id":  178,
+        "deck_id":  5,
+        "word":  "Navratri"
+    },
+    {
+        "id":  179,
+        "deck_id":  5,
+        "word":  "Janmashtami"
+    },
+    {
+        "id":  180,
+        "deck_id":  5,
+        "word":  "Onam"
+    },
+    {
+        "id":  181,
+        "deck_id":  5,
+        "word":  "Rakhi"
+    },
+    {
+        "id":  182,
+        "deck_id":  5,
+        "word":  "Shivratri"
+    },
+    {
+        "id":  183,
+        "deck_id":  5,
+        "word":  "Gurpurab"
+    },
+    {
+        "id":  184,
+        "deck_id":  6,
+        "word":  "Courage the Cowardly"
+    },
+    {
+        "id":  185,
+        "deck_id":  6,
+        "word":  "Avatar"
+    },
+    {
+        "id":  186,
+        "deck_id":  6,
+        "word":  "Mr. Bean"
+    },
+    {
+        "id":  187,
+        "deck_id":  6,
+        "word":  "Spiderman"
+    },
+    {
+        "id":  188,
+        "deck_id":  6,
+        "word":  "Kochikame"
+    },
+    {
+        "id":  189,
+        "deck_id":  6,
+        "word":  "He-man"
+    },
+    {
+        "id":  190,
+        "deck_id":  6,
+        "word":  "Hero"
+    },
+    {
+        "id":  191,
+        "deck_id":  6,
+        "word":  "PowerPuff Girls"
+    },
+    {
+        "id":  192,
+        "deck_id":  6,
+        "word":  "Johnny Bravo"
+    },
+    {
+        "id":  193,
+        "deck_id":  6,
+        "word":  "Dexter"
+    },
+    {
+        "id":  194,
+        "deck_id":  6,
+        "word":  "Kick Buttowski"
+    },
+    {
+        "id":  195,
+        "deck_id":  6,
+        "word":  "Looney Tunes"
+    },
+    {
+        "id":  196,
+        "deck_id":  6,
+        "word":  "Thomas the Train"
+    },
+    {
+        "id":  197,
+        "deck_id":  6,
+        "word":  "Dora the Explorer"
+    },
+    {
+        "id":  198,
+        "deck_id":  6,
+        "word":  "Bugs Bunny"
+    },
+    {
+        "id":  199,
+        "deck_id":  6,
+        "word":  "Teen Titans"
+    },
+    {
+        "id":  200,
+        "deck_id":  6,
+        "word":  "Samurai Jack"
+    },
+    {
+        "id":  201,
+        "deck_id":  6,
+        "word":  "Sonic"
+    },
+    {
+        "id":  202,
+        "deck_id":  6,
+        "word":  "Transformers"
+    },
+    {
+        "id":  203,
+        "deck_id":  6,
+        "word":  "SlugTerra"
+    },
+    {
+        "id":  204,
+        "deck_id":  6,
+        "word":  "Bob the Builder"
+    },
+    {
+        "id":  205,
+        "deck_id":  6,
+        "word":  "Noddy"
+    },
+    {
+        "id":  206,
+        "deck_id":  6,
+        "word":  "Aladdin"
+    },
+    {
+        "id":  207,
+        "deck_id":  6,
+        "word":  "Jackie Chan"
+    },
+    {
+        "id":  208,
+        "deck_id":  6,
+        "word":  "Justice League"
+    },
+    {
+        "id":  209,
+        "deck_id":  6,
+        "word":  "Stuart Little"
+    },
+    {
+        "id":  210,
+        "deck_id":  6,
+        "word":  "Popeye"
+    },
+    {
+        "id":  211,
+        "deck_id":  6,
+        "word":  "Superman"
+    },
+    {
+        "id":  212,
+        "deck_id":  6,
+        "word":  "Richie Rich"
+    },
+    {
+        "id":  213,
+        "deck_id":  6,
+        "word":  "Pink Panther"
+    },
+    {
+        "id":  214,
+        "deck_id":  6,
+        "word":  "Pingu"
+    },
+    {
+        "id":  215,
+        "deck_id":  7,
+        "word":  "Broom"
+    },
+    {
+        "id":  216,
+        "deck_id":  7,
+        "word":  "Sabjiwala"
+    },
+    {
+        "id":  217,
+        "deck_id":  7,
+        "word":  "Gilli Danda"
+    },
+    {
+        "id":  218,
+        "deck_id":  7,
+        "word":  "Drying Clothes"
+    },
+    {
+        "id":  219,
+        "deck_id":  7,
+        "word":  "Washing Clothes"
+    },
+    {
+        "id":  220,
+        "deck_id":  7,
+        "word":  "Washing Utensils"
+    },
+    {
+        "id":  221,
+        "deck_id":  7,
+        "word":  "Pooja"
+    },
+    {
+        "id":  222,
+        "deck_id":  7,
+        "word":  "Activa Kickstart"
+    },
+    {
+        "id":  223,
+        "deck_id":  7,
+        "word":  "Chetak Start"
+    },
+    {
+        "id":  224,
+        "deck_id":  7,
+        "word":  "Traffic"
+    },
+    {
+        "id":  225,
+        "deck_id":  7,
+        "word":  "Bargain"
+    },
+    {
+        "id":  226,
+        "deck_id":  7,
+        "word":  "Namaste"
+    },
+    {
+        "id":  227,
+        "deck_id":  7,
+        "word":  "Meditation"
+    },
+    {
+        "id":  228,
+        "deck_id":  7,
+        "word":  "Yoga"
+    },
+    {
+        "id":  229,
+        "deck_id":  7,
+        "word":  "Dangal"
+    },
+    {
+        "id":  230,
+        "deck_id":  7,
+        "word":  "Kites"
+    },
+    {
+        "id":  231,
+        "deck_id":  7,
+        "word":  "Firecrackers"
+    },
+    {
+        "id":  232,
+        "deck_id":  7,
+        "word":  "Bharaat Dance"
+    },
+    {
+        "id":  233,
+        "deck_id":  7,
+        "word":  "Cameraman in Weddings"
+    },
+    {
+        "id":  234,
+        "deck_id":  8,
+        "word":  "Shah Rukh Khan"
+    },
+    {
+        "id":  235,
+        "deck_id":  8,
+        "word":  "Salman Khan"
+    },
+    {
+        "id":  236,
+        "deck_id":  8,
+        "word":  "Amitabh Bachchan"
+    },
+    {
+        "id":  237,
+        "deck_id":  8,
+        "word":  "Ranbir Kapoor"
+    },
+    {
+        "id":  238,
+        "deck_id":  8,
+        "word":  "Akshay Kumar"
+    },
+    {
+        "id":  239,
+        "deck_id":  8,
+        "word":  "Hrithik Roshan"
+    },
+    {
+        "id":  240,
+        "deck_id":  8,
+        "word":  "Tiger Shroff"
+    },
+    {
+        "id":  241,
+        "deck_id":  8,
+        "word":  "Jodha Akbar"
+    },
+    {
+        "id":  242,
+        "deck_id":  8,
+        "word":  "Katrina Kaif"
+    },
+    {
+        "id":  243,
+        "deck_id":  8,
+        "word":  "Deepika Padukone"
+    },
+    {
+        "id":  244,
+        "deck_id":  8,
+        "word":  "Sholay"
+    },
+    {
+        "id":  245,
+        "deck_id":  8,
+        "word":  "3 Idiots"
+    },
+    {
+        "id":  246,
+        "deck_id":  8,
+        "word":  "Taare Zameen Par"
+    },
+    {
+        "id":  247,
+        "deck_id":  8,
+        "word":  "Bhaag Milkha Bhaag"
+    },
+    {
+        "id":  248,
+        "deck_id":  8,
+        "word":  "Dangal"
+    },
+    {
+        "id":  249,
+        "deck_id":  8,
+        "word":  "Andhadhun"
+    },
+    {
+        "id":  250,
+        "deck_id":  8,
+        "word":  "ZNMD"
+    },
+    {
+        "id":  251,
+        "deck_id":  8,
+        "word":  "Karthik Calling Karthik"
+    },
+    {
+        "id":  252,
+        "deck_id":  8,
+        "word":  "Barfi"
+    },
+    {
+        "id":  253,
+        "deck_id":  8,
+        "word":  "MS Dhoni"
+    },
+    {
+        "id":  254,
+        "deck_id":  8,
+        "word":  "pk"
+    },
+    {
+        "id":  255,
+        "deck_id":  8,
+        "word":  "Ragini MMS"
+    },
+    {
+        "id":  256,
+        "deck_id":  8,
+        "word":  "Golmaal"
+    },
+    {
+        "id":  257,
+        "deck_id":  8,
+        "word":  "Welcome"
+    },
+    {
+        "id":  258,
+        "deck_id":  8,
+        "word":  "Rockstar"
+    },
+    {
+        "id":  259,
+        "deck_id":  8,
+        "word":  "Sanju"
+    },
+    {
+        "id":  260,
+        "deck_id":  8,
+        "word":  "Baahubali"
+    },
+    {
+        "id":  261,
+        "deck_id":  8,
+        "word":  "Vicky Donor"
+    },
+    {
+        "id":  262,
+        "deck_id":  8,
+        "word":  "DDLJ"
+    },
+    {
+        "id":  263,
+        "deck_id":  8,
+        "word":  "Pad Man"
+    },
+    {
+        "id":  264,
+        "deck_id":  8,
+        "word":  "Udta Punjab"
+    },
+    {
+        "id":  265,
+        "deck_id":  8,
+        "word":  "Lagaan"
+    },
+    {
+        "id":  266,
+        "deck_id":  8,
+        "word":  "Mary Kom"
+    },
+    {
+        "id":  267,
+        "deck_id":  8,
+        "word":  "Saawariya"
+    },
+    {
+        "id":  268,
+        "deck_id":  8,
+        "word":  "Devdas"
+    },
+    {
+        "id":  269,
+        "deck_id":  8,
+        "word":  "Dhoom"
+    },
+    {
+        "id":  270,
+        "deck_id":  8,
+        "word":  "Chak De India"
+    },
+    {
+        "id":  271,
+        "deck_id":  8,
+        "word":  "Brahmastra"
+    },
+    {
+        "id":  272,
+        "deck_id":  8,
+        "word":  "Gangubai"
+    },
+    {
+        "id":  273,
+        "deck_id":  9,
+        "word":  "RCB"
+    },
+    {
+        "id":  274,
+        "deck_id":  9,
+        "word":  "Chennai Super Kings"
+    },
+    {
+        "id":  275,
+        "deck_id":  9,
+        "word":  "Delhi Capitals"
+    },
+    {
+        "id":  276,
+        "deck_id":  9,
+        "word":  "Gujarat Titans"
+    },
+    {
+        "id":  277,
+        "deck_id":  9,
+        "word":  "Kolkata Knight Riders"
+    },
+    {
+        "id":  278,
+        "deck_id":  9,
+        "word":  "Lucknow Super Giants"
+    },
+    {
+        "id":  279,
+        "deck_id":  9,
+        "word":  "Mumbai Indians"
+    },
+    {
+        "id":  280,
+        "deck_id":  9,
+        "word":  "Punjab Kings"
+    },
+    {
+        "id":  281,
+        "deck_id":  9,
+        "word":  "Rajasthan Royals"
+    },
+    {
+        "id":  282,
+        "deck_id":  9,
+        "word":  "Sunrisers Hyderabad"
+    },
+    {
+        "id":  354,
+        "deck_id":  1,
+        "word":  "Qutub Minar"
+    },
+    {
+        "id":  355,
+        "deck_id":  1,
+        "word":  "Lotus Temple"
+    },
+    {
+        "id":  356,
+        "deck_id":  1,
+        "word":  "Red Fort"
+    },
+    {
+        "id":  357,
+        "deck_id":  1,
+        "word":  "Gateway of India"
+    },
+    {
+        "id":  358,
+        "deck_id":  1,
+        "word":  "Hawa Mahal"
+    },
+    {
+        "id":  359,
+        "deck_id":  1,
+        "word":  "Golden Temple"
+    },
+    {
+        "id":  360,
+        "deck_id":  1,
+        "word":  "Golconda Fort"
+    },
+    {
+        "id":  361,
+        "deck_id":  6,
+        "word":  "Vikram aur Betaal"
+    },
+    {
+        "id":  362,
+        "deck_id":  6,
+        "word":  "Tenali Rama"
+    },
+    {
+        "id":  363,
+        "deck_id":  7,
+        "word":  "Bajrang Dal"
+    },
+    {
+        "id":  364,
+        "deck_id":  7,
+        "word":  "Hookah"
+    },
+    {
+        "id":  365,
+        "deck_id":  7,
+        "word":  "Diwali Cleaning"
+    },
+    {
+        "id":  366,
+        "deck_id":  7,
+        "word":  "Oyo Rooms"
+    },
+    {
+        "id":  367,
+        "deck_id":  7,
+        "word":  "Swiggy"
+    },
+    {
+        "id":  368,
+        "deck_id":  7,
+        "word":  "Ola"
+    },
+    {
+        "id":  369,
+        "deck_id":  7,
+        "word":  "Chain Snatching"
+    },
+    {
+        "id":  370,
+        "deck_id":  2,
+        "word":  "Haleem"
+    },
+    {
+        "id":  371,
+        "deck_id":  2,
+        "word":  "Dahi Puri"
+    },
+    {
+        "id":  372,
+        "deck_id":  2,
+        "word":  "Butter Chicken"
+    },
+    {
+        "id":  403,
+        "deck_id":  15,
+        "word":  "Blanket Hall"
+    },
+    {
+        "id":  404,
+        "deck_id":  15,
+        "word":  "Saleem Pheku"
+    },
+    {
+        "id":  405,
+        "deck_id":  15,
+        "word":  "Baigan"
+    },
+    {
+        "id":  406,
+        "deck_id":  15,
+        "word":  "Kiraak"
+    },
+    {
+        "id":  407,
+        "deck_id":  15,
+        "word":  "Item"
+    },
+    {
+        "id":  408,
+        "deck_id":  15,
+        "word":  "Charminar"
+    },
+    {
+        "id":  409,
+        "deck_id":  15,
+        "word":  "Begum Bazaar"
+    },
+    {
+        "id":  410,
+        "deck_id":  15,
+        "word":  "Irani Chai"
+    },
+    {
+        "id":  411,
+        "deck_id":  15,
+        "word":  "Niloufer"
+    },
+    {
+        "id":  412,
+        "deck_id":  15,
+        "word":  "Oyo Rooms"
+    },
+    {
+        "id":  413,
+        "deck_id":  15,
+        "word":  "Babri"
+    },
+    {
+        "id":  414,
+        "deck_id":  15,
+        "word":  "Maram pitti"
+    },
+    {
+        "id":  415,
+        "deck_id":  15,
+        "word":  "Necklace Road"
+    },
+    {
+        "id":  416,
+        "deck_id":  15,
+        "word":  "Indira Park"
+    },
+    {
+        "id":  417,
+        "deck_id":  15,
+        "word":  "Triple Riding"
+    },
+    {
+        "id":  418,
+        "deck_id":  15,
+        "word":  "Burqa"
+    },
+    {
+        "id":  419,
+        "deck_id":  15,
+        "word":  "Haleem"
+    },
+    {
+        "id":  420,
+        "deck_id":  15,
+        "word":  "Shawarma"
+    },
+    {
+        "id":  421,
+        "deck_id":  15,
+        "word":  "Kaan Bhairi"
+    },
+    {
+        "id":  422,
+        "deck_id":  15,
+        "word":  "Pinde me Miljana"
+    },
+    {
+        "id":  423,
+        "deck_id":  15,
+        "word":  "Kaiku?"
+    },
+    {
+        "id":  424,
+        "deck_id":  15,
+        "word":  "Yaaro"
+    },
+    {
+        "id":  425,
+        "deck_id":  15,
+        "word":  "Miya"
+    },
+    {
+        "id":  426,
+        "deck_id":  15,
+        "word":  "Teenmaar"
+    },
+    {
+        "id":  427,
+        "deck_id":  15,
+        "word":  "Marfa"
+    },
+    {
+        "id":  428,
+        "deck_id":  15,
+        "word":  "Dedh Hushaari"
+    },
+    {
+        "id":  429,
+        "deck_id":  15,
+        "word":  "Mothabari"
+    },
+    {
+        "id":  430,
+        "deck_id":  15,
+        "word":  "Galeez"
+    },
+    {
+        "id":  431,
+        "deck_id":  15,
+        "word":  "Amma Bava"
+    },
+    {
+        "id":  432,
+        "deck_id":  15,
+        "word":  "Howle"
+    },
+    {
+        "id":  433,
+        "deck_id":  15,
+        "word":  "Advance Baata"
+    },
+    {
+        "id":  434,
+        "deck_id":  7,
+        "word":  "Mehendi"
+    },
+    {
+        "id":  435,
+        "deck_id":  5,
+        "word":  "Ugadi"
+    },
+    {
+        "id":  436,
+        "deck_id":  16,
+        "word":  "Bathukamma"
+    },
+    {
+        "id":  437,
+        "deck_id":  16,
+        "word":  "Kurchi Madtapetti"
+    },
+    {
+        "id":  438,
+        "deck_id":  16,
+        "word":  "Uppal Balu"
+    },
+    {
+        "id":  439,
+        "deck_id":  16,
+        "word":  "Baane Extralu"
+    },
+    {
+        "id":  440,
+        "deck_id":  16,
+        "word":  "Enkamala Backside"
+    },
+    {
+        "id":  441,
+        "deck_id":  16,
+        "word":  "Chese Moodu Utsaham"
+    },
+    {
+        "id":  442,
+        "deck_id":  16,
+        "word":  "Tinnava Srujana?"
+    },
+    {
+        "id":  443,
+        "deck_id":  16,
+        "word":  "Chaduvukondi Firstu"
+    },
+    {
+        "id":  444,
+        "deck_id":  16,
+        "word":  "So Beautiful So Elegant"
+    },
+    {
+        "id":  445,
+        "deck_id":  16,
+        "word":  "Iron eh vanchala enti"
+    },
+    {
+        "id":  446,
+        "deck_id":  16,
+        "word":  "Idhi nen sudala"
+    },
+    {
+        "id":  447,
+        "deck_id":  16,
+        "word":  "Paadala Midha Nadiche Yatra"
+    },
+    {
+        "id":  448,
+        "deck_id":  16,
+        "word":  "Rendu Gaajulu Ammukovali"
+    },
+    {
+        "id":  449,
+        "deck_id":  16,
+        "word":  "Model Model Supermodel"
+    },
+    {
+        "id":  450,
+        "deck_id":  16,
+        "word":  "Enjoy Pandago"
+    },
+    {
+        "id":  451,
+        "deck_id":  17,
+        "word":  "Pawan Kalyan"
+    },
+    {
+        "id":  452,
+        "deck_id":  17,
+        "word":  "Brahmanandam"
+    },
+    {
+        "id":  453,
+        "deck_id":  17,
+        "word":  "Mahesh Babu"
+    },
+    {
+        "id":  454,
+        "deck_id":  17,
+        "word":  "Allu Arjun"
+    },
+    {
+        "id":  455,
+        "deck_id":  17,
+        "word":  "Vijay Deverakonda"
+    },
+    {
+        "id":  456,
+        "deck_id":  17,
+        "word":  "Junior NTR"
+    },
+    {
+        "id":  457,
+        "deck_id":  17,
+        "word":  "Ram Charan"
+    },
+    {
+        "id":  458,
+        "deck_id":  17,
+        "word":  "Prabhas"
+    },
+    {
+        "id":  459,
+        "deck_id":  17,
+        "word":  "Ravi Teja"
+    },
+    {
+        "id":  460,
+        "deck_id":  17,
+        "word":  "Nagarjuna"
+    },
+    {
+        "id":  461,
+        "deck_id":  17,
+        "word":  "Balayya"
+    },
+    {
+        "id":  462,
+        "deck_id":  17,
+        "word":  "Chiranjeevi"
+    },
+    {
+        "id":  463,
+        "deck_id":  17,
+        "word":  "Venky"
+    },
+    {
+        "id":  464,
+        "deck_id":  17,
+        "word":  "Nani"
+    },
+    {
+        "id":  465,
+        "deck_id":  17,
+        "word":  "Naga Chaitanya"
+    },
+    {
+        "id":  466,
+        "deck_id":  17,
+        "word":  "Samantha"
+    },
+    {
+        "id":  467,
+        "deck_id":  17,
+        "word":  "Adivi Sesh"
+    },
+    {
+        "id":  468,
+        "deck_id":  17,
+        "word":  "Vishwak Sen"
+    },
+    {
+        "id":  469,
+        "deck_id":  17,
+        "word":  "Rashmika"
+    },
+    {
+        "id":  470,
+        "deck_id":  17,
+        "word":  "Anupama"
+    },
+    {
+        "id":  471,
+        "deck_id":  17,
+        "word":  "DJ Tillu"
+    },
+    {
+        "id":  472,
+        "deck_id":  17,
+        "word":  "Pooja Hegde"
+    },
+    {
+        "id":  473,
+        "deck_id":  17,
+        "word":  "Keerthi Suresh"
+    },
+    {
+        "id":  474,
+        "deck_id":  17,
+        "word":  "Uppena"
+    },
+    {
+        "id":  475,
+        "deck_id":  17,
+        "word":  "Sree Leela"
+    },
+    {
+        "id":  476,
+        "deck_id":  17,
+        "word":  "Jaathi Ratnalu"
+    },
+    {
+        "id":  477,
+        "deck_id":  17,
+        "word":  "Ee Nagaraniki Emaindi"
+    },
+    {
+        "id":  478,
+        "deck_id":  17,
+        "word":  "Aarya 2"
+    },
+    {
+        "id":  479,
+        "deck_id":  17,
+        "word":  "Arjun Reddy"
+    },
+    {
+        "id":  480,
+        "deck_id":  17,
+        "word":  "Baahubali"
+    },
+    {
+        "id":  481,
+        "deck_id":  17,
+        "word":  "Pokiri"
+    },
+    {
+        "id":  482,
+        "deck_id":  17,
+        "word":  "Happy Days"
+    },
+    {
+        "id":  483,
+        "deck_id":  17,
+        "word":  "RRR"
+    },
+    {
+        "id":  484,
+        "deck_id":  17,
+        "word":  "Eega"
+    },
+    {
+        "id":  485,
+        "deck_id":  17,
+        "word":  "Magadheera"
+    },
+    {
+        "id":  486,
+        "deck_id":  17,
+        "word":  "Pushpa"
+    },
+    {
+        "id":  487,
+        "deck_id":  17,
+        "word":  "KGF"
+    },
+    {
+        "id":  488,
+        "deck_id":  17,
+        "word":  "Jersey"
+    },
+    {
+        "id":  489,
+        "deck_id":  17,
+        "word":  "Sita Ramam"
+    },
+    {
+        "id":  490,
+        "deck_id":  17,
+        "word":  "Mahanati"
+    },
+    {
+        "id":  491,
+        "deck_id":  17,
+        "word":  "Agent Sai Srinivas Atreya"
+    },
+    {
+        "id":  492,
+        "deck_id":  17,
+        "word":  "Bommarillu"
+    },
+    {
+        "id":  493,
+        "deck_id":  17,
+        "word":  "Pelli Choopulu"
+    },
+    {
+        "id":  494,
+        "deck_id":  17,
+        "word":  "Manmadhudu"
+    },
+    {
+        "id":  495,
+        "deck_id":  17,
+        "word":  "RX100"
+    },
+    {
+        "id":  496,
+        "deck_id":  17,
+        "word":  "Rangasthalam"
+    },
+    {
+        "id":  497,
+        "deck_id":  17,
+        "word":  "Srimanthudu"
+    },
+    {
+        "id":  498,
+        "deck_id":  17,
+        "word":  "Bharat Ane Nenu"
+    },
+    {
+        "id":  499,
+        "deck_id":  17,
+        "word":  "Ala Vaikuntapuramlo"
+    },
+    {
+        "id":  500,
+        "deck_id":  17,
+        "word":  "Geeta Govindam"
+    },
+    {
+        "id":  501,
+        "deck_id":  17,
+        "word":  "Gabbar Singh"
+    },
+    {
+        "id":  502,
+        "deck_id":  17,
+        "word":  "Mirchi"
+    },
+    {
+        "id":  503,
+        "deck_id":  17,
+        "word":  "Ninnu Kori"
+    },
+    {
+        "id":  504,
+        "deck_id":  17,
+        "word":  "Attharintiki Daaredi"
+    },
+    {
+        "id":  505,
+        "deck_id":  17,
+        "word":  "Dookudu"
+    },
+    {
+        "id":  506,
+        "deck_id":  12,
+        "word":  "Virat Kohli"
+    },
+    {
+        "id":  507,
+        "deck_id":  12,
+        "word":  "Rohit Sharma"
+    },
+    {
+        "id":  508,
+        "deck_id":  12,
+        "word":  "Shubman Gill"
+    },
+    {
+        "id":  509,
+        "deck_id":  12,
+        "word":  "Bhuvneshwar Kumar"
+    },
+    {
+        "id":  510,
+        "deck_id":  12,
+        "word":  "Rishabh Pant"
+    },
+    {
+        "id":  511,
+        "deck_id":  12,
+        "word":  "Jasprit Bumrah"
+    },
+    {
+        "id":  512,
+        "deck_id":  12,
+        "word":  "Ravindra Jadeja"
+    },
+    {
+        "id":  513,
+        "deck_id":  12,
+        "word":  "Ravichandran Ashwin"
+    },
+    {
+        "id":  514,
+        "deck_id":  12,
+        "word":  "Mohammad Shami"
+    },
+    {
+        "id":  515,
+        "deck_id":  12,
+        "word":  "Mohammed Siraj"
+    },
+    {
+        "id":  516,
+        "deck_id":  12,
+        "word":  "Kl Rahul"
+    },
+    {
+        "id":  517,
+        "deck_id":  12,
+        "word":  "Hardik Pandya"
+    },
+    {
+        "id":  518,
+        "deck_id":  12,
+        "word":  "MS Dhoni"
+    },
+    {
+        "id":  519,
+        "deck_id":  12,
+        "word":  "Kapil Dev"
+    },
+    {
+        "id":  520,
+        "deck_id":  12,
+        "word":  "Sachin Tendulkar"
+    },
+    {
+        "id":  521,
+        "deck_id":  12,
+        "word":  "Rahul Dravid"
+    },
+    {
+        "id":  522,
+        "deck_id":  12,
+        "word":  "Sunil Gavaskar"
+    },
+    {
+        "id":  523,
+        "deck_id":  12,
+        "word":  "Anil Kumble"
+    },
+    {
+        "id":  524,
+        "deck_id":  12,
+        "word":  "Sourav Ganguly"
+    },
+    {
+        "id":  525,
+        "deck_id":  12,
+        "word":  "Virender Sehwag"
+    },
+    {
+        "id":  526,
+        "deck_id":  12,
+        "word":  "Yuvraj Singh"
+    },
+    {
+        "id":  527,
+        "deck_id":  12,
+        "word":  "Mohammad Azharuddin"
+    },
+    {
+        "id":  528,
+        "deck_id":  12,
+        "word":  "Javagal Srinath"
+    },
+    {
+        "id":  529,
+        "deck_id":  12,
+        "word":  "Harbhajan Singh"
+    },
+    {
+        "id":  530,
+        "deck_id":  12,
+        "word":  "Zaheer Khan"
+    },
+    {
+        "id":  531,
+        "deck_id":  12,
+        "word":  "VVS Laxman"
+    },
+    {
+        "id":  532,
+        "deck_id":  12,
+        "word":  "Gautam Gambhir"
+    },
+    {
+        "id":  533,
+        "deck_id":  12,
+        "word":  "Suresh Raina"
+    },
+    {
+        "id":  534,
+        "deck_id":  12,
+        "word":  "Murali Vijay"
+    },
+    {
+        "id":  535,
+        "deck_id":  12,
+        "word":  "Shikhar Dhawan"
+    },
+    {
+        "id":  536,
+        "deck_id":  12,
+        "word":  "Ajinkya Rahane"
+    },
+    {
+        "id":  537,
+        "deck_id":  12,
+        "word":  "Irfan Pathan"
+    },
+    {
+        "id":  538,
+        "deck_id":  12,
+        "word":  "Yusuf Pathan"
+    },
+    {
+        "id":  539,
+        "deck_id":  12,
+        "word":  "Wriddhiman Saha"
+    },
+    {
+        "id":  540,
+        "deck_id":  12,
+        "word":  "Kuldeep Yadav"
+    },
+    {
+        "id":  541,
+        "deck_id":  18,
+        "word":  "Ramayana"
+    },
+    {
+        "id":  542,
+        "deck_id":  18,
+        "word":  "Mahabharata"
+    },
+    {
+        "id":  543,
+        "deck_id":  18,
+        "word":  "Krishna"
+    },
+    {
+        "id":  544,
+        "deck_id":  18,
+        "word":  "Shiva"
+    },
+    {
+        "id":  545,
+        "deck_id":  18,
+        "word":  "Ganesha"
+    },
+    {
+        "id":  546,
+        "deck_id":  18,
+        "word":  "Durga"
+    },
+    {
+        "id":  547,
+        "deck_id":  18,
+        "word":  "Parvati"
+    },
+    {
+        "id":  548,
+        "deck_id":  18,
+        "word":  "Vishnu"
+    },
+    {
+        "id":  549,
+        "deck_id":  18,
+        "word":  "Lakshmi"
+    },
+    {
+        "id":  550,
+        "deck_id":  18,
+        "word":  "Hanuman"
+    },
+    {
+        "id":  551,
+        "deck_id":  18,
+        "word":  "Ram"
+    },
+    {
+        "id":  552,
+        "deck_id":  18,
+        "word":  "Sita"
+    },
+    {
+        "id":  553,
+        "deck_id":  18,
+        "word":  "Lakshman"
+    },
+    {
+        "id":  554,
+        "deck_id":  18,
+        "word":  "Ravan"
+    },
+    {
+        "id":  555,
+        "deck_id":  18,
+        "word":  "Yudhishthira"
+    },
+    {
+        "id":  556,
+        "deck_id":  18,
+        "word":  "Bheem"
+    },
+    {
+        "id":  557,
+        "deck_id":  18,
+        "word":  "Arjuna"
+    },
+    {
+        "id":  558,
+        "deck_id":  18,
+        "word":  "Nakul"
+    },
+    {
+        "id":  559,
+        "deck_id":  18,
+        "word":  "Sahadeva"
+    },
+    {
+        "id":  560,
+        "deck_id":  18,
+        "word":  "Draupadi"
+    },
+    {
+        "id":  561,
+        "deck_id":  18,
+        "word":  "Duryodhana"
+    },
+    {
+        "id":  562,
+        "deck_id":  18,
+        "word":  "Karna"
+    },
+    {
+        "id":  563,
+        "deck_id":  18,
+        "word":  "Kunti"
+    },
+    {
+        "id":  564,
+        "deck_id":  18,
+        "word":  "Bhima"
+    },
+    {
+        "id":  565,
+        "deck_id":  18,
+        "word":  "Surya"
+    },
+    {
+        "id":  566,
+        "deck_id":  18,
+        "word":  "Chandra"
+    },
+    {
+        "id":  567,
+        "deck_id":  18,
+        "word":  "Vayu"
+    },
+    {
+        "id":  568,
+        "deck_id":  18,
+        "word":  "Varuna"
+    },
+    {
+        "id":  569,
+        "deck_id":  18,
+        "word":  "Indra"
+    },
+    {
+        "id":  570,
+        "deck_id":  18,
+        "word":  "Yamaraj"
+    },
+    {
+        "id":  571,
+        "deck_id":  18,
+        "word":  "Ashwatthama"
+    },
+    {
+        "id":  572,
+        "deck_id":  18,
+        "word":  "Kali"
+    },
+    {
+        "id":  573,
+        "deck_id":  18,
+        "word":  "Vedas"
+    },
+    {
+        "id":  574,
+        "deck_id":  18,
+        "word":  "Purana"
+    },
+    {
+        "id":  575,
+        "deck_id":  18,
+        "word":  "Bhagavad Gita"
+    },
+    {
+        "id":  579,
+        "deck_id":  18,
+        "word":  "Brahma"
+    },
+    {
+        "id":  580,
+        "deck_id":  18,
+        "word":  "Saraswati"
+    },
+    {
+        "id":  581,
+        "deck_id":  18,
+        "word":  "Narada"
+    },
+    {
+        "id":  582,
+        "deck_id":  18,
+        "word":  "Dasharatha"
+    },
+    {
+        "id":  583,
+        "deck_id":  18,
+        "word":  "Kaikeyi"
+    },
+    {
+        "id":  584,
+        "deck_id":  18,
+        "word":  "Sugriva"
+    },
+    {
+        "id":  585,
+        "deck_id":  18,
+        "word":  "Vibhishana"
+    },
+    {
+        "id":  586,
+        "deck_id":  18,
+        "word":  "Shakuni"
+    },
+    {
+        "id":  587,
+        "deck_id":  18,
+        "word":  "Balarama"
+    },
+    {
+        "id":  588,
+        "deck_id":  18,
+        "word":  "Radha"
+    },
+    {
+        "id":  589,
+        "deck_id":  18,
+        "word":  "Rukmini"
+    },
+    {
+        "id":  590,
+        "deck_id":  18,
+        "word":  "Sati"
+    },
+    {
+        "id":  591,
+        "deck_id":  18,
+        "word":  "Kartikeya"
+    },
+    {
+        "id":  592,
+        "deck_id":  18,
+        "word":  "Kubera"
+    },
+    {
+        "id":  593,
+        "deck_id":  18,
+        "word":  "Garuda"
+    },
+    {
+        "id":  594,
+        "deck_id":  18,
+        "word":  "Nandi"
+    },
+    {
+        "id":  595,
+        "deck_id":  18,
+        "word":  "Varaha"
+    },
+    {
+        "id":  596,
+        "deck_id":  18,
+        "word":  "Narasimha"
+    },
+    {
+        "id":  597,
+        "deck_id":  18,
+        "word":  "Buddha"
+    },
+    {
+        "id":  598,
+        "deck_id":  18,
+        "word":  "Kalki"
+    },
+    {
+        "id":  599,
+        "deck_id":  18,
+        "word":  "Savitri"
+    },
+    {
+        "id":  600,
+        "deck_id":  18,
+        "word":  "Brahman"
+    },
+    {
+        "id":  601,
+        "deck_id":  18,
+        "word":  "Maya"
+    },
+    {
+        "id":  602,
+        "deck_id":  18,
+        "word":  "Karma"
+    },
+    {
+        "id":  603,
+        "deck_id":  18,
+        "word":  "Dharma"
+    },
+    {
+        "id":  604,
+        "deck_id":  18,
+        "word":  "Samsara"
+    },
+    {
+        "id":  605,
+        "deck_id":  18,
+        "word":  "Moksha"
+    },
+    {
+        "id":  606,
+        "deck_id":  18,
+        "word":  "Upanishads"
+    },
+    {
+        "id":  607,
+        "deck_id":  18,
+        "word":  "Puranas"
+    },
+    {
+        "id":  608,
+        "deck_id":  18,
+        "word":  "Vedanta"
+    },
+    {
+        "id":  609,
+        "deck_id":  18,
+        "word":  "Bhagavata Purana"
+    },
+    {
+        "id":  610,
+        "deck_id":  18,
+        "word":  "Vishnu Purana"
+    },
+    {
+        "id":  611,
+        "deck_id":  18,
+        "word":  "Shiva Purana"
+    },
+    {
+        "id":  612,
+        "deck_id":  18,
+        "word":  "Devi Bhagavata Purana"
+    },
+    {
+        "id":  613,
+        "deck_id":  18,
+        "word":  "Skanda Purana"
+    },
+    {
+        "id":  726,
+        "deck_id":  22,
+        "word":  "Tarak Mehta ka Oolta Chashma"
+    },
+    {
+        "id":  727,
+        "deck_id":  22,
+        "word":  "Yeh Rishta Kya Kehlata Hai"
+    },
+    {
+        "id":  728,
+        "deck_id":  22,
+        "word":  "Bhabhi Ji Ghar Par Hain"
+    },
+    {
+        "id":  729,
+        "deck_id":  22,
+        "word":  "Kumkum Bhagya"
+    },
+    {
+        "id":  730,
+        "deck_id":  22,
+        "word":  "Kahaani Ghar Ghar Ki"
+    },
+    {
+        "id":  731,
+        "deck_id":  22,
+        "word":  "Yeh Hai Mohabbatein"
+    },
+    {
+        "id":  732,
+        "deck_id":  22,
+        "word":  "Balika Vadhu"
+    },
+    {
+        "id":  733,
+        "deck_id":  22,
+        "word":  "Kapil Sharma Show"
+    },
+    {
+        "id":  734,
+        "deck_id":  22,
+        "word":  "Kyuki Saas Bhi Kabhi Bahu Thi"
+    },
+    {
+        "id":  735,
+        "deck_id":  22,
+        "word":  "Shaktimaan"
+    },
+    {
+        "id":  736,
+        "deck_id":  22,
+        "word":  "Ramayan"
+    },
+    {
+        "id":  737,
+        "deck_id":  22,
+        "word":  "Mahabharat"
+    },
+    {
+        "id":  738,
+        "deck_id":  22,
+        "word":  "Hum Paanch"
+    },
+    {
+        "id":  739,
+        "deck_id":  22,
+        "word":  "Dekh Bhai Dekh"
+    },
+    {
+        "id":  740,
+        "deck_id":  22,
+        "word":  "Buniyaad"
+    },
+    {
+        "id":  741,
+        "deck_id":  22,
+        "word":  "Malgudi Days"
+    },
+    {
+        "id":  742,
+        "deck_id":  22,
+        "word":  "Taarak Mehta Ka Ooltah Chashmah"
+    },
+    {
+        "id":  743,
+        "deck_id":  22,
+        "word":  "Sarabhai vs Sarabhai"
+    },
+    {
+        "id":  744,
+        "deck_id":  22,
+        "word":  "CID"
+    },
+    {
+        "id":  745,
+        "deck_id":  22,
+        "word":  "Office Office"
+    },
+    {
+        "id":  746,
+        "deck_id":  22,
+        "word":  "Kasautii Zindagii Kay"
+    },
+    {
+        "id":  747,
+        "deck_id":  22,
+        "word":  "Jassi Jaissi Koi Nahin"
+    },
+    {
+        "id":  748,
+        "deck_id":  22,
+        "word":  "Sa Re Ga Ma Pa"
+    },
+    {
+        "id":  749,
+        "deck_id":  22,
+        "word":  "Kyunki Jeena Issi Ka Naam Hai"
+    },
+    {
+        "id":  750,
+        "deck_id":  22,
+        "word":  "Kkusum"
+    },
+    {
+        "id":  751,
+        "deck_id":  22,
+        "word":  "Pavitra Rishta"
+    },
+    {
+        "id":  752,
+        "deck_id":  22,
+        "word":  "Bade Achhe Lagte Hain"
+    },
+    {
+        "id":  753,
+        "deck_id":  22,
+        "word":  "Devon Ke Dev...Mahadev"
+    },
+    {
+        "id":  754,
+        "deck_id":  22,
+        "word":  "Sasural Simar Ka"
+    },
+    {
+        "id":  755,
+        "deck_id":  22,
+        "word":  "Naagin"
+    },
+    {
+        "id":  756,
+        "deck_id":  22,
+        "word":  "Udaan"
+    },
+    {
+        "id":  757,
+        "deck_id":  22,
+        "word":  "Aahat"
+    },
+    {
+        "id":  758,
+        "deck_id":  22,
+        "word":  "Chandrakanta"
+    },
+    {
+        "id":  759,
+        "deck_id":  22,
+        "word":  "Kuch Rang Pyar Ke Aise Bhi"
+    },
+    {
+        "id":  760,
+        "deck_id":  22,
+        "word":  "Sasural Genda Phool"
+    },
+    {
+        "id":  761,
+        "deck_id":  22,
+        "word":  "Kasamh Se"
+    },
+    {
+        "id":  762,
+        "deck_id":  22,
+        "word":  "Kahani Comedy Circus Ki"
+    },
+    {
+        "id":  763,
+        "deck_id":  22,
+        "word":  "Astitva...Ek Prem Kahani"
+    },
+    {
+        "id":  764,
+        "deck_id":  22,
+        "word":  "Bhabi Ji Ghar Par Hai"
+    },
+    {
+        "id":  765,
+        "deck_id":  22,
+        "word":  "Saath Nibhaana Saathiya"
+    },
+    {
+        "id":  766,
+        "deck_id":  22,
+        "word":  "Iss Pyaar Ko Kya Naam Doon?"
+    },
+    {
+        "id":  767,
+        "deck_id":  22,
+        "word":  "Nukkad"
+    },
+    {
+        "id":  768,
+        "deck_id":  22,
+        "word":  "Yeh Un Dinon Ki Baat Hai"
+    },
+    {
+        "id":  769,
+        "deck_id":  22,
+        "word":  "Shanti"
+    },
+    {
+        "id":  770,
+        "deck_id":  22,
+        "word":  "Tu Tu Main Main"
+    },
+    {
+        "id":  771,
+        "deck_id":  22,
+        "word":  "Tujhse Hai Raabta"
+    },
+    {
+        "id":  772,
+        "deck_id":  22,
+        "word":  "Bhagyashree"
+    },
+    {
+        "id":  773,
+        "deck_id":  22,
+        "word":  "Mahadev"
+    },
+    {
+        "id":  774,
+        "deck_id":  22,
+        "word":  "Meri Aashiqui Tum Se Hi"
+    },
+    {
+        "id":  775,
+        "deck_id":  22,
+        "word":  "Kaun Banega Crorepati"
+    },
+    {
+        "id":  776,
+        "deck_id":  22,
+        "word":  "Dance India Dance"
+    },
+    {
+        "id":  777,
+        "deck_id":  22,
+        "word":  "Indian Idol"
+    },
+    {
+        "id":  778,
+        "deck_id":  22,
+        "word":  "Bigg Boss"
+    },
+    {
+        "id":  779,
+        "deck_id":  22,
+        "word":  "Comedy Nights with Kapil"
+    }
+]

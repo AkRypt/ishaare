@@ -37,3 +37,5 @@ next-env.d.ts
 
 # local files
 /default_values.js
+scripts/.migrate.env
+scripts/.migrate-output/

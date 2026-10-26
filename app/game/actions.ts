@@ -1,16 +1,32 @@
 'use server'
 
 import { getAdminDb } from '@/utils/firebase/admin'
+import { isFirebaseAdminConfigured } from '@/utils/firebase/config'
+import { getSeedWords } from '@/utils/firebase/seed'
 
 export async function getWords(deck_id: number) {
-  const snapshot = await getAdminDb()
-    .collection('words')
-    .where('deck_id', '==', deck_id)
-    .get()
+  if (isFirebaseAdminConfigured()) {
+    try {
+      const snapshot = await getAdminDb()
+        .collection('words')
+        .where('deck_id', '==', deck_id)
+        .get()
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
+      if (!snapshot.empty) {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      }
+    } catch (error) {
+      console.error('Firestore words read failed; using local seed', error)
+    }
+  }
+
+  return getSeedWords(deck_id).map((w) => ({
+    id: String(w.id),
+    deck_id: w.deck_id,
+    word: w.word,
   }))
 }
 

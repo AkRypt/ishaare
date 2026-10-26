@@ -1,0 +1,28 @@
+rules_version = '2';
+// Shared Firebase project (akxh-games): deploy THIS file as the project ruleset.
+// Ishaare catalog is Admin-only; Spycy lobbies need authenticated clients.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Spycy
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /lobbies/{lobbyId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+    }
+    // Spycy word banks are category docs with a `words` array.
+    // Ishaare word rows are numeric-id docs with `deck_id` + `word` — both live in `words`.
+    // Clients may read Spycy-style docs; Admin bypasses rules for Ishaare writes/reads.
+    match /words/{id} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Ishaare catalog — Admin SDK only
+    match /decks/{id} {
+      allow read, write: if false;
+    }
+  }
+}
