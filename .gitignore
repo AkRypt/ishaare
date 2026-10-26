@@ -28,6 +28,11 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# Firebase / Google service-account keys (never commit)
+*firebase-adminsdk*.json
+*-firebase-admins.json
+serviceAccount*.json
+
 # vercel
 .vercel
 
@@ -37,3 +42,5 @@ next-env.d.ts
 
 # local files
 /default_values.js
+scripts/.migrate.env
+scripts/.migrate-output/

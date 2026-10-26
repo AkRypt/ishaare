@@ -1,34 +1,64 @@
-'use server';
+'use server'
 
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
-import { createClient } from '@/utils/supabase/server'
+import { cookies } from 'next/headers'
+import { resolveDeckImage } from '@/utils/deck-image'
+import { getAdminDb } from '@/utils/firebase/admin'
+import { ISHAARE_COLLECTIONS } from '@/utils/firebase/collections'
+import { isFirebaseAdminConfigured } from '@/utils/firebase/config'
+import { getSeedDecks } from '@/utils/firebase/seed'
+import { getSessionUser, SESSION_COOKIE_NAME } from '@/utils/firebase/session'
+import { getUserProfile, upsertUser } from '@/utils/firebase/users'
 
 export async function getDecks() {
-    const supabase = createClient()
-
-    const { data, error, status } = await supabase
-        .from('decks')
-        .select("*")
-
-    if (error && status !== 406) {
-        console.log(error)
-        throw error
+  if (isFirebaseAdminConfigured()) {
+    try {
+      const snapshot = await getAdminDb().collection(ISHAARE_COLLECTIONS.DECKS).get()
+      if (!snapshot.empty) {
+        return snapshot.docs.map((doc) => {
+          const data = doc.data()
+          return {
+            id: typeof data.id === 'number' ? data.id : Number(doc.id),
+            ...data,
+            image: resolveDeckImage(
+              typeof data.image === 'string' ? data.image : null
+            ),
+          }
+        })
+      }
+    } catch (error) {
+      console.error('Firestore decks read failed; using local seed', error)
     }
+  }
+  return getSeedDecks()
+}
 
-    return data
+export async function getCurrentUser() {
+  if (!isFirebaseAdminConfigured()) return null
+
+  try {
+    const session = await getSessionUser()
+    if (!session) return null
+
+    const existing = await getUserProfile(session.uid)
+    if (existing) return existing
+    return upsertUser(session)
+  } catch (error) {
+    console.error('getCurrentUser failed', error)
+    return null
+  }
 }
 
 export async function signOut() {
-    const supabase = createClient()
-    const { error } =await supabase.auth.signOut()
-
-    if (error) {
-        console.log(error)
-        throw error
-    }
-
-    redirect('/')
+  const cookieStore = cookies()
+  cookieStore.set({
+    name: SESSION_COOKIE_NAME,
+    value: '',
+    maxAge: 0,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+  })
+  redirect('/')
 }
-
