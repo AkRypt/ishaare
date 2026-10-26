@@ -64,9 +64,17 @@ body {
   background: radial-gradient(ellipse at 30% 20%, rgba(126, 200, 212, 0.35), transparent 55%),
     radial-gradient(ellipse at 80% 90%, rgba(53, 241, 176, 0.12), transparent 50%),
     linear-gradient(160deg, #2c7c8d 0%, #3b92a2 55%, #247a8a 100%);
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
+}
+
+.game-hint-landscape {
+  display: none;
+}
+
+.game-hint-portrait {
+  display: inline-flex;
 }
 
 .game-zones {
@@ -221,6 +229,14 @@ body {
 
 /* Landscape / forehead mode — side-by-side zones */
 @media (orientation: landscape) {
+  .game-hint-portrait {
+    display: none;
+  }
+
+  .game-hint-landscape {
+    display: inline-flex;
+  }
+
   .game-zones {
     flex-direction: row;
   }
