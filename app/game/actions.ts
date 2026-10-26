@@ -1,27 +1,19 @@
-'use server';
+'use server'
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-
-import { createClient } from '@/utils/supabase/server'
+import { getAdminDb } from '@/utils/firebase/admin'
 
 export async function getWords(deck_id: number) {
-    const supabase = createClient()
+  const snapshot = await getAdminDb()
+    .collection('words')
+    .where('deck_id', '==', deck_id)
+    .get()
 
-    const { data, error, status } = await supabase
-        .from('words')
-        .select("*")
-        .eq('deck_id', deck_id)
-
-    if (error && status !== 406) {
-
-        console.log(error)
-        throw error
-    }
-
-    return data
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
 }
 
 export async function ilog(text: string) {
-    console.log(text)
+  console.log(text)
 }

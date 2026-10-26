@@ -2,8 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getDecks, signOut } from "./actions";
-import { createClient } from "@/utils/supabase/client";
+import { getCurrentUser, getDecks, signOut } from "./actions";
 import HowToPlayModal from "../components/howToPlay";
 import SignOutButton from "../components/signOutButton";
 import { Loading } from "../components/loading";
@@ -32,20 +31,12 @@ export default function Lobby() {
         })
     }, [])
 
-    // Fetching logged in userData
-    async function getUserData() {
-        const supabase = createClient();
-        const { data, error } = await supabase.auth.getUser()
-        const { data: userD, error: userError } = await supabase
-            .from('users')
-            .select('*')
-            .eq('id', data?.user?.id)
-        setUserData(userD ? userD[0] : null)
-        setPurchasedTopics(userD ? userD[0]?.purchased_topics : [])
-        setEmailParam(userD ? `?prefilled_email=${userD[0]?.email}` : '')
-    }
     useEffect(() => {
-        getUserData()
+        getCurrentUser().then((user) => {
+            setUserData(user)
+            setPurchasedTopics(user?.purchased_topics ?? [])
+            setEmailParam(user?.email ? `?prefilled_email=${user.email}` : '')
+        })
     }, [])
 
     const onClickDeck = (id: number, isPremium: boolean) => {
