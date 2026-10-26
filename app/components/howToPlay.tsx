@@ -25,14 +25,14 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
     return (
         <div>
             {show && (
-                <div className="fixed top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-50">
-                    <div className="relative w-full h-full flex items-center justify-center">
+                <div className="fixed top-0 left-0 z-50 w-full h-full bg-brand-deep/55 backdrop-blur-sm safe-pad">
+                    <div className="relative w-full h-full flex items-center justify-center p-3">
                         <div className="absolute w-full h-full" onClick={onClose}></div>
-                        <div className="bg-white p-4 w-[90%] md:w-[30%] rounded-lg shadow-2xl relative">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#2c7c8d" className="absolute top-4 right-4 w-6 h-6 cursor-pointer" onClick={onClose}>
+                        <div className="bg-white p-5 w-[92%] max-w-md md:w-[30%] rounded-2xl shadow-2xl relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#2c7c8d" className="absolute top-4 right-4 w-7 h-7 cursor-pointer" onClick={onClose}>
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            <h1 className="text-3xl text-primary-bg font-bold mb-4">How to Play</h1>
+                            <h1 className="text-3xl text-primary-bg font-bold mb-4 pr-8">How to Play</h1>
 
                             {/* Previous and Next Arrows */}
                             {currentPage > 0 ?
@@ -72,7 +72,7 @@ export default function HowToPlayModal({ show, onClose }: { show: boolean, onClo
                                         <div className="flex flex-col justify-center items-center">
                                             {/* <Image src="/assets/how-to/how-3.avif" alt="" width={1} height={1} style={{ width: "80%", height: "80%" }} priority={true} /> */}
                                             <img src="/assets/how-to/how-3.avif" alt="" className="w-[80%] h-[80%] mb-2" />
-                                            <p className="text-md text-primary-bg mt-2">Swipe Right if you guessed the word correctly. Swipe Left to skip the word. (Without looking at the screen)</p>
+                                            <p className="text-md text-primary-bg mt-2">Swipe or tap <span className="font-bold text-correct-deep">right / bottom for Correct (green)</span>. Swipe or tap <span className="font-bold text-skip-deep">left / top to Skip (red)</span> — without looking at the screen.</p>
                                         </div>
                             }
 
