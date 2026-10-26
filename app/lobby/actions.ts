@@ -10,21 +10,27 @@ import { getSeedDecks } from '@/utils/firebase/seed'
 import { getSessionUser, SESSION_COOKIE_NAME } from '@/utils/firebase/session'
 import { getUserProfile, upsertUser } from '@/utils/firebase/users'
 
+function serializeDeck(docId: string, data: Record<string, unknown>) {
+  return {
+    id: typeof data.id === 'number' ? data.id : Number(docId),
+    name: typeof data.name === 'string' ? data.name : '',
+    description: typeof data.description === 'string' ? data.description : '',
+    image: resolveDeckImage(typeof data.image === 'string' ? data.image : null),
+    is_premium: Boolean(data.is_premium),
+    enabled: data.enabled !== false,
+    coming_soon: Boolean(data.coming_soon),
+    buy_link: typeof data.buy_link === 'string' ? data.buy_link : null,
+  }
+}
+
 export async function getDecks() {
   if (isFirebaseAdminConfigured()) {
     try {
       const snapshot = await getAdminDb().collection(ISHAARE_COLLECTIONS.DECKS).get()
       if (!snapshot.empty) {
-        return snapshot.docs.map((doc) => {
-          const data = doc.data()
-          return {
-            id: typeof data.id === 'number' ? data.id : Number(doc.id),
-            ...data,
-            image: resolveDeckImage(
-              typeof data.image === 'string' ? data.image : null
-            ),
-          }
-        })
+        return snapshot.docs.map((doc) =>
+          serializeDeck(doc.id, doc.data() as Record<string, unknown>)
+        )
       }
     } catch (error) {
       console.error('Firestore decks read failed; using local seed', error)
