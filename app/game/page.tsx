@@ -195,40 +195,35 @@ function Game() {
                             className={`game-zone game-zone-skip ${skipSwiped ? "active" : ""}`}
                             onClick={onSkipWord}
                         >
-                            <div className="game-zone-label">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="w-7 h-7">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                Skip
-                            </div>
-                            <div className="game-zone-hint">
-                                {isMobile ? (
-                                    <>
-                                        <span className="game-hint-portrait inline-flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
-                                            </svg>
-                                            Swipe up or tap
-                                        </span>
-                                        <span className="game-hint-landscape inline-flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                                            </svg>
-                                            Swipe left or tap
-                                        </span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
-                                        </svg>
-                                        Backspace
-                                    </>
-                                )}
+                            <div className="game-action">
+                                <p className="game-action-label">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                    </svg>
+                                    Skip
+                                </p>
+                                <p className="game-action-hint">
+                                    {isMobile ? (
+                                        <>
+                                            <span className="game-hint-portrait inline-flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                                                </svg>
+                                                Swipe up
+                                            </span>
+                                            <span className="game-hint-landscape inline-flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                                </svg>
+                                                Swipe left
+                                            </span>
+                                        </>
+                                    ) : (
+                                        "Backspace"
+                                    )}
+                                </p>
                             </div>
                         </button>
-
-                        <div className="game-divider" aria-hidden />
 
                         <button
                             type="button"
@@ -237,47 +232,46 @@ function Game() {
                             className={`game-zone game-zone-correct ${correctSwiped ? "active" : ""}`}
                             onClick={onCorrectWord}
                         >
-                            <div className="game-zone-label">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="w-7 h-7">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                Correct
-                            </div>
-                            <div className="game-zone-hint">
-                                {isMobile ? (
-                                    <>
-                                        <span className="game-hint-portrait inline-flex items-center gap-1">
-                                            Swipe down or tap
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
-                                            </svg>
-                                        </span>
-                                        <span className="game-hint-landscape inline-flex items-center gap-1">
-                                            Swipe right or tap
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                            </svg>
-                                        </span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-                                        </svg>
-                                        Enter
-                                    </>
-                                )}
+                            <div className="game-action">
+                                <p className="game-action-label">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                    </svg>
+                                    Correct
+                                </p>
+                                <p className="game-action-hint">
+                                    {isMobile ? (
+                                        <>
+                                            <span className="game-hint-portrait inline-flex items-center gap-1">
+                                                Swipe down
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                                                </svg>
+                                            </span>
+                                            <span className="game-hint-landscape inline-flex items-center gap-1">
+                                                Swipe right
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                                </svg>
+                                            </span>
+                                        </>
+                                    ) : (
+                                        "Enter"
+                                    )}
+                                </p>
                             </div>
                         </button>
                     </div>
 
                     <div className="game-center">
-                        <h1 key={wordKey} className="game-word game-word-enter" data-testid="current-word">
-                            {currentWord}
-                        </h1>
-                        <p className="game-timer" data-testid="timer">
-                            {formatTime(timer)}
-                        </p>
+                        <div className="game-stage">
+                            <h1 key={wordKey} className="game-word game-word-enter" data-testid="current-word">
+                                {currentWord}
+                            </h1>
+                            <p className="game-timer" data-testid="timer">
+                                {formatTime(timer)}
+                            </p>
+                        </div>
                     </div>
                 </div>
             ) : (
