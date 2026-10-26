@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { SESSION_COOKIE_NAME } from './session'
+import { SESSION_COOKIE_NAME } from './constants'
 
 /**
  * Edge-safe session gate. Full cookie verification happens in Node

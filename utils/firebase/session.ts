@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { getAdminAuth } from './admin'
+import { SESSION_COOKIE_NAME, SESSION_MAX_AGE_MS } from './constants'
 
-export const SESSION_COOKIE_NAME = '__session'
-export const SESSION_MAX_AGE_MS = 60 * 60 * 24 * 5 * 1000 // 5 days
+export { SESSION_COOKIE_NAME, SESSION_MAX_AGE_MS }
 
 export type SessionUser = {
   uid: string
