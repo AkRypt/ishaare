@@ -2,7 +2,9 @@
 
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import { resolveDeckImage } from '@/utils/deck-image'
 import { getAdminDb } from '@/utils/firebase/admin'
+import { ISHAARE_COLLECTIONS } from '@/utils/firebase/collections'
 import { isFirebaseAdminConfigured } from '@/utils/firebase/config'
 import { getSeedDecks } from '@/utils/firebase/seed'
 import { getSessionUser, SESSION_COOKIE_NAME } from '@/utils/firebase/session'
@@ -11,13 +13,16 @@ import { getUserProfile, upsertUser } from '@/utils/firebase/users'
 export async function getDecks() {
   if (isFirebaseAdminConfigured()) {
     try {
-      const snapshot = await getAdminDb().collection('decks').get()
+      const snapshot = await getAdminDb().collection(ISHAARE_COLLECTIONS.DECKS).get()
       if (!snapshot.empty) {
         return snapshot.docs.map((doc) => {
           const data = doc.data()
           return {
             id: typeof data.id === 'number' ? data.id : Number(doc.id),
             ...data,
+            image: resolveDeckImage(
+              typeof data.image === 'string' ? data.image : null
+            ),
           }
         })
       }

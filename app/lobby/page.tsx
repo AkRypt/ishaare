@@ -9,7 +9,7 @@ import { Loading } from "../components/loading";
 import GoogleMiniButton from "../components/googleMiniButton";
 import ReloadModal from "../components/reloadModal";
 import { greatVibes } from "../fonts";
-import Image from "next/image";
+import { DEFAULT_DECK_IMAGE, resolveDeckImage } from "@/utils/deck-image";
 
 export default function Lobby() {
     const router = useRouter();
@@ -109,16 +109,29 @@ export default function Lobby() {
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                         {decks
                             ?.filter((deck) => deck.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                            ?.map((deck, index) => (
-                                deck.enabled &&
+                            ?.map((deck, index) => {
+                                if (!deck.enabled) return null
+                                const imageSrc = resolveDeckImage(deck.image)
+                                return (
                                 <div key={index} className={`p-0.5 pb-4 mb-2 h-[30vh] group md:mb-0 border-4 rounded-lg relative shadow-md overflow-hidden 
                             hover:cursor-pointer ${activeDeck === deck.id ? 'bg-teal-400 border-teal-400' : 'border-transparent bg-white'}`}
                                     onClick={() => !deck.coming_soon ? onClickDeck(deck.id, deck.is_premium) : null}>
                                     <picture>
-                                        <source srcSet={deck.image} type="image/avif" />
+                                        {imageSrc.endsWith('.avif') ? (
+                                            <source srcSet={imageSrc} type="image/avif" />
+                                        ) : null}
                                         <img
-                                            src={deck.image}
-                                            alt="Topic Image"
+                                            src={imageSrc}
+                                            alt={deck.name || 'Topic Image'}
+                                            onError={(e) => {
+                                                const el = e.currentTarget
+                                                if (el.getAttribute('src') === DEFAULT_DECK_IMAGE) return
+                                                el.onerror = null
+                                                el.src = DEFAULT_DECK_IMAGE
+                                                const picture = el.parentElement
+                                                const source = picture?.querySelector('source')
+                                                if (source) source.remove()
+                                            }}
                                             className={`w-full mb-2 mx-auto object-cover rounded-lg md:group-hover:h-[30%] 
          transition-height duration-300 ease-in-out ${activeDeck === deck.id ? 'h-[30%]' : 'h-[86%]'} ${deck.coming_soon ? 'grayscale' : ''}`}
                                         />
@@ -172,7 +185,8 @@ export default function Lobby() {
                                         </div> : <></>
                                     }
                                 </div>
-                            ))
+                                )
+                            })
                         }
                         {decks?.filter((deck) =>
                             deck.name.toLowerCase().includes(searchQuery.toLowerCase())

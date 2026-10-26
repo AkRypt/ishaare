@@ -1,5 +1,6 @@
 /**
  * Migrate Ishaare decks/words into Firestore (project akxh-games / shared Firebase).
+ * Target collections: ishaare_decks, ishaare_words (namespaced per game).
  *
  * Sources (first match wins for catalog data):
  *   1. data/firestore-seed/{decks,words}.json  (committed export from Supabase)
@@ -109,6 +110,8 @@ const app =
   })
 
 const db = getFirestore(app)
+const DECKS = 'ishaare_decks'
+const WORDS = 'ishaare_words'
 
 async function commitBatches(items, writeOne) {
   const CHUNK = 400
@@ -121,15 +124,29 @@ async function commitBatches(items, writeOne) {
   }
 }
 
+function resolveDeckImage(image) {
+  if (!image || typeof image !== 'string') return '/decks/default.svg'
+  const trimmed = image.trim()
+  if (!trimmed) return '/decks/default.svg'
+  if (trimmed.startsWith('/decks/')) return trimmed
+  const match = trimmed.match(
+    /\/storage\/v1\/object\/public\/topic_images\/([^/?#]+)/i
+  )
+  if (match?.[1]) return `/decks/${match[1]}`
+  if (!trimmed.includes('/')) return `/decks/${trimmed}`
+  return '/decks/default.svg'
+}
+
 await commitBatches(decks, (batch, deck) => {
   const id = String(deck.id)
-  const ref = db.collection('decks').doc(id)
+  const ref = db.collection(DECKS).doc(id)
   const { created_at, ...rest } = deck
   batch.set(
     ref,
     {
       ...rest,
       id: Number(deck.id),
+      image: resolveDeckImage(deck.image),
       migratedFrom: 'supabase',
       migratedAt: new Date(),
     },
@@ -139,7 +156,7 @@ await commitBatches(decks, (batch, deck) => {
 
 await commitBatches(words, (batch, word) => {
   const id = String(word.id)
-  const ref = db.collection('words').doc(id)
+  const ref = db.collection(WORDS).doc(id)
   batch.set(
     ref,
     {
@@ -153,7 +170,7 @@ await commitBatches(words, (batch, word) => {
   )
 })
 
-console.log('Migration complete: decks + words written to Firestore.')
+console.log(`Migration complete: wrote to ${DECKS} + ${WORDS}.`)
 console.log(
-  'Users: Supabase anon export was empty (RLS). Profiles are created on first Google sign-in; restore purchased_topics manually if needed.'
+  'Users: profiles go to ishaare_users on first Google sign-in; restore purchased_topics manually if needed.'
 )

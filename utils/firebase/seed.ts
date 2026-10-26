@@ -1,5 +1,6 @@
 import decksSeed from '@/data/firestore-seed/decks.json'
 import wordsSeed from '@/data/firestore-seed/words.json'
+import { resolveDeckImage } from '@/utils/deck-image'
 
 export type SeedDeck = {
   id: number
@@ -23,6 +24,7 @@ export function getSeedDecks(): SeedDeck[] {
   return (decksSeed as SeedDeck[]).map((deck) => ({
     ...deck,
     id: Number(deck.id),
+    image: resolveDeckImage(deck.image),
   }))
 }
 
