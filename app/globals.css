@@ -241,16 +241,37 @@ body {
     flex-direction: row;
   }
 
+  /* Full-width tap halves; labels pulled to the outer edges */
+  .game-zone {
+    justify-content: center;
+  }
+
   .game-zone-skip {
-    background: linear-gradient(90deg, #d95448 0%, rgba(217, 84, 72, 0.72) 45%, rgba(44, 124, 141, 0.15) 100%);
-    padding-top: 0;
-    padding-left: max(0.75rem, var(--safe-left));
+    background: linear-gradient(90deg, #d95448 0%, rgba(217, 84, 72, 0.72) 40%, rgba(44, 124, 141, 0.1) 100%);
+    padding: max(0.5rem, var(--safe-top)) 34% max(0.5rem, var(--safe-bottom)) max(0.65rem, var(--safe-left));
+    align-items: flex-start;
   }
 
   .game-zone-correct {
-    background: linear-gradient(270deg, #27ae60 0%, rgba(39, 174, 96, 0.72) 45%, rgba(44, 124, 141, 0.15) 100%);
-    padding-bottom: 0;
-    padding-right: max(0.75rem, var(--safe-right));
+    background: linear-gradient(270deg, #27ae60 0%, rgba(39, 174, 96, 0.72) 40%, rgba(44, 124, 141, 0.1) 100%);
+    padding: max(0.5rem, var(--safe-top)) max(0.65rem, var(--safe-right)) max(0.5rem, var(--safe-bottom)) 34%;
+    align-items: flex-end;
+  }
+
+  .game-zone-label {
+    font-size: clamp(1rem, 3.2vw, 1.45rem);
+    flex-direction: column;
+    text-align: center;
+    gap: 0.15rem;
+  }
+
+  .game-zone-hint {
+    font-size: 0.68rem;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 6.25rem;
+    line-height: 1.2;
   }
 
   .game-divider {
@@ -259,21 +280,24 @@ body {
     background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.55), transparent);
   }
 
-  .game-word {
-    font-size: clamp(2.2rem, 8vw, 4rem);
-  }
-
+  /* Word stays in the clear middle band between side labels */
   .game-center {
-    padding-top: max(0.5rem, var(--safe-top));
-    justify-content: flex-start;
-    padding-top: max(1.5rem, calc(var(--safe-top) + 1rem));
+    justify-content: center;
+    align-items: center;
+    padding: max(0.4rem, var(--safe-top)) clamp(7.5rem, 36vw, 14rem) max(0.4rem, var(--safe-bottom));
   }
 
-  @media (min-height: 420px) {
-    .game-center {
-      justify-content: center;
-      padding-top: 0;
-    }
+  .game-word {
+    font-size: clamp(1.5rem, 4.8vw, 2.75rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    line-height: 1.1;
+  }
+
+  .game-timer {
+    margin-top: 0.45rem;
+    padding: 0.28rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
 
