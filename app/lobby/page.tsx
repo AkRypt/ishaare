@@ -25,18 +25,29 @@ export default function Lobby() {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        getDecks().then((data) => {
-            setDecks(data)
-            setLoading(false)
-        })
+        getDecks()
+            .then((data) => {
+                setDecks(data)
+            })
+            .catch((error) => {
+                console.error('getDecks failed', error)
+                setDecks([])
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }, [])
 
     useEffect(() => {
-        getCurrentUser().then((user) => {
-            setUserData(user)
-            setPurchasedTopics(user?.purchased_topics ?? [])
-            setEmailParam(user?.email ? `?prefilled_email=${user.email}` : '')
-        })
+        getCurrentUser()
+            .then((user) => {
+                setUserData(user)
+                setPurchasedTopics(user?.purchased_topics ?? [])
+                setEmailParam(user?.email ? `?prefilled_email=${user.email}` : '')
+            })
+            .catch((error) => {
+                console.error('getCurrentUser failed', error)
+            })
     }, [])
 
     const onClickDeck = (id: number, isPremium: boolean) => {

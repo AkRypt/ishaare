@@ -14,10 +14,14 @@ export async function getWords(deck_id: number) {
         .get()
 
       if (!snapshot.empty) {
-        return snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
+        return snapshot.docs.map((doc) => {
+          const data = doc.data() as Record<string, unknown>
+          return {
+            id: String(doc.id),
+            deck_id: Number(data.deck_id),
+            word: typeof data.word === 'string' ? data.word : '',
+          }
+        })
       }
     } catch (error) {
       console.error('Firestore words read failed; using local seed', error)
