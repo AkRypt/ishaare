@@ -168,62 +168,59 @@ function Game() {
         <main>
             {loading ? <Loading /> : null}
 
-            {showSnack && !gameOver && !loading ? (
-                <div className="fixed top-[16%] left-0 right-0 w-[90%] max-w-md mx-auto z-50 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-white/70 backdrop-blur-md border border-white/80 shadow-sm">
-                    <p className="text-sm text-[#1f4f5a] font-medium text-center m-0">
-                        Rotate landscape · hold on forehead
-                    </p>
-                </div>
-            ) : null}
-
             {!gameOver ? (
-                <div className="game-shell" data-testid="game-shell">
-                    <div className="game-zones">
+                <div className="play" data-testid="game-shell">
+                    <div className="play-halves">
                         <button
                             type="button"
-                            aria-label="Skip word"
+                            aria-label="Skip — swipe up in portrait, left in landscape"
                             data-testid="skip-zone"
-                            className={`game-zone game-zone-skip ${skipSwiped ? "active" : ""}`}
+                            className={`play-half play-half--skip ${skipSwiped ? "is-active" : ""}`}
                             onClick={onSkipWord}
                         >
-                            <div className="game-action">
-                                <p className="game-action-label">
-                                    <span className="game-action-icon" aria-hidden>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-4 h-4">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                        </svg>
-                                    </span>
-                                    Skip
-                                </p>
-                            </div>
+                            <span className="play-half__mark" aria-hidden>
+                                SKIP
+                            </span>
+                            <span className="play-half__signal">
+                                <span className="play-half__chev play-half__chev--up" aria-hidden />
+                                <span className="play-half__chev play-half__chev--left" aria-hidden />
+                                <p className="play-half__title">Skip</p>
+                                <p className="play-half__dir">swipe up</p>
+                            </span>
                         </button>
 
                         <button
                             type="button"
-                            aria-label="Mark correct"
+                            aria-label="Correct — swipe down in portrait, right in landscape"
                             data-testid="correct-zone"
-                            className={`game-zone game-zone-correct ${correctSwiped ? "active" : ""}`}
+                            className={`play-half play-half--correct ${correctSwiped ? "is-active" : ""}`}
                             onClick={onCorrectWord}
                         >
-                            <div className="game-action">
-                                <p className="game-action-label">
-                                    <span className="game-action-icon" aria-hidden>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-4 h-4">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                        </svg>
-                                    </span>
-                                    Correct
-                                </p>
-                            </div>
+                            <span className="play-half__mark" aria-hidden>
+                                CORRECT
+                            </span>
+                            <span className="play-half__signal">
+                                <p className="play-half__title">Correct</p>
+                                <p className="play-half__dir">swipe down</p>
+                                <span className="play-half__chev play-half__chev--down" aria-hidden />
+                                <span className="play-half__chev play-half__chev--right" aria-hidden />
+                            </span>
                         </button>
                     </div>
 
-                    <div className="game-center">
-                        <div className="game-stage">
-                            <h1 key={wordKey} className={`game-word ${raleway.className}`} data-testid="current-word">
+                    <div className="play-focus">
+                        <div className="play-card">
+                            {showSnack && !loading ? (
+                                <p className="play-card__orient">Rotate landscape · hold on forehead</p>
+                            ) : null}
+                            <h1
+                                key={wordKey}
+                                className={`play-card__word ${raleway.className}`}
+                                data-testid="current-word"
+                            >
                                 {currentWord}
                             </h1>
-                            <p className="game-timer" data-testid="timer">
+                            <p className="play-card__timer" data-testid="timer">
                                 {formatTime(timer)}
                             </p>
                         </div>
