@@ -6,6 +6,7 @@ import { getWords } from "./actions";
 import { keyboardHandler, preventReload, swipeHandler } from "./hooks";
 import { formatTime } from "./helpers";
 import { Loading } from "../components/loading";
+import { raleway } from "../fonts";
 
 function Game() {
     const router = useRouter();
@@ -197,9 +198,11 @@ function Game() {
                         >
                             <div className="game-action">
                                 <p className="game-action-label">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                    </svg>
+                                    <span className="game-action-icon" aria-hidden>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                        </svg>
+                                    </span>
                                     Skip
                                 </p>
                                 <p className="game-action-hint">
@@ -234,9 +237,11 @@ function Game() {
                         >
                             <div className="game-action">
                                 <p className="game-action-label">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                    </svg>
+                                    <span className="game-action-icon" aria-hidden>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.4} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg>
+                                    </span>
                                     Correct
                                 </p>
                                 <p className="game-action-hint">
@@ -265,7 +270,7 @@ function Game() {
 
                     <div className="game-center">
                         <div className="game-stage">
-                            <h1 key={wordKey} className="game-word game-word-enter" data-testid="current-word">
+                            <h1 key={wordKey} className={`game-word game-word-enter ${raleway.className}`} data-testid="current-word">
                                 {currentWord}
                             </h1>
                             <p className="game-timer" data-testid="timer">
