@@ -52,15 +52,13 @@ body {
   }
 }
 
-/* Game play — night stage with coral-rose / jade blooms + pearl word card */
+/* Game play — soft red|green split + glass word card (static, no motion) */
 .game-shell {
-  --skip-hot: #ff8b78;
-  --skip-deep: #c23d5c;
-  --correct-mint: #4ef0c2;
-  --correct-deep: #1a9f86;
-  --ink: #0a1416;
-  --pearl: #fff7f0;
-  --teal-ink: #164e5c;
+  --skip: #f3a59a;
+  --skip-deep: #e8887c;
+  --correct: #8fdcc4;
+  --correct-deep: #6fcfb0;
+  --ink: #1f4f5a;
 
   position: relative;
   display: flex;
@@ -68,42 +66,10 @@ body {
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-  background: var(--ink);
+  background: #f7f3ef;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-}
-
-.game-shell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 48%, rgba(44, 124, 141, 0.28), transparent 68%),
-    radial-gradient(ellipse 45% 35% at 18% 20%, rgba(255, 139, 120, 0.18), transparent 60%),
-    radial-gradient(ellipse 45% 35% at 82% 80%, rgba(78, 240, 194, 0.16), transparent 60%);
-}
-
-.game-shell::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: soft-light;
-}
-
-.game-hint-landscape {
-  display: none !important;
-}
-
-.game-hint-portrait {
-  display: inline-flex !important;
 }
 
 .game-zones {
@@ -125,94 +91,80 @@ body {
   padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: filter 0.3s ease;
 }
 
 .game-zone-skip {
-  background:
-    radial-gradient(ellipse 110% 95% at 50% 0%, rgba(255, 180, 150, 0.95) 0%, transparent 58%),
-    linear-gradient(180deg, #ff9a7a 0%, #e4566a 38%, rgba(10, 20, 22, 0.15) 78%, transparent 100%);
-  padding-top: max(0.9rem, var(--safe-top));
+  background: linear-gradient(180deg, #ffc5bb 0%, #f3a59a 55%, #ee968a 100%);
+  padding-top: max(1rem, calc(var(--safe-top) + 0.5rem));
 }
 
 .game-zone-correct {
-  background:
-    radial-gradient(ellipse 110% 95% at 50% 100%, rgba(110, 255, 210, 0.9) 0%, transparent 58%),
-    linear-gradient(0deg, #5ef5c8 0%, #2ab89a 38%, rgba(10, 20, 22, 0.15) 78%, transparent 100%);
-  padding-bottom: max(0.9rem, var(--safe-bottom));
+  background: linear-gradient(0deg, #a8ebd6 0%, #8fdcc4 55%, #7ad4b8 100%);
+  padding-bottom: max(1rem, calc(var(--safe-bottom) + 0.5rem));
 }
 
 .game-zone-skip.active {
-  filter: saturate(1.15) brightness(1.08);
+  background: linear-gradient(180deg, #ffb3a6 0%, #e8887c 100%);
 }
 
 .game-zone-correct.active {
-  filter: saturate(1.15) brightness(1.08);
+  background: linear-gradient(0deg, #95e4cb 0%, #6fcfb0 100%);
 }
 
 .game-action {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.95rem 1.15rem 0.85rem;
-  border-radius: 1.6rem;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1));
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  color: #fff;
-  min-width: 6.75rem;
-  transition: transform 0.28s ease, background 0.28s ease;
-}
-
-.game-zone.active .game-action {
-  transform: scale(1.06);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.16));
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px rgba(60, 40, 30, 0.08);
 }
 
 .game-action-icon {
   display: grid;
   place-items: center;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.game-zone-skip .game-action-icon {
+  color: #b84a42;
+}
+
+.game-zone-correct .game-action-icon {
+  color: #1f8a6e;
 }
 
 .game-action-label {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
+  margin: 0;
   font-weight: 700;
-  font-size: clamp(1.05rem, 3.8vw, 1.35rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0;
-  color: #fff;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  letter-spacing: 0.02em;
+  color: #3a2f2c;
 }
 
-.game-action-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  opacity: 0.88;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.95);
+.game-zone-skip .game-action-label {
+  color: #8f3d38;
 }
 
-.game-divider {
+.game-zone-correct .game-action-label {
+  color: #1a6f5a;
+}
+
+.game-action-hint,
+.game-divider,
+.game-hint-portrait,
+.game-hint-landscape {
   display: none;
 }
 
@@ -228,44 +180,27 @@ body {
 }
 
 .game-stage {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  width: min(86vw, 26rem);
-  padding: 1.6rem 1.6rem 1.35rem;
-  border-radius: 1.75rem;
-  background:
-    linear-gradient(165deg, rgba(255, 252, 248, 0.98) 0%, rgba(255, 240, 230, 0.94) 55%, rgba(232, 248, 244, 0.96) 100%);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.65),
-    0 18px 50px rgba(0, 0, 0, 0.35),
-    0 0 60px rgba(78, 240, 194, 0.12),
-    0 0 60px rgba(255, 139, 120, 0.1);
-}
-
-.game-stage::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 180, 150, 0.55), rgba(44, 124, 141, 0.35), rgba(78, 240, 194, 0.55));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
+  gap: 0.75rem;
+  width: min(86vw, 24rem);
+  padding: 1.5rem 1.4rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 36px rgba(50, 40, 30, 0.1);
 }
 
 .game-word {
-  font-size: clamp(2.1rem, 9vw, 3.5rem);
-  line-height: 1.08;
+  font-size: clamp(2rem, 8.5vw, 3.25rem);
+  line-height: 1.1;
   font-weight: 700;
   text-align: center;
-  color: var(--teal-ink);
+  color: var(--ink);
   letter-spacing: -0.02em;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -274,134 +209,76 @@ body {
 
 .game-timer {
   margin: 0;
-  padding: 0.4rem 1.05rem;
+  padding: 0.35rem 0.95rem;
   border-radius: 9999px;
-  background: linear-gradient(120deg, #2c7c8d 0%, #249f8c 55%, #35d4a8 100%);
-  color: #fff;
+  background: rgba(31, 79, 90, 0.12);
+  border: 1px solid rgba(31, 79, 90, 0.14);
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: 0.06em;
-  font-size: 0.92rem;
-  box-shadow: 0 4px 16px rgba(36, 159, 140, 0.35);
+  font-size: 0.9rem;
 }
 
-.game-flash {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.game-flash-correct {
-  background: radial-gradient(circle at 50% 70%, rgba(78, 240, 194, 0.75), rgba(26, 159, 134, 0.35) 55%, transparent 75%);
-  animation: flash-correct 0.5s ease-out forwards;
-}
-
-.game-flash-skip {
-  background: radial-gradient(circle at 50% 30%, rgba(255, 139, 120, 0.75), rgba(194, 61, 92, 0.35) 55%, transparent 75%);
-  animation: flash-skip 0.5s ease-out forwards;
-}
-
-@keyframes flash-correct {
-  0% { opacity: 0; }
-  28% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes flash-skip {
-  0% { opacity: 0; }
-  28% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes word-in {
-  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-
+.game-flash,
+.game-flash-correct,
+.game-flash-skip,
 .game-word-enter {
-  animation: word-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: none;
 }
 
-/* Landscape — side blooms + centered stage */
 @media (orientation: landscape) {
-  .game-hint-portrait {
-    display: none !important;
-  }
-
-  .game-hint-landscape {
-    display: inline-flex !important;
-  }
-
   .game-zones {
     flex-direction: row;
   }
 
   .game-zone-skip {
+    background: linear-gradient(90deg, #ffc5bb 0%, #f3a59a 55%, #ee968a 100%);
     align-items: flex-start;
     justify-content: center;
-    background:
-      radial-gradient(ellipse 95% 110% at 0% 50%, rgba(255, 180, 150, 0.95) 0%, transparent 58%),
-      linear-gradient(90deg, #ff9a7a 0%, #e4566a 36%, rgba(10, 20, 22, 0.12) 78%, transparent 100%);
     padding: max(0.5rem, var(--safe-top)) 0 max(0.5rem, var(--safe-bottom)) max(1.1rem, var(--safe-left));
   }
 
   .game-zone-correct {
+    background: linear-gradient(270deg, #a8ebd6 0%, #8fdcc4 55%, #7ad4b8 100%);
     align-items: flex-end;
     justify-content: center;
-    background:
-      radial-gradient(ellipse 95% 110% at 100% 50%, rgba(110, 255, 210, 0.9) 0%, transparent 58%),
-      linear-gradient(270deg, #5ef5c8 0%, #2ab89a 36%, rgba(10, 20, 22, 0.12) 78%, transparent 100%);
     padding: max(0.5rem, var(--safe-top)) max(1.1rem, var(--safe-right)) max(0.5rem, var(--safe-bottom)) 0;
   }
 
-  .game-action {
-    min-width: 5.5rem;
-    max-width: 7rem;
-    padding: 0.75rem 0.9rem 0.7rem;
-    border-radius: 1.35rem;
+  .game-zone-skip.active {
+    background: linear-gradient(90deg, #ffb3a6 0%, #e8887c 100%);
   }
 
-  .game-action-icon {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .game-action-label {
-    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
-    letter-spacing: 0.1em;
-  }
-
-  .game-action-hint {
-    font-size: 0.6rem;
+  .game-zone-correct.active {
+    background: linear-gradient(270deg, #95e4cb 0%, #6fcfb0 100%);
   }
 
   .game-center {
-    padding: max(0.5rem, var(--safe-top)) clamp(8.75rem, 32vw, 13rem) max(0.5rem, var(--safe-bottom));
+    padding: max(0.5rem, var(--safe-top)) clamp(8rem, 30vw, 12rem) max(0.5rem, var(--safe-bottom));
   }
 
   .game-stage {
-    width: min(100%, 19.5rem);
-    padding: 1.15rem 1.25rem 1.05rem;
-    border-radius: 1.45rem;
+    width: min(100%, 18.5rem);
+    padding: 1.15rem 1.2rem;
+    border-radius: 1.35rem;
     gap: 0.55rem;
   }
 
   .game-word {
-    font-size: clamp(1.55rem, 4.2vw, 2.55rem);
+    font-size: clamp(1.55rem, 4.4vw, 2.5rem);
   }
 
   .game-timer {
     font-size: 0.82rem;
-    padding: 0.3rem 0.9rem;
   }
 
-  .game-flash-correct {
-    background: radial-gradient(circle at 75% 50%, rgba(78, 240, 194, 0.75), rgba(26, 159, 134, 0.3) 55%, transparent 75%);
+  .game-action {
+    padding: 0.55rem 1rem;
   }
 
-  .game-flash-skip {
-    background: radial-gradient(circle at 25% 50%, rgba(255, 139, 120, 0.75), rgba(194, 61, 92, 0.3) 55%, transparent 75%);
+  .game-action-label {
+    font-size: clamp(0.85rem, 2.2vw, 1.05rem);
   }
 }
 
