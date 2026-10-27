@@ -7,6 +7,7 @@ import { keyboardHandler, preventReload, swipeHandler } from "./hooks";
 import { formatTime } from "./helpers";
 import { Loading } from "../components/loading";
 import { raleway } from "../fonts";
+import { trackGameFinished, trackGameStarted } from "@/utils/analytics";
 
 function Game() {
     const router = useRouter();
@@ -26,6 +27,7 @@ function Game() {
     const [seenWords, setSeenWords] = useState<Record<string, boolean>>({});
     const seenWordsRef = useRef<Record<string, boolean>>({});
     const busyRef = useRef(false);
+    const startedAtRef = useRef<number | null>(null);
 
     const [words, setWords] = useState<any[]>([]);
 
@@ -68,6 +70,20 @@ function Game() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading]);
+
+    useEffect(() => {
+        if (loading || words.length === 0) return;
+        if (startedAtRef.current == null) startedAtRef.current = Date.now();
+        trackGameStarted(deck_id);
+    }, [loading, words.length, deck_id]);
+
+    useEffect(() => {
+        if (!gameOver) return;
+        const elapsed = startedAtRef.current
+            ? (Date.now() - startedAtRef.current) / 1000
+            : 0;
+        trackGameFinished(deck_id, elapsed);
+    }, [gameOver, deck_id]);
 
     useEffect(() => {
         if (gameOver || loading) return;

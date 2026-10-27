@@ -6,12 +6,14 @@ import GoogleButton from "./components/googleButton";
 import HowToPlayModal from "./components/howToPlay";
 import { jsonLd } from "./helpers";
 import { greatVibes, raleway } from "./fonts";
+import { trackLobbyCreated } from "@/utils/analytics";
 
 export default function Home() {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false)
 
     const createLobby = () => {
+        trackLobbyCreated();
         router.push('/lobby');
     }
 
