@@ -169,11 +169,8 @@ function Game() {
             {loading ? <Loading /> : null}
 
             {showSnack && !gameOver && !loading ? (
-                <div className="fixed top-[18%] left-0 right-0 w-[90%] max-w-md mx-auto z-50 flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-deep/80 backdrop-blur-md rounded-full shadow-lg animate-pulse-soft">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-brand-mist shrink-0">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
-                    </svg>
-                    <p className="text-sm text-white/95 font-medium text-center">
+                <div className="fixed top-[16%] left-0 right-0 w-[90%] max-w-md mx-auto z-50 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-white/70 backdrop-blur-md border border-white/80 shadow-sm">
+                    <p className="text-sm text-[#1f4f5a] font-medium text-center m-0">
                         Rotate landscape · hold on forehead
                     </p>
                 </div>
@@ -181,13 +178,6 @@ function Game() {
 
             {!gameOver ? (
                 <div className="game-shell" data-testid="game-shell">
-                    {correctSwiped ? (
-                        <div className="game-flash game-flash-correct" aria-hidden />
-                    ) : null}
-                    {skipSwiped ? (
-                        <div className="game-flash game-flash-skip" aria-hidden />
-                    ) : null}
-
                     <div className="game-zones">
                         <button
                             type="button"
@@ -229,12 +219,14 @@ function Game() {
                     </div>
 
                     <div className="game-center">
-                        <h1 key={wordKey} className={`game-word game-word-enter ${raleway.className}`} data-testid="current-word">
-                            {currentWord}
-                        </h1>
-                        <p className="game-timer" data-testid="timer">
-                            {formatTime(timer)}
-                        </p>
+                        <div className="game-stage">
+                            <h1 key={wordKey} className={`game-word ${raleway.className}`} data-testid="current-word">
+                                {currentWord}
+                            </h1>
+                            <p className="game-timer" data-testid="timer">
+                                {formatTime(timer)}
+                            </p>
+                        </div>
                     </div>
                 </div>
             ) : (
