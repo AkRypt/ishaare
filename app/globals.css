@@ -8,8 +8,8 @@
   --brand-teal-mid: #3b92a2;
   --brand-mint: #35f1b0;
   --brand-deep: #1a5a66;
-  --correct: #148a4b;
-  --skip: #c62828;
+  --correct: #249e6c;
+  --skip: #de5348;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
@@ -52,14 +52,14 @@ body {
   }
 }
 
-/* Game play — rich saturated red|green split + glass word card (static) */
+/* Game play — mid-sat soft red|green gradients + glass word card (static) */
 .game-shell {
-  --skip: #c62828;
-  --skip-mid: #d32f2f;
-  --skip-soft: #e53935;
-  --correct: #148a4b;
-  --correct-mid: #1aa05a;
-  --correct-soft: #22b05f;
+  --skip: #de5348;
+  --skip-mid: #e4655a;
+  --skip-soft: #e87268;
+  --correct: #249e6c;
+  --correct-mid: #2eae78;
+  --correct-soft: #3bbf84;
   --ink: #1f4f5a;
 
   position: relative;
@@ -96,21 +96,21 @@ body {
 }
 
 .game-zone-skip {
-  background: linear-gradient(180deg, #e53935 0%, #c62828 55%, #a81f1f 100%);
+  background: linear-gradient(180deg, #e87268 0%, #de5348 52%, #d0433a 100%);
   padding-top: max(1rem, calc(var(--safe-top) + 0.5rem));
 }
 
 .game-zone-correct {
-  background: linear-gradient(0deg, #22b05f 0%, #148a4b 55%, #0f6f3c 100%);
+  background: linear-gradient(0deg, #3bbf84 0%, #249e6c 52%, #1b8f5e 100%);
   padding-bottom: max(1rem, calc(var(--safe-bottom) + 0.5rem));
 }
 
 .game-zone-skip.active {
-  background: linear-gradient(180deg, #c62828 0%, #8e1b1b 100%);
+  background: linear-gradient(180deg, #de5348 0%, #c93d35 100%);
 }
 
 .game-zone-correct.active {
-  background: linear-gradient(0deg, #148a4b 0%, #0b5c32 100%);
+  background: linear-gradient(0deg, #249e6c 0%, #1a8558 100%);
 }
 
 .game-action {
@@ -220,25 +220,25 @@ body {
   }
 
   .game-zone-skip {
-    background: linear-gradient(90deg, #e53935 0%, #c62828 55%, #a81f1f 100%);
+    background: linear-gradient(90deg, #e87268 0%, #de5348 52%, #d0433a 100%);
     align-items: flex-start;
     justify-content: center;
     padding: max(0.5rem, var(--safe-top)) 0 max(0.5rem, var(--safe-bottom)) max(1.1rem, var(--safe-left));
   }
 
   .game-zone-correct {
-    background: linear-gradient(270deg, #22b05f 0%, #148a4b 55%, #0f6f3c 100%);
+    background: linear-gradient(270deg, #3bbf84 0%, #249e6c 52%, #1b8f5e 100%);
     align-items: flex-end;
     justify-content: center;
     padding: max(0.5rem, var(--safe-top)) max(1.1rem, var(--safe-right)) max(0.5rem, var(--safe-bottom)) 0;
   }
 
   .game-zone-skip.active {
-    background: linear-gradient(90deg, #c62828 0%, #8e1b1b 100%);
+    background: linear-gradient(90deg, #de5348 0%, #c93d35 100%);
   }
 
   .game-zone-correct.active {
-    background: linear-gradient(270deg, #148a4b 0%, #0b5c32 100%);
+    background: linear-gradient(270deg, #249e6c 0%, #1a8558 100%);
   }
 
   .game-center {
@@ -356,13 +356,13 @@ body {
 }
 
 .result-correct {
-  background: rgba(20, 138, 75, 0.22);
+  background: rgba(36, 158, 108, 0.22);
   color: #e8fff2;
   font-weight: 700;
 }
 
 .result-skip {
-  background: rgba(198, 40, 40, 0.2);
+  background: rgba(222, 83, 72, 0.2);
   color: #ffe8e5;
   opacity: 0.92;
 }
@@ -378,8 +378,8 @@ body {
   justify-content: center;
   padding: max(1.25rem, var(--safe-top)) 1rem max(1.25rem, var(--safe-bottom));
   background:
-    linear-gradient(135deg, rgba(198, 40, 40, 0.28) 0%, transparent 42%),
-    linear-gradient(315deg, rgba(20, 138, 75, 0.32) 0%, transparent 45%),
+    linear-gradient(135deg, rgba(222, 83, 72, 0.26) 0%, transparent 42%),
+    linear-gradient(315deg, rgba(36, 158, 108, 0.3) 0%, transparent 45%),
     linear-gradient(165deg, #2c7c8d 0%, #247a88 50%, #1a5f6c 100%);
 }
 
@@ -416,11 +416,11 @@ body {
 }
 
 .game-results-stat-correct {
-  color: #148a4b;
+  color: #1b8f5e;
 }
 
 .game-results-stat-skip {
-  color: #c62828;
+  color: #d0433a;
 }
 
 .game-results-stat-sep {
@@ -454,13 +454,13 @@ body {
 }
 
 .game-results-row.is-correct {
-  background: rgba(20, 138, 75, 0.18);
-  color: #0f6f3c;
+  background: rgba(36, 158, 108, 0.18);
+  color: #1b8f5e;
 }
 
 .game-results-row.is-skip {
-  background: rgba(198, 40, 40, 0.16);
-  color: #8e1b1b;
+  background: rgba(222, 83, 72, 0.16);
+  color: #c93d35;
 }
 
 .game-results-actions {
