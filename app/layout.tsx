@@ -3,6 +3,7 @@ import "./globals.css";
 import { constants } from "./constants";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import FirebaseAnalytics from "./components/FirebaseAnalytics";
 import { poppins } from "./fonts";
 
 export const viewport: Viewport = {
@@ -117,6 +118,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         {children}
+        <FirebaseAnalytics />
         <Analytics />
         <SpeedInsights />
       </body>

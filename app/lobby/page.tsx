@@ -10,6 +10,7 @@ import GoogleMiniButton from "../components/googleMiniButton";
 import ReloadModal from "../components/reloadModal";
 import { greatVibes } from "../fonts";
 import { DEFAULT_DECK_IMAGE, resolveDeckImage } from "@/utils/deck-image";
+import { trackDeckSelected } from "@/utils/analytics";
 
 export default function Lobby() {
     const router = useRouter();
@@ -55,6 +56,7 @@ export default function Lobby() {
     }
 
     const onClickPlay = (id: number) => {
+        trackDeckSelected(id)
         setLoading(true)
         router.push(`/game?deck_id=${id}`);
     }
