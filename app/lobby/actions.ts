@@ -56,7 +56,7 @@ export async function getCurrentUser() {
 }
 
 export async function signOut() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   cookieStore.set({
     name: SESSION_COOKIE_NAME,
     value: '',
