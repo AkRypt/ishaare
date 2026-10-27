@@ -54,10 +54,12 @@ body {
 
 /* Game play — soft red|green split + glass word card (static, no motion) */
 .game-shell {
-  --skip: #f3a59a;
-  --skip-deep: #e8887c;
-  --correct: #8fdcc4;
-  --correct-deep: #6fcfb0;
+  --skip: #e05d52;
+  --skip-mid: #e97268;
+  --skip-soft: #ec7a6e;
+  --correct: #2fae8a;
+  --correct-mid: #3dbf9a;
+  --correct-soft: #4bc9a5;
   --ink: #1f4f5a;
 
   position: relative;
@@ -94,21 +96,21 @@ body {
 }
 
 .game-zone-skip {
-  background: linear-gradient(180deg, #ffc5bb 0%, #f3a59a 55%, #ee968a 100%);
+  background: linear-gradient(180deg, #ec7a6e 0%, #e05d52 55%, #d45248 100%);
   padding-top: max(1rem, calc(var(--safe-top) + 0.5rem));
 }
 
 .game-zone-correct {
-  background: linear-gradient(0deg, #a8ebd6 0%, #8fdcc4 55%, #7ad4b8 100%);
+  background: linear-gradient(0deg, #4bc9a5 0%, #2fae8a 55%, #279d7c 100%);
   padding-bottom: max(1rem, calc(var(--safe-bottom) + 0.5rem));
 }
 
 .game-zone-skip.active {
-  background: linear-gradient(180deg, #ffb3a6 0%, #e8887c 100%);
+  background: linear-gradient(180deg, #e05d52 0%, #c9473e 100%);
 }
 
 .game-zone-correct.active {
-  background: linear-gradient(0deg, #95e4cb 0%, #6fcfb0 100%);
+  background: linear-gradient(0deg, #2fae8a 0%, #218a6c 100%);
 }
 
 .game-action {
@@ -117,11 +119,11 @@ body {
   gap: 0.5rem;
   padding: 0.65rem 1.2rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 18px rgba(60, 40, 30, 0.08);
+  box-shadow: 0 4px 18px rgba(20, 30, 30, 0.12);
 }
 
 .game-action-icon {
@@ -130,15 +132,8 @@ body {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.game-zone-skip .game-action-icon {
-  color: #b84a42;
-}
-
-.game-zone-correct .game-action-icon {
-  color: #1f8a6e;
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
 }
 
 .game-action-label {
@@ -150,15 +145,7 @@ body {
   font-weight: 700;
   font-size: clamp(0.95rem, 3.2vw, 1.15rem);
   letter-spacing: 0.02em;
-  color: #3a2f2c;
-}
-
-.game-zone-skip .game-action-label {
-  color: #8f3d38;
-}
-
-.game-zone-correct .game-action-label {
-  color: #1a6f5a;
+  color: #fff;
 }
 
 .game-action-hint,
@@ -233,25 +220,25 @@ body {
   }
 
   .game-zone-skip {
-    background: linear-gradient(90deg, #ffc5bb 0%, #f3a59a 55%, #ee968a 100%);
+    background: linear-gradient(90deg, #ec7a6e 0%, #e05d52 55%, #d45248 100%);
     align-items: flex-start;
     justify-content: center;
     padding: max(0.5rem, var(--safe-top)) 0 max(0.5rem, var(--safe-bottom)) max(1.1rem, var(--safe-left));
   }
 
   .game-zone-correct {
-    background: linear-gradient(270deg, #a8ebd6 0%, #8fdcc4 55%, #7ad4b8 100%);
+    background: linear-gradient(270deg, #4bc9a5 0%, #2fae8a 55%, #279d7c 100%);
     align-items: flex-end;
     justify-content: center;
     padding: max(0.5rem, var(--safe-top)) max(1.1rem, var(--safe-right)) max(0.5rem, var(--safe-bottom)) 0;
   }
 
   .game-zone-skip.active {
-    background: linear-gradient(90deg, #ffb3a6 0%, #e8887c 100%);
+    background: linear-gradient(90deg, #e05d52 0%, #c9473e 100%);
   }
 
   .game-zone-correct.active {
-    background: linear-gradient(270deg, #95e4cb 0%, #6fcfb0 100%);
+    background: linear-gradient(270deg, #2fae8a 0%, #218a6c 100%);
   }
 
   .game-center {
