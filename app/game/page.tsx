@@ -165,7 +165,7 @@ function Game() {
     const skipCount = Object.values(seenWords).filter((v) => !v).length;
 
     return (
-        <main className="bg-brand-deep">
+        <main>
             {loading ? <Loading /> : null}
 
             {showSnack && !gameOver && !loading ? (
@@ -230,46 +230,43 @@ function Game() {
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col w-[92%] max-w-lg p-5 my-6 mx-auto justify-center items-center rounded-2xl bg-secondary-bg shadow-xl safe-pad">
-                    <h1 className="text-3xl font-bold mb-1">Round over</h1>
-                    <p className="text-sm text-white/80 mb-4">
-                        <span className="text-correct-soft font-semibold">{correctCount} correct</span>
-                        <span className="mx-2 text-white/40">·</span>
-                        <span className="text-skip-soft font-semibold">{skipCount} skipped</span>
-                    </p>
+                <div className="game-results" data-testid="game-results">
+                    <div className="game-results-card">
+                        <h1 className={`game-results-title ${raleway.className}`}>Round over</h1>
+                        <p className="game-results-stats">
+                            <span className="game-results-stat-correct">{correctCount} correct</span>
+                            <span className="game-results-stat-sep">·</span>
+                            <span className="game-results-stat-skip">{skipCount} skipped</span>
+                        </p>
 
-                    <div className="w-full my-1 mx-auto max-h-[45vh] overflow-y-auto rounded-xl">
-                        {Object.keys(seenWords).map((word) => (
-                            <div
-                                key={word}
-                                className={`flex justify-center items-center px-3 py-2 mb-1 rounded-lg ${
-                                    seenWords[word] ? "result-correct" : "result-skip"
-                                }`}
-                            >
-                                <p className="w-full text-center text-base m-0">
-                                    {seenWords[word] ? "✓ " : "✕ "}
-                                    {word}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="w-full mt-5 space-y-3">
-                        <div className="w-full h-[44px] rounded-xl bg-black/80">
-                            <button
-                                className="w-full h-[44px] bg-white rounded-xl translate-x-1 -translate-y-1 hover:bg-gray-100 active:translate-y-0 active:translate-x-0 transition-transform"
-                                onClick={() => window.location.reload()}
-                            >
-                                <p className="text-lg text-secondary-bg font-bold m-0">Play again</p>
-                            </button>
+                        <div className="game-results-list">
+                            {Object.keys(seenWords).map((word) => (
+                                <div
+                                    key={word}
+                                    className={`game-results-row ${seenWords[word] ? "is-correct" : "is-skip"}`}
+                                >
+                                    <p className="m-0">
+                                        {seenWords[word] ? "✓ " : "✕ "}
+                                        {word}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
 
-                        <div className="w-full h-[44px] rounded-xl bg-black/80">
+                        <div className="game-results-actions">
                             <button
-                                className="w-full h-[44px] bg-primary-bg rounded-xl translate-x-1 -translate-y-1 hover:bg-brand-deep active:translate-y-0 active:translate-x-0 transition-transform"
+                                type="button"
+                                className="game-results-btn game-results-btn-primary"
+                                onClick={() => window.location.reload()}
+                            >
+                                Play again
+                            </button>
+                            <button
+                                type="button"
+                                className="game-results-btn game-results-btn-secondary"
                                 onClick={() => router.back()}
                             >
-                                <p className="text-lg text-white font-bold m-0">Choose another deck</p>
+                                Choose another deck
                             </button>
                         </div>
                     </div>

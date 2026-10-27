@@ -13,7 +13,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Ishaare",
+  title: {
+    default: "Ishaare",
+    template: "%s · Ishaare",
+  },
   description: "Play Heads Up game with your Indian friends",
 
   metadataBase: new URL("https://ishaaregame.vercel.app"),
@@ -27,9 +30,12 @@ export const metadata: Metadata = {
     "heads up"
   ],
   openGraph: {
+    title: "Ishaare",
+    description: "Play Heads Up game with your Indian friends",
     siteName: "Ishaare",
     type: "website",
-    locale: "en_US"
+    locale: "en_US",
+    url: "https://ishaaregame.vercel.app",
   },
   robots: {
     index: true,
